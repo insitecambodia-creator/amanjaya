@@ -5,15 +5,54 @@
  * `photo` values are keys in src/data/image-manifest.json; `alt` text needs a human check once photos are in.
  */
 
+/**
+ * Hero photograph options. A is the approved hero; B to D are kept for the next creative review
+ * (comparison in docs/screenshots/hero-options.jpg and docs/PHOTO-REVIEW.md).
+ * To preview another option locally:  PUBLIC_HERO_OPTION=B npm run dev
+ * Builds use A unless that variable is set.
+ */
+export const heroOptions = [
+  {
+    id: 'A',
+    photo: 'hero',
+    /** Focal point so the crop keeps the smiling guest and the hotel balconies on every screen shape. */
+    position: '60% 18%',
+    alt: 'A couple walks hand in hand at sunset in front of the Amanjaya Pancam hotel',
+    note: 'Couple in front of the hotel at golden hour (2560 px). Current.',
+  },
+  {
+    id: 'B',
+    photo: 'dining-le-moon',
+    position: '50% 58%',
+    alt: 'The hotel at night with the Le Moon sign lit on the roof',
+    note: 'The hotel at night. Dramatic and architectural, but dark and busy; 1319 px wide.',
+  },
+  {
+    id: 'C',
+    photo: 'riverside',
+    position: '50% 55%',
+    alt: 'The riverside promenade and the wide river seen from a hotel balcony',
+    note: 'Quay and river from a balcony. Right in concept, flat in light; 1200 px wide.',
+  },
+  {
+    id: 'D',
+    photo: 'gallery-pagoda',
+    position: '72% 50%',
+    alt: 'A golden stupa and orange pagoda roofs beside the street',
+    note: 'Golden pagoda beside the hotel. Very characterful, but not the hotel; 1353 px wide.',
+  },
+] as const;
+
+const chosenHero = heroOptions.find((o) => o.id === import.meta.env.PUBLIC_HERO_OPTION) ?? heroOptions[0];
+
 export const hero = {
-  photo: 'hero',
-  /** Focal point so the crop keeps the smiling guest and the hotel balconies on every screen shape. */
-  position: '60% 18%',
-  alt: 'A couple walks hand in hand at sunset in front of the Amanjaya Pancam hotel',
+  photo: chosenHero.photo,
+  position: chosenHero.position,
+  alt: chosenHero.alt,
   title: 'Phnom Penh, at the water’s edge.',
   intro:
     'A boutique hotel at the corner of Sisowath Quay and Street 154, looking over the Tonle Sap and the Mekong.',
-} as const;
+};
 
 export const welcome = {
   title: 'On the riverside since 2002.',

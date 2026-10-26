@@ -1,5 +1,7 @@
 # Photo review and hero recommendation
 
+> Update (visual QA pass): the hero stays as A for now. Alternatives B to D are kept switchable for the next creative review (see "Hero options" below). Room-photo alternatives are shortlisted in `docs/ROOM-PHOTO-CANDIDATES.md`.
+
 Reviewed with the 17 real photographs in place. Screenshots are in `docs/screenshots/` (`hero-options.jpg` compares the candidates).
 
 ## Hero
@@ -43,3 +45,22 @@ The 2024 photographs are 2560 px and clearly sharper. Where possible, prefer the
 
 - Images are processed to WebP in responsive sets by Astro. The largest hero variant is about 150 KB; the page downloads far less on a phone.
 - Only the hero loads eagerly (high priority). Everything else is lazy-loaded with fixed aspect ratios, so there is no layout shift.
+
+## Hero options (kept for the next creative review)
+
+All four are defined in `heroOptions` in `src/content/home.ts`, each with its own crop and alt text. The default is A. To preview another on your own machine:
+
+```sh
+PUBLIC_HERO_OPTION=B npm run dev     # B, C or D
+```
+
+Individual desktop and mobile screenshots of each option are in `docs/screenshots/hero-options/`, and the side-by-side sheet is `docs/screenshots/hero-options.jpg`.
+
+## Visual QA: suite photo
+
+The full-size screenshot reviewed earlier showed the Junior photo as a faint ghost. Findings:
+
+- **Normal browsing was never affected.** 60 automated checks in Chromium (widths 900 to 1920 px, wheel scrolling, mouse and arrow-key category changes, deep link, reload) all showed the correct, sharp, fully opaque photo. Firefox and WebKit are not installed in the build environment and have not been tested.
+- **Cause:** full-size screenshot tools make the browser re-resolve styles, which started the suite transitions (photo fade, label border, description height); the capture froze them half-way. A fading photo under `position: sticky` made it worse.
+- **Fixes:** the photo is no longer sticky (the list is barely taller than the photo, so it did nothing useful); the transitions now exist only while the visitor is hovering or has focus in the list, so any non-interactive style change snaps to its end state; unselected photos are now `visibility: hidden`, so screen readers no longer announce all four; transitions stay off for `prefers-reduced-motion`.
+- All screenshots in `docs/screenshots/` were regenerated after the fix.

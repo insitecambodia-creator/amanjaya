@@ -139,16 +139,12 @@ import { suites } from '../content/home';
       padding-top: 1.5rem;
       cursor: pointer;
       border-top: 1px solid color-mix(in srgb, var(--bronze) 45%, transparent);
-      transition: border-color 0.3s ease;
     }
 
     .suite__name {
       font-size: var(--step-3);
       color: var(--charcoal);
       opacity: 0.62;
-      transition:
-        color 0.3s ease,
-        opacity 0.3s ease;
     }
 
     .suite__label:hover .suite__name {
@@ -179,7 +175,6 @@ import { suites } from '../content/home';
       display: grid;
       grid-template-rows: 0fr;
       margin: 0;
-      transition: grid-template-rows 0.4s ease;
     }
 
     .suite__body p {
@@ -196,35 +191,54 @@ import { suites } from '../content/home';
       padding-bottom: 0.25rem;
     }
 
-    /* All four photographs share one frame; only the chosen one shows. */
+    /* All four photographs share one frame; only the chosen one shows. The figure fades, then switches
+       visibility, so unselected photographs are hidden from assistive technology. Not position: sticky:
+       a fading element under a sticky one renders blank in Chromium's full-size screenshots, and the
+       list is barely taller than the photo anyway. */
     .suite__photo {
       grid-column: 2;
       grid-row: 1 / span 9;
-      position: sticky;
-      top: calc(var(--header-h) + 1.5rem);
+      align-self: start;
       order: 0;
       margin: 0;
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
-      transition: opacity 0.45s ease;
     }
 
     .suite__input:checked ~ .suite__photo {
       opacity: 1;
+      visibility: visible;
       pointer-events: auto;
-    }
-
-    /* Stacking: the sticky frames overlap exactly in one grid cell. */
-    .suite__photo {
-      align-self: start;
     }
   }
 
-  @media (min-width: 56rem) and (prefers-reduced-motion: reduce) {
-    .suite__body,
-    .suite__photo,
-    .suite__name {
-      transition: none;
+  /* Transitions exist only while the visitor is using the list. A state change that is not an interaction
+     (page load, print, full-size screenshot tools that re-resolve styles) snaps to its end state instead of
+     being caught half-way, and nothing here runs under prefers-reduced-motion. */
+  @media (min-width: 56rem) and (prefers-reduced-motion: no-preference) {
+    .suites__list:is(:hover, :focus-within) .suite__label {
+      transition: border-color 0.3s ease;
+    }
+
+    .suites__list:is(:hover, :focus-within) .suite__name {
+      transition:
+        color 0.3s ease,
+        opacity 0.3s ease;
+    }
+
+    .suites__list:is(:hover, :focus-within) .suite__body {
+      transition: grid-template-rows 0.4s ease;
+    }
+
+    .suites__list:is(:hover, :focus-within) .suite__photo {
+      transition:
+        opacity 0.45s ease,
+        visibility 0s 0.45s;
+    }
+
+    .suites__list:is(:hover, :focus-within) .suite__input:checked ~ .suite__photo {
+      transition-delay: 0s;
     }
   }
 </style>

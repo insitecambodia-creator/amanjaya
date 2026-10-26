@@ -18,6 +18,8 @@ To check the production build:
 ```sh
 npm run build && npm run preview
 npm run check          # type and template checks
+npm run fetch:candidates   # review room-photo candidates (needs internet access to the live site)
+PUBLIC_HERO_OPTION=B npm run dev   # preview an alternative hero (B, C or D)
 ```
 
 ## Photographs
@@ -34,7 +36,8 @@ The hotel's own photographs are committed in `src/assets/photos/` (never hotlink
 | Page sections | `src/components/` |
 | Sources, placeholders, questions for the hotel | `docs/CONTENT-SOURCES.md` |
 | Design rationale | `docs/DESIGN-RATIONALE.md` |
-| Photo review and hero recommendation | `docs/PHOTO-REVIEW.md` |
+| Photo review, hero options, QA notes | `docs/PHOTO-REVIEW.md` |
+| Room photo shortlist | `docs/ROOM-PHOTO-CANDIDATES.md` |
 | Screenshots | `docs/screenshots/` |
 
 The booking button reads one setting (`booking.url`). It currently points at the engine's undated property page, flagged as unverified.
