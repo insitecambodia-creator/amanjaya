@@ -42,6 +42,7 @@ The hotel's own photographs are committed in `src/assets/photos/` (never hotlink
 | Design rationale | `docs/DESIGN-RATIONALE.md` |
 | Photo review, hero options, QA notes | `docs/PHOTO-REVIEW.md` |
 | Room photo shortlist | `docs/ROOM-PHOTO-CANDIDATES.md` |
+| Rooftop & Dining photos: what we have and need | `docs/DINING-PHOTOS.md` |
 | Type scale, original-site typography, font recommendation | `docs/TYPOGRAPHY.md` |
 | Screenshots | `docs/screenshots/` |
 

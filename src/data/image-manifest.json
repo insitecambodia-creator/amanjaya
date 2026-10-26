@@ -92,7 +92,7 @@
   ],
   "missing": [],
   "candidates": {
-    "_readme": "Possible better lead images for the room categories, taken from the existing room pages and gallery export. They have NOT been viewed (this environment cannot download them). Run `npm run fetch:candidates` to download them to src/assets/candidates/ (git-ignored) and build a contact sheet at docs/room-photo-candidates.jpg for review. Evidence that a photo is the hotel's own category picture comes from the image sitemap, which shows junior14, executive7, panoramic2 (Summer Deal) and deluxe5, junior2 (Pchum Ben) as the thumbnails on its offers pages.",
+    "_readme": "Possible better lead images for the room categories, taken from the existing room pages and gallery export. They have NOT been viewed (this environment cannot download them). Run `npm run fetch:candidates` to download them to src/assets/candidates/ (git-ignored) and build a contact sheet at docs/room-photo-candidates.jpg for review. Evidence that a photo is the hotel's own category picture comes from the image sitemap, which shows junior14, executive7, panoramic2 (Summer Deal) and deluxe5, junior2 (Pchum Ben) as the thumbnails on its offers pages. The `venues` group holds Le Moon candidates for the Rooftop & Dining section. Sombok has none: the exports reference only the portrait already in use.",
     "rooms": {
       "junior": [
         {
@@ -196,6 +196,71 @@
         "path": "2024/08/P1220487-scaled.jpg",
         "note": "2024 shoot, portrait. Subject unknown."
       }
-    ]
+    ],
+    "venues": {
+      "le-moon": [
+        {
+          "path": "2020/10/LMN-menu-image-web-1.jpg",
+          "note": "Le Moon image from the October 2020 \"lifestyle photo session for our branding campaign\" blog post. Not viewed; may show drinks, guests or the rooftop."
+        },
+        {
+          "path": "2020/10/LMN-menu-image-web-2.jpg",
+          "note": "Le Moon image from the October 2020 \"lifestyle photo session for our branding campaign\" blog post. Not viewed; may show drinks, guests or the rooftop."
+        },
+        {
+          "path": "2020/10/LMN-menu-image-web-3.jpg",
+          "note": "Le Moon image from the October 2020 \"lifestyle photo session for our branding campaign\" blog post. Not viewed; may show drinks, guests or the rooftop."
+        },
+        {
+          "path": "2020/10/LMN-menu-image-web-4.jpg",
+          "note": "Le Moon image from the October 2020 \"lifestyle photo session for our branding campaign\" blog post. Not viewed; may show drinks, guests or the rooftop."
+        },
+        {
+          "path": "2020/10/LMN-menu-image-web-5.jpg",
+          "note": "Le Moon image from the October 2020 \"lifestyle photo session for our branding campaign\" blog post. Not viewed; may show drinks, guests or the rooftop."
+        },
+        {
+          "path": "2020/10/LMN-menu-image-web-6.jpg",
+          "note": "Le Moon image from the October 2020 \"lifestyle photo session for our branding campaign\" blog post. Not viewed; may show drinks, guests or the rooftop."
+        },
+        {
+          "path": "2020/10/LMN-menu-image-web-7.jpg",
+          "note": "Le Moon image from the October 2020 \"lifestyle photo session for our branding campaign\" blog post. Not viewed; may show drinks, guests or the rooftop."
+        },
+        {
+          "path": "2020/10/LMN-menu-image-web-9.jpg",
+          "note": "Le Moon image from the October 2020 \"lifestyle photo session for our branding campaign\" blog post. Not viewed; may show drinks, guests or the rooftop."
+        },
+        {
+          "path": "2020/10/LMN-menu-image-web-10.jpg",
+          "note": "Le Moon image from the October 2020 \"lifestyle photo session for our branding campaign\" blog post. Not viewed; may show drinks, guests or the rooftop."
+        },
+        {
+          "path": "2020/10/LMN-menu-image-web-11.jpg",
+          "note": "Le Moon image from the October 2020 \"lifestyle photo session for our branding campaign\" blog post. Not viewed; may show drinks, guests or the rooftop."
+        },
+        {
+          "path": "2020/10/LMN-menu-image-web-12.jpg",
+          "note": "Le Moon image from the October 2020 \"lifestyle photo session for our branding campaign\" blog post. Not viewed; may show drinks, guests or the rooftop."
+        },
+        {
+          "path": "2020/10/LMN-menu-image-web-13.jpg",
+          "note": "Le Moon image from the October 2020 \"lifestyle photo session for our branding campaign\" blog post. Not viewed; may show drinks, guests or the rooftop."
+        },
+        {
+          "path": "2020/10/LMN-menu-image-web-14.jpg",
+          "note": "Le Moon image from the October 2020 \"lifestyle photo session for our branding campaign\" blog post. Not viewed; may show drinks, guests or the rooftop."
+        },
+        {
+          "path": "2020/10/LMN-menu-image-web-15.jpg",
+          "note": "Le Moon image from the October 2020 \"lifestyle photo session for our branding campaign\" blog post. Not viewed; may show drinks, guests or the rooftop."
+        },
+        {
+          "path": "2020/03/LeMoon-180.jpg",
+          "note": "On the hotel's \"things to do in Phnom Penh\" page. Not viewed; subject unknown."
+        }
+      ],
+      "sombok": []
+    }
   }
 }

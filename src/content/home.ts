@@ -144,27 +144,33 @@ export const suites = {
 } as const;
 
 export const dining = {
-  title: 'Dining and the rooftop',
+  title: 'Rooftop & Dining',
+  /**
+   * Two editorial rows: Le Moon (photo left) then Sombok (photo right). Each description is about 20 to 30 words.
+   * Sombok is listed as a restaurant in Phnom Penh. The existing homepage does not say it is inside the hotel,
+   * so nothing here claims that. Photographs are the best currently available; better ones are being sourced
+   * (docs/DINING-PHOTOS.md).
+   */
   venues: [
     {
       id: 'le-moon',
       name: 'Le Moon Rooftop',
       kind: 'Rooftop bar',
-      text: 'Part of the hotel since 2010. Early evening is for a sundowner before dinner; later it belongs to friends and couples, for dinner or just a drink.',
+      text: 'Our rooftop bar since 2010. Early evening is for a sundowner before dinner; later it belongs to friends and couples, for dinner or just a drink.',
       photo: 'dining-le-moon',
-      position: '50% 50%',
+      position: '50% 55%',
       alt: 'The hotel at night with the Le Moon sign lit on the roof',
-      link: { label: 'Visit Le Moon Rooftop', url: 'https://www.le-moon-rooftop.com/' },
+      link: { label: 'Discover Le Moon', url: 'https://www.le-moon-rooftop.com/' },
     },
     {
       id: 'sombok',
       name: 'Sombok',
       kind: 'Khmer fine dining',
-      text: 'Khmer fine dining led by the Kimsan Twins, and sister restaurant to Embassy in Siem Reap.',
+      text: 'A fine dining restaurant for Khmer gastronomy in Phnom Penh, headed by the Kimsan Twins and sister restaurant to Embassy in Siem Reap.',
       photo: 'dining-sombok',
       position: '50% 30%',
       alt: 'Two chefs in white jackets beside the Sombok sign at the restaurant entrance',
-      link: { label: 'Visit Sombok', url: 'https://sombok.asia/' },
+      link: { label: 'Discover Sombok', url: 'https://sombok.asia/' },
     },
   ],
 } as const;

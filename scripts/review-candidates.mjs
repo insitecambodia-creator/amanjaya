@@ -19,6 +19,7 @@ const exists = (p) => access(p).then(() => true, () => false);
 
 const groups = [
   ...Object.entries(manifest.candidates.rooms),
+  ...Object.entries(manifest.candidates.venues ?? {}).filter(([, items]) => items.length),
   ['unplaced 2560px', manifest.candidates.unplaced_2560px],
 ];
 
