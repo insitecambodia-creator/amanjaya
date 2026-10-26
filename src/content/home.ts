@@ -50,8 +50,6 @@ export const hero = {
   position: chosenHero.position,
   alt: chosenHero.alt,
   title: 'Phnom Penh, at the water’s edge.',
-  intro:
-    'A boutique hotel at the corner of Sisowath Quay and Street 154, looking over the Tonle Sap and the Mekong.',
 };
 
 export const welcome = {

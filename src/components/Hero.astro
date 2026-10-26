@@ -12,7 +12,7 @@ import { booking, contact } from '../config/site';
         alt={hero.alt}
         position={hero.position}
         sizes="100vw"
-        widths={[640, 960, 1280, 1600, 1920]}
+        widths={[640, 960, 1280, 1600, 1920, 2560]}
         loading="eager"
         fetchpriority="high"
         tone="dark"
@@ -20,11 +20,13 @@ import { booking, contact } from '../config/site';
       />
     </div>
 
+    <!-- A neutral black gradient only (no colour grade), so the headline reads and the photograph keeps its own light. -->
+    <div class="hero__shade" aria-hidden="true"></div>
+
     <div class="hero__overlay">
       <div class="container">
-        <div class="hero__panel">
+        <div class="hero__text">
           <h1 id="hero-title">{hero.title}</h1>
-          <p class="copy">{hero.intro}</p>
         </div>
       </div>
     </div>
@@ -40,13 +42,23 @@ import { booking, contact } from '../config/site';
 </section>
 
 <style>
+  /* Full-width, immersive photograph with the headline set directly on it. Phones: the headline sits at the foot,
+     under the couple's faces. From 56rem: it sits on the left, over the sky, clear of the woman and the facade. */
   .hero__stage {
     position: relative;
+    isolation: isolate;
+    overflow: clip;
+    color: var(--white);
   }
 
   .hero__media {
-    height: clamp(22rem, 62svh, 40rem);
+    height: clamp(31rem, 84svh, 40rem);
     overflow: hidden;
+  }
+
+  /* Phone crop: the woman, her smile and the balconies stay in frame; the man's shoulder is left partly out. */
+  .hero__media :global(.photo) {
+    --focus: 66% 30% !important;
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -66,17 +78,42 @@ import { booking, contact } from '../config/site';
     }
   }
 
-  /* Small screens: the text sits below the photograph. */
-  .hero__panel {
-    padding-block: 2.25rem 1.5rem;
+  .hero__shade {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      rgb(0 0 0 / 0.66) 0%,
+      rgb(0 0 0 / 0.46) 26%,
+      rgb(0 0 0 / 0.14) 52%,
+      rgb(0 0 0 / 0) 70%
+    );
   }
 
-  .hero__panel h1 {
-    color: var(--teak);
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    pointer-events: none;
   }
 
-  .hero__panel p {
-    margin-top: 1.25rem;
+  .hero__overlay .container {
+    padding-bottom: clamp(1.75rem, 6svh, 2.75rem);
+  }
+
+  .hero__text {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .hero__text h1 {
+    max-width: 11em;
+    color: var(--white);
+    font-weight: 300;
   }
 
   .hero__quay-inner {
@@ -103,32 +140,48 @@ import { booking, contact } from '../config/site';
     }
   }
 
-  /* Larger screens: a white panel rises from the page into the photograph and ends on the waterline. */
   @media (min-width: 56rem) {
     .hero__media {
-      height: clamp(34rem, 80svh, 52rem);
+      height: clamp(34rem, calc(100svh - var(--header-h)), 54rem);
+    }
+
+    .hero__media :global(.photo) {
+      --focus: 60% 14% !important;
+    }
+
+    /* Left-hand gradient: strongest at the edge, gone before the woman (about 50% across). */
+    .hero__shade {
+      background: linear-gradient(
+        90deg,
+        rgb(0 0 0 / 0.3) 0%,
+        rgb(0 0 0 / 0.2) 30%,
+        rgb(0 0 0 / 0.06) 46%,
+        rgb(0 0 0 / 0) 58%
+      );
     }
 
     .hero__overlay {
+      align-items: center;
+    }
+
+    /* A soft neutral cloud that travels with the headline, so contrast holds wherever the white shirt falls
+       behind it, while the rest of the photograph keeps its own light. */
+    .hero__text::before {
+      content: '';
       position: absolute;
-      inset: auto 0 0 0;
+      z-index: -1;
+      inset: -2.5rem -4rem -2.5rem -16rem;
       pointer-events: none;
+      background: rgb(0 0 0 / 0.46);
+      filter: blur(3.25rem);
     }
 
-    .hero__panel {
-      width: min(36rem, 46vw);
-      margin-left: calc(-1 * var(--gutter));
-      padding: clamp(2rem, 3.4vw, 3.25rem) clamp(1.75rem, 3vw, 3rem) 2.25rem var(--gutter);
-      background: var(--white);
-      pointer-events: auto;
+    .hero__text h1 {
+      text-shadow: 0 0 1.5rem rgb(0 0 0 / 0.25);
     }
 
-    .hero__panel h1 {
-      max-width: none; /* balanced wrapping (global h1 text-wrap) at the smaller scale */
-    }
-
-    .hero__panel p {
-      max-width: 38ch;
+    .hero__overlay .container {
+      padding-bottom: 0;
     }
   }
 </style>
