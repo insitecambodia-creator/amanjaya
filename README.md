@@ -19,6 +19,7 @@ To check the production build:
 npm run build && npm run preview
 npm run check          # type and template checks
 npm run fetch:candidates   # review room-photo candidates (needs internet access to the live site)
+npm run extract:card-images -- post-333.css   # find the original room-card photos in the old homepage CSS
 npm run audit:fonts    # report the fonts a page really renders (needs Playwright; see docs/TYPOGRAPHY.md)
 PUBLIC_HERO_OPTION=B npm run dev   # preview an alternative hero (B, C or D)
 ```
@@ -33,6 +34,7 @@ The hotel's own photographs are committed in `src/assets/photos/` (never hotlink
 |---|---|
 | Hotel facts, booking link, contact, nav | `src/config/site.ts` |
 | Homepage copy and photo choices | `src/content/home.ts` |
+| Room starting prices (edit here only) | `src/data/pricing.ts` |
 | Colours, type scale (Montserrat + Open Sans), waterline motif | `src/styles/global.css` |
 | Page sections | `src/components/` |
 | Sources, placeholders, questions for the hotel | `docs/CONTENT-SOURCES.md` |

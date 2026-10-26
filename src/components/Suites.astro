@@ -1,6 +1,7 @@
 ---
 import Photo from './Photo.astro';
 import { suites } from '../content/home';
+import { pricing, startingPrice } from '../data/pricing';
 ---
 
 <section class="suites section" id="suites" aria-labelledby="suites-title">
@@ -10,47 +11,52 @@ import { suites } from '../content/home';
       <p>{suites.intro}</p>
     </header>
 
-    <!-- A CSS-only radio group: choosing a category opens its description and shows its photograph.
-         On small screens every category is simply listed with its photograph. -->
-    <div class="suites__list" role="radiogroup" aria-label="Suite categories">
+    <ul class="rooms">
       {
-        suites.items.map((s, i) => (
-          <div class="suite">
-            <input class="suite__input" type="radio" name="suite" id={`suite-${s.id}`} checked={i === 0} />
-            <label class="suite__label" for={`suite-${s.id}`}>
-              <span class="suite__name">{s.name}</span>
-              <span class="suite__size">{s.size ?? ''}</span>
-              <span class="suite__note">{s.note}</span>
-            </label>
-            <div class="suite__body">
-              <p>{s.text}</p>
-            </div>
-            <figure class="suite__photo">
-              <Photo
-                name={s.photo}
-                alt={s.alt}
-                ratio="3 / 2"
-                position={s.position}
-                sizes="(min-width: 56rem) 52vw, 92vw"
-                label={`${s.name} photograph`}
-              />
-            </figure>
-          </div>
-        ))
+        suites.items.map((room) => {
+          const price = startingPrice(room.id);
+          return (
+            <li class="room">
+              <figure class="room__photo">
+                <Photo
+                  name={room.photo}
+                  alt={room.alt}
+                  ratio="4 / 3"
+                  position={room.position}
+                  sizes="(min-width: 72rem) 22vw, (min-width: 40rem) 44vw, 92vw"
+                  label={`${room.name} photograph`}
+                />
+              </figure>
+              <div class="room__body">
+                <h3>{room.name}</h3>
+                <p class="room__note">{room.note}</p>
+                <p class="room__summary">{room.summary}</p>
+                <div class="room__foot">
+                  {price && (
+                    <p class="room__price">
+                      <span class="room__from">{price.label}</span> <span class="room__amount">{price.amount}</span>
+                    </p>
+                  )}
+                  <a class="btn btn--outline" href={room.exploreUrl}>
+                    Explore<span class="sr-only"> {room.name}</span>
+                  </a>
+                </div>
+              </div>
+            </li>
+          );
+        })
       }
-    </div>
+    </ul>
+
+    <p class="suites__note">{pricing.disclaimer}</p>
   </div>
 </section>
 
 <style>
-  .suites {
-    background: var(--ivory);
-  }
-
   .suites__head {
     display: grid;
     gap: 1.25rem;
-    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: clamp(2.25rem, 4.5vw, 3.5rem);
   }
 
   .suites__head h2 {
@@ -61,184 +67,89 @@ import { suites } from '../content/home';
     color: var(--sage-text);
   }
 
-  /* Small screens: stacked, photograph first. */
-  .suite {
-    display: flex;
-    flex-direction: column;
-    padding-block: 2rem;
-    border-top: 1px solid color-mix(in srgb, var(--bronze) 45%, transparent);
-  }
-
-  .suite__input {
-    display: none;
-  }
-
-  .suite__photo {
-    order: -1;
-    margin-bottom: 1.25rem;
-  }
-
-  .suite__label {
+  /* One column on phones, two on tablets and small laptops, four from 72rem. */
+  .rooms {
     display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: baseline;
-    gap: 0.15rem 1rem;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(2.5rem, 4vw, 3rem) clamp(1.25rem, 2vw, 1.75rem);
   }
 
-  .suite__name {
-    font-family: var(--font-heading);
-    font-size: var(--step-2);
-    font-weight: 400;
-    line-height: 1.25;
+  .room {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 1.25rem;
+  }
+
+  .room__photo {
+    overflow: hidden;
+  }
+
+  .room__body {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: 0.45rem;
+    align-content: start;
+  }
+
+  .room__body h3 {
     color: var(--teak);
   }
 
-  .suite__size {
-    font-size: var(--step--1);
-    font-variant-numeric: tabular-nums;
-    color: var(--sage-text);
-  }
-
-  .suite__note {
-    grid-column: 1 / -1;
-    font-size: var(--step--1);
+  .room__note {
     color: var(--bronze-deep);
+    font-size: var(--step--1);
   }
 
-  .suite__body {
-    margin-top: 0.9rem;
+  .room__summary {
+    margin-top: 0.35rem;
+    max-width: 34ch;
   }
 
-  .suite__body p {
-    max-width: 52ch;
+  /* The price row sits on a bronze hairline, a small echo of the waterline. */
+  .room__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid color-mix(in srgb, var(--bronze) 55%, transparent);
   }
 
-  @media (min-width: 56rem) {
-    .suites__list {
-      display: grid;
-      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-      column-gap: clamp(3rem, 7vw, 7rem);
-      grid-template-rows: repeat(8, auto) 1fr;
-      align-items: start;
-    }
+  .room__price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+  }
 
-    .suite {
-      display: contents;
-    }
+  .room__from {
+    color: var(--sage-text);
+    font-size: var(--step--1);
+  }
 
-    .suite__input {
-      display: block;
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      opacity: 0;
-    }
+  .room__amount {
+    color: var(--teak);
+    font-family: var(--font-heading);
+    font-size: var(--step-1);
+  }
 
-    .suite__label {
-      grid-column: 1;
-      padding-top: 1.5rem;
-      cursor: pointer;
-      border-top: 1px solid color-mix(in srgb, var(--bronze) 45%, transparent);
-    }
+  .suites__note {
+    margin-top: clamp(2rem, 4vw, 3rem);
+    max-width: 70ch;
+    color: var(--sage-text);
+    font-size: var(--step--1);
+  }
 
-    .suite__name {
-      font-size: var(--step-2);
-      color: var(--charcoal);
-      opacity: 0.75; /* unselected names: about 5:1 on ivory */
-    }
-
-    .suite__label:hover .suite__name {
-      opacity: 1;
-    }
-
-    .suite__input:checked + .suite__label {
-      border-top: 2px solid var(--bronze);
-    }
-
-    .suite__input:checked + .suite__label .suite__name {
-      color: var(--teak);
-      opacity: 1;
-    }
-
-    .suite__input:focus-visible + .suite__label {
-      outline: 2px solid var(--teak);
-      outline-offset: 4px;
-    }
-
-    .suite__label {
-      padding-bottom: 1.25rem;
-    }
-
-    /* The description opens when its category is chosen. */
-    .suite__body {
-      grid-column: 1;
-      display: grid;
-      grid-template-rows: 0fr;
-      margin: 0;
-    }
-
-    .suite__body p {
-      overflow: hidden;
-      min-height: 0;
-    }
-
-    .suite__input:checked ~ .suite__body {
-      grid-template-rows: 1fr;
-      padding-bottom: 1.5rem;
-    }
-
-    .suite__input:checked ~ .suite__body p {
-      padding-bottom: 0.25rem;
-    }
-
-    /* All four photographs share one frame; only the chosen one shows. The figure fades, then switches
-       visibility, so unselected photographs are hidden from assistive technology. Not position: sticky:
-       a fading element under a sticky one renders blank in Chromium's full-size screenshots, and the
-       list is barely taller than the photo anyway. */
-    .suite__photo {
-      grid-column: 2;
-      grid-row: 1 / span 9;
-      align-self: start;
-      order: 0;
-      margin: 0;
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .suite__input:checked ~ .suite__photo {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
+  @media (min-width: 40rem) {
+    .rooms {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
-  /* Transitions exist only while the visitor is using the list. A state change that is not an interaction
-     (page load, print, full-size screenshot tools that re-resolve styles) snaps to its end state instead of
-     being caught half-way, and nothing here runs under prefers-reduced-motion. */
-  @media (min-width: 56rem) and (prefers-reduced-motion: no-preference) {
-    .suites__list:is(:hover, :focus-within) .suite__label {
-      transition: border-color 0.3s ease;
-    }
-
-    .suites__list:is(:hover, :focus-within) .suite__name {
-      transition:
-        color 0.3s ease,
-        opacity 0.3s ease;
-    }
-
-    .suites__list:is(:hover, :focus-within) .suite__body {
-      transition: grid-template-rows 0.4s ease;
-    }
-
-    .suites__list:is(:hover, :focus-within) .suite__photo {
-      transition:
-        opacity 0.45s ease,
-        visibility 0s 0.45s;
-    }
-
-    .suites__list:is(:hover, :focus-within) .suite__input:checked ~ .suite__photo {
-      transition-delay: 0s;
+  @media (min-width: 72rem) {
+    .rooms {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
 </style>

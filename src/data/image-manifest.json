@@ -92,12 +92,16 @@
   ],
   "missing": [],
   "candidates": {
-    "_readme": "Possible better lead images for the room categories, taken from the existing room pages and gallery export. They have NOT been viewed (this environment cannot download them). Run `npm run fetch:candidates` to download them to src/assets/candidates/ (git-ignored) and build a contact sheet at docs/room-photo-candidates.jpg for review.",
+    "_readme": "Possible better lead images for the room categories, taken from the existing room pages and gallery export. They have NOT been viewed (this environment cannot download them). Run `npm run fetch:candidates` to download them to src/assets/candidates/ (git-ignored) and build a contact sheet at docs/room-photo-candidates.jpg for review. Evidence that a photo is the hotel's own category picture comes from the image sitemap, which shows junior14, executive7, panoramic2 (Summer Deal) and deluxe5, junior2 (Pchum Ben) as the thumbnails on its offers pages.",
     "rooms": {
       "junior": [
         {
           "path": "2020/09/Amanjaya-junior14.jpg",
-          "note": "Lead slide on the Junior page. 16:9."
+          "note": "Lead slide on the Junior page, and shown as the Junior thumbnail on the hotel's offers pages. 16:9."
+        },
+        {
+          "path": "2020/09/Amanjaya-junior2.jpg",
+          "note": "Shown as a Junior thumbnail on the hotel's Pchum Ben and Early Bird offer pages. Not in the room page or gallery export; ratio unknown."
         },
         {
           "path": "2020/09/Amanjaya-junior5.jpg",
@@ -127,7 +131,7 @@
         },
         {
           "path": "2020/09/Amanjaya-deluxe5.jpg",
-          "note": "In the gallery. 3:2."
+          "note": "Shown as the Deluxe thumbnail on the hotel's Pchum Ben offer page, and in the gallery. 3:2."
         },
         {
           "path": "2020/09/Amanjaya-deluxe2.jpg",
@@ -153,7 +157,7 @@
         },
         {
           "path": "2020/09/Amanjaya-executive7.jpg",
-          "note": "In the gallery. 16:9."
+          "note": "Shown as the Executive thumbnail on the hotel's offers pages, and in the gallery. 16:9."
         },
         {
           "path": "2020/09/Amanjaya-executive10.jpg",

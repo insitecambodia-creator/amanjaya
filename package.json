@@ -10,7 +10,8 @@
     "check": "astro check",
     "fetch:images": "node scripts/fetch-images.mjs",
     "fetch:candidates": "node scripts/review-candidates.mjs",
-    "audit:fonts": "node scripts/audit-fonts.mjs"
+    "audit:fonts": "node scripts/audit-fonts.mjs",
+    "extract:card-images": "node scripts/extract-card-images.mjs"
   },
   "dependencies": {
     "@fontsource-variable/montserrat": "^5.3.0",

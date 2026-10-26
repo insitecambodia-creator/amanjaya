@@ -24,7 +24,7 @@ Ivory `#EFEADD`, teak `#5B3F2C`, charcoal `#34332F`, bronze `#8C6A3F`, plus a de
 ## Choices against the defaults
 
 - No centred headline over a photo; no numbered markers on the rooms (they are not a sequence); no caps eyebrows; no arrow glyphs; no identical rounded cards.
-- Suites: a list of four names that opens one description and swaps one photograph, built with plain CSS radio inputs (no JavaScript, keyboard accessible). The fades run only while the visitor is using the list. On small screens each suite is listed with its photograph.
+- Suites: a four-card photographic grid, as on the original site: photo, name, one-line description, starting price on a bronze hairline, and an Explore button. Four across from 72rem, two across below, one on phones. Prices come from `src/data/pricing.ts` and are labelled indicative.
 - Dining sits on a teak band with a deliberate stagger between the two venues.
 - Motion: one load moment (photo settles, waterline draws), plus responses to the visitor's own actions. All of it is off under `prefers-reduced-motion`.
 

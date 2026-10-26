@@ -193,6 +193,18 @@ a:hover {
   color: var(--teak);
 }
 
+.btn--outline {
+  min-height: 2.5rem;
+  padding: 0.5rem 1.25rem;
+  background: transparent;
+  color: var(--teak);
+}
+
+.btn--outline:hover {
+  background: var(--teak);
+  color: var(--ivory);
+}
+
 .btn--light {
   background: var(--ivory);
   border-color: var(--ivory);

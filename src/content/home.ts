@@ -77,13 +77,22 @@ export const welcome = {
 export const suites = {
   title: 'Four ways to stay',
   intro: 'Every category has a private balcony, air conditioning, a working desk and room service.',
+  /**
+   * Starting prices are NOT here: they live in src/data/pricing.ts so there is one place to edit them.
+   * `exploreUrl` points at the hotel's existing room pages (verified in the homepage export) until the new
+   * room pages are built; then switch these to internal links.
+   * `summary` is the short card text; `description` is the longer wording kept for the future room pages.
+   * Photographs are the best available at the moment; better wide-angle ones are being sourced (docs/ROOM-PHOTO-CANDIDATES.md).
+   */
   items: [
     {
       id: 'junior',
       name: 'Junior Suite',
-      size: '45 sqm',
-      note: 'The hotel’s bestseller',
-      text: 'A king bed and a lounge area. Local rosewood floors, black-out curtains in Cambodian raw silk, and reproductions of artefacts from the neighbouring National Museum.',
+      note: 'Our bestselling rooms',
+      summary: '45 sqm with a king bed, a lounge area and a private balcony.',
+      description:
+        'A king bed and a lounge area. Local rosewood floors, black-out curtains in Cambodian raw silk, and reproductions of artefacts from the neighbouring National Museum.',
+      exploreUrl: 'https://www.amanjaya-suites-phnom-penh.com/4-types-of-rooms/junior-suite-phnom-penh/',
       photo: 'suite-junior',
       position: '62% 50%',
       alt: 'A Junior Suite corner with a carved lattice cabinet, an armchair and fresh flowers',
@@ -91,9 +100,11 @@ export const suites = {
     {
       id: 'deluxe',
       name: 'Deluxe Room',
-      size: null,
-      note: 'Canopy bed and bathtub',
-      text: 'A king-size canopy bed, a bathroom with both bath and shower, and a living area with armchairs. The balcony looks over the city.',
+      note: 'The comfort of living',
+      summary: 'A king canopy bed, bath and shower, and a balcony over the city.',
+      description:
+        'A king-size canopy bed, a bathroom with both bath and shower, and a living area with armchairs. The balcony looks over the city.',
+      exploreUrl: 'https://www.amanjaya-suites-phnom-penh.com/4-types-of-rooms/deluxe-suite/',
       photo: 'suite-deluxe',
       position: '50% 50%',
       alt: 'A Deluxe Room bed with a timber headboard and sheer curtains',
@@ -101,9 +112,11 @@ export const suites = {
     {
       id: 'executive',
       name: 'Executive Suite',
-      size: '90 sqm',
-      note: 'Three suites, river views',
-      text: 'A genuine living area with a sofa, three armchairs and a desk. Cambodian raw silk, replica artefacts and polished local cherrywood, with furniture made to order. For business or leisure.',
+      note: 'Breath-taking view over the river',
+      summary: '90 sqm with a living area, a sofa, three armchairs and a desk.',
+      description:
+        'A genuine living area with a sofa, three armchairs and a desk. Cambodian raw silk, replica artefacts and polished local cherrywood, with furniture made to order. For business or leisure.',
+      exploreUrl: 'https://www.amanjaya-suites-phnom-penh.com/4-types-of-rooms/executive/',
       photo: 'suite-executive',
       position: '62% 50%',
       alt: 'An Executive Suite bed with a carved timber headboard, linen and sheer curtains',
@@ -111,9 +124,11 @@ export const suites = {
     {
       id: 'panoramic',
       name: 'Panoramic Suite',
-      size: '50 sqm',
-      note: 'Both rivers and the pagoda',
-      text: 'A wide view over the two rivers and the pagoda, a lounge area, a king bed, and windows that let the light in.',
+      note: 'It’s all about space',
+      summary: '50 sqm with wide views over both rivers and the pagoda.',
+      description:
+        'A wide view over the two rivers and the pagoda, a lounge area, a king bed, and windows that let the light in.',
+      exploreUrl: 'https://www.amanjaya-suites-phnom-penh.com/4-types-of-rooms/panoramic/',
       photo: 'suite-panoramic',
       position: '50% 55%',
       alt: 'A Panoramic Suite with a king bed, a writing desk and tall windows full of light',

@@ -39,3 +39,24 @@ npm run fetch:candidates
 This downloads the candidates to `src/assets/candidates/` (git-ignored, never used by the site) and writes a labelled contact sheet to `docs/room-photo-candidates.jpg` with each photo shown whole, with its pixel size. Pick the best per category, then add it to `images` in the manifest and point `suite-*` in `src/content/home.ts` at it.
 
 For Deluxe in particular, if no candidate is larger than about 1,200 px, ask the hotel for the original-resolution photos rather than upscaling.
+
+## Update: can the original homepage card photographs be recovered?
+
+**Short answer: not from the exports we have, but the route to them is now precise.**
+
+What was checked, and found:
+
+- **The exported homepage HTML contains no image reference for the four room cards.** The cards are Elementor containers (Junior `45c4fbf`, Deluxe `2737823`, Executive `661050b`, Panoramic `1789dd1`, inside outer containers `6547f68` and `4af4033`). The HTML has no inline `background-image`, and no background setting in any `data-settings`.
+- **Elementor writes those backgrounds into the page's own stylesheet,** `wp-content/uploads/elementor/css/post-333.css` (333 is the homepage's page id, from the export's `<body>` class). That file was not exported, and the live site is not reachable from the build environment, so it could not be read.
+- **The image sitemap does not help for the cards:** for the homepage it lists only the cover, the Sombok photo and a review image.
+- **It does show which images the hotel uses as category pictures elsewhere.** The thumbnails on its offers pages are `panoramic2`, `executive7`, `junior14` (Summer Deal), and `deluxe5`, `junior2` (Pchum Ben). These are the best available hint about the hotel's own category images, and are now flagged in the manifest. Only `panoramic2` is on the page today.
+
+Nothing was substituted: the cards use the best images we already have, and they will switch as soon as better ones are confirmed.
+
+### To recover the originals (two minutes)
+
+1. Save `https://www.amanjaya-suites-phnom-penh.com/wp-content/uploads/elementor/css/post-333.css` from a browser that can reach the live site, or ask the site's developer for it. It is a public file; nothing needs to be logged into.
+2. Run `npm run extract:card-images -- path/to/post-333.css`. It prints each card's background image, including any tablet or mobile variants. (The extractor was tested on a synthetic sample in Elementor's format, not on the real file.)
+3. Add the chosen files to `images` in `src/data/image-manifest.json`, run `npm run fetch:images`, and change `photo` for the room in `src/content/home.ts`.
+
+If the CSS shows nothing for a card, that image was set another way (for example in a template), and `npm run fetch:candidates` plus a visual check of the shortlist above is the fallback.
