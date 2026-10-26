@@ -1,6 +1,6 @@
 # Typography
 
-> **Current direction (typography experiment 2): Montserrat Regular headings + Open Sans Regular text.** Section 5 describes it. Sections 1 to 4 record the earlier Newsreader / Hanken Grotesk direction and the research on the original site, which still stands. The Newsreader version is preserved in git at commit `15a7fa7`.
+> **Current direction (typography experiment 3): Montserrat Regular headings and interface + Helvetica system stack for body paragraphs (section 6).** Experiment 2 was Montserrat + Open Sans. Section 5 describes it. Sections 1 to 4 record the earlier Newsreader / Hanken Grotesk direction and the research on the original site, which still stands. The Newsreader version is preserved in git at commit `15a7fa7`.
 
 ## 1. Heading scale (earlier Newsreader pass, superseded by section 5)
 
@@ -113,3 +113,14 @@ Compared with the Newsreader version, the desktop H1 drops from 58.8px to 46px, 
 - Compared with the Newsreader direction, this is more neutral and closer to a typical hotel template. It gains familiarity with the original site and loses the editorial character. Whether that trade is right is the point of this experiment.
 
 Screenshots: `docs/screenshots/` (desktop and mobile, refreshed), and `docs/screenshots/typography/newsreader-vs-montserrat-desktop.jpg` and `-mobile.jpg` compare the two directions directly.
+
+## 6. Typography experiment 3: Helvetica body copy
+
+The hotel verified the original site's body text in Elementor: Helvetica, 1.1em (17.6px at a 16px parent), weight 400, line height 1.7, letter spacing 0.4px, justified. The main body paragraphs now use exactly that (`.copy` in `src/styles/global.css`).
+
+- **Font:** `'Helvetica Neue', Helvetica, Arial, sans-serif`. No Helvetica files are downloaded or bundled, so every device shows its own: Helvetica Neue on Apple devices, Arial on Windows, the system sans on Android and Linux. Montserrat stays for headings and for the interface (nav, buttons). Open Sans is removed, which also saves a font download.
+- **Which paragraphs:** the hero intro, the Welcome text, the Suites intro, the two Rooftop & Dining descriptions and the Riverside text. Small labels, prices, notes and the footer stay at the body default, in the same Helvetica stack.
+- **Justification:** the original is justified, but justified text needs a long line. Measured as the widest word gap against a normal space, in the 310 to 470px side-by-side columns (56rem and up) lines stretched to 2 to 5 times normal ("A   fine   dining   restaurant   for   Khmer"), and phone columns (350px) are narrower still. So those are left-aligned. Justification is on where the sections stack into one wide column, 40rem to 56rem (about 640 to 895px), where the worst gap is about 1.3 to 2 times normal. The Rooftop & Dining descriptions stay left-aligned at every width because their 38ch column is narrow.
+- **To justify everywhere:** in `global.css`, remove `and (max-width: 55.99rem)` and the `min-width` condition from the `.copy` media query, and delete `text-align: left` from `.venue__desc` in `Dining.astro`. The side-by-side columns would then show the wide gaps described above; the cure is a wider column (a layout change) or hyphenation (`hyphens: auto` helps in most browsers but could not be tested here).
+- **Header:** Montserrat is wider than Open Sans, so the nav needed a slightly tighter gap and a non-wrapping wordmark to stay on one line from 896px up.
+- **Screenshots:** `docs/screenshots/typography/body-copy-*.jpg`. This environment has no Helvetica, so it renders the stack with Liberation Sans (metric-compatible with Arial and close to Helvetica); on real devices the letterforms will differ slightly and the line breaks may shift by a word.

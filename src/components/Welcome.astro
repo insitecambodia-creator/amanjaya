@@ -9,7 +9,7 @@ const [large, small] = welcome.photos;
   <div class="container welcome__grid">
     <div class="welcome__text" data-reveal>
       <h2 id="welcome-title">{welcome.title}</h2>
-      {welcome.paragraphs.map((p) => <p>{p}</p>)}
+      {welcome.paragraphs.map((p) => <p class="copy">{p}</p>)}
     </div>
 
     <div class="welcome__images">
@@ -53,11 +53,6 @@ const [large, small] = welcome.photos;
   .welcome__text h2 {
     color: var(--teak);
     max-width: 14ch;
-  }
-
-  .welcome__text p {
-    font-size: var(--step-1);
-    line-height: 1.65;
   }
 
   .welcome__images {

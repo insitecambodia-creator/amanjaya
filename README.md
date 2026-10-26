@@ -36,7 +36,7 @@ The hotel's own photographs are committed in `src/assets/photos/` (never hotlink
 | Hotel facts, booking link, contact, nav | `src/config/site.ts` |
 | Homepage copy and photo choices | `src/content/home.ts` |
 | Room starting prices (edit here only) | `src/data/pricing.ts` |
-| Colours (white, charcoal, teak, bronze), type scale (Montserrat + Open Sans), waterline motif | `src/styles/global.css` |
+| Colours (white, charcoal, teak, bronze), type scale (Montserrat + Helvetica system stack), waterline motif | `src/styles/global.css` |
 | Page sections | `src/components/` |
 | Sources, placeholders, questions for the hotel | `docs/CONTENT-SOURCES.md` |
 | Design rationale | `docs/DESIGN-RATIONALE.md` |
