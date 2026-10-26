@@ -19,6 +19,7 @@ To check the production build:
 npm run build && npm run preview
 npm run check          # type and template checks
 npm run fetch:candidates   # review room-photo candidates (needs internet access to the live site)
+npm run audit:fonts    # report the fonts a page really renders (needs Playwright; see docs/TYPOGRAPHY.md)
 PUBLIC_HERO_OPTION=B npm run dev   # preview an alternative hero (B, C or D)
 ```
 
@@ -38,6 +39,7 @@ The hotel's own photographs are committed in `src/assets/photos/` (never hotlink
 | Design rationale | `docs/DESIGN-RATIONALE.md` |
 | Photo review, hero options, QA notes | `docs/PHOTO-REVIEW.md` |
 | Room photo shortlist | `docs/ROOM-PHOTO-CANDIDATES.md` |
+| Type scale, original-site typography, font recommendation | `docs/TYPOGRAPHY.md` |
 | Screenshots | `docs/screenshots/` |
 
 The booking button reads one setting (`booking.url`). It currently points at the engine's undated property page, flagged as unverified.

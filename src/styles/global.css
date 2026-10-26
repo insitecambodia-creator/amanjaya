@@ -19,9 +19,13 @@
   --step--1: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
   --step-0: clamp(1.0625rem, 1.02rem + 0.2vw, 1.1875rem);
   --step-1: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
-  --step-2: clamp(1.6rem, 1.3rem + 1.4vw, 2.25rem);
-  --step-3: clamp(2rem, 1.4rem + 2.6vw, 3.5rem);
-  --step-4: clamp(2.5rem, 1.5rem + 4.2vw, 4.9rem);
+  /* Heading steps (h3, h2, h1). Fluid between 360px and 1280px wide, then fixed.
+     Largest sizes are 75% of the previous scale (2.25 / 3.5 / 4.9rem); the small-screen floors are
+     reduced by about 20-25% rather than more, so headings stay comfortably above body size on phones.
+     Body steps (--step--1 to --step-1) are unchanged. */
+  --step-2: clamp(1.3rem, 1.148rem + 0.674vw, 1.6875rem); /* h3: 20.8px to 27px */
+  --step-3: clamp(1.55rem, 1.129rem + 1.87vw, 2.625rem); /* h2: 24.8px to 42px */
+  --step-4: clamp(1.9rem, 1.206rem + 3.087vw, 3.675rem); /* h1: 30.4px to 58.8px */
 
   --gutter: clamp(1.25rem, 4.5vw, 3.5rem);
   --max: 84rem;

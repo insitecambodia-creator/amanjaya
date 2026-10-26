@@ -12,7 +12,7 @@ The hero text sits on a solid ivory panel that rises from the page into the phot
 
 - Headings: Newsreader (variable, light weights, optical sizes), self-hosted.
 - Interface and body: Hanken Grotesk (variable), self-hosted.
-- Fluid scale from `--step--1` to `--step-4`; lines held to about 62 characters.
+- Fluid scale from `--step--1` to `--step-4`; lines held to about 62 characters. Headings run 20.8 to 27px (H3), 24.8 to 42px (H2) and 30.4 to 58.8px (H1) between 360 and 1280px wide; body text is 17 to 19px. Details and the history of this change are in `docs/TYPOGRAPHY.md`.
 - Both are open-source (SIL OFL). Noto Serif/Sans Khmer are the planned pair for Khmer later.
 
 ## Colour
