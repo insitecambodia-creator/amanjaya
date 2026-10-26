@@ -6,7 +6,7 @@ Reviewed with the 17 real photographs in place. Screenshots are in `docs/screens
 
 ## Hero
 
-**Recommendation: keep the couple in front of the hotel, using the 2560 px original.** It is the only image that shows the hotel in daylight, the light is warm and matches the ivory, teak and bronze palette, and it crops well to every screen: on mobile the portrait crop keeps the smile, the balconies and the held hands; on desktop the ivory panel covers the least interesting part (the out-of-focus shoulder).
+**Recommendation: keep the couple in front of the hotel, using the 2560 px original.** It is the only image that shows the hotel in daylight, the warm light suits the teak and bronze accents, and it crops well to every screen: on mobile the portrait crop keeps the smile, the balconies and the held hands; on desktop the white panel covers the least interesting part (the out-of-focus shoulder).
 
 The file the existing site uses as its cover (`amh-homepage-cover.png`) is a 16:9 crop of this same photograph. The original is better because it is 2560 px wide and lets us choose the crop.
 

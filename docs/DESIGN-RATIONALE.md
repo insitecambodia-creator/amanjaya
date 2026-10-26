@@ -6,7 +6,7 @@
 
 A hairline in bronze with a river-gauge scale hanging from it marks the join between the hero photograph and the page. It draws across once on load and appears again at the top of the footer. It is the only recurring decoration. The hotel stands on a quay, and gauges like this are what you find at a river's edge.
 
-The hero text sits on a solid ivory panel that rises from the page into the photograph and ends on the waterline, so contrast never depends on the photograph.
+The hero text sits on a solid white panel that rises from the page into the photograph and ends on the waterline, so contrast never depends on the photograph.
 
 ## Type
 
@@ -19,7 +19,9 @@ Typography experiment 2 (the Newsreader / Hanken Grotesk direction is in git at 
 
 ## Colour
 
-Ivory `#EFEADD`, teak `#5B3F2C`, charcoal `#34332F`, bronze `#8C6A3F`, plus a deep bronze (`#6B4E2C`) and a light bronze (`#D2B686`) for text, and a sage-grey (`#55625B`) for secondary text. The mid bronze is only 4.1:1 on ivory, so it is used for lines and large type only. Text pairs used: charcoal on ivory 10.5, teak on ivory 8.0, deep bronze on ivory 6.3, sage on ivory 5.3, soft ivory on teak 6.1, light bronze on teak 4.9 (all WCAG AA).
+Pure white `#FFFFFF` for the page, header, hero panel and content sections, as on the existing Amanjaya website. The earlier beige/ivory background was dropped because it read as a generic template. Text is charcoal `#333333`. Teak `#5B3F2C` is the accent for headings, buttons and the darker dining band, and muted bronze `#8C6A3F` (deep `#6B4E2C` for links, light `#D2B686` on dark) is used for hairlines, the waterline and small accents. Secondary text is a neutral grey `#5C5C5C`; the footer is charcoal. No tinted or beige surfaces remain.
+
+Contrast (WCAG AA): charcoal on white 12.6, teak on white 9.6, grey on white 6.7, deep bronze on white 7.6, bronze on white 4.9, white on teak 9.6, soft white on teak 7.0, light bronze on teak 4.9 and on charcoal 6.5.
 
 ## Choices against the defaults
 

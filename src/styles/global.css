@@ -1,17 +1,18 @@
 /* Amanjaya Pancam: design tokens and base styles.
-   Palette follows CLAUDE.md (ivory, teak, charcoal, bronze). Bronze has a light variant for lines on dark
-   and a deep variant for small text, because the mid bronze is only 4.1:1 on ivory (large text only). */
+   Palette: pure white surfaces, charcoal text, with teak and muted bronze as restrained accents.
+   Teak is also the darker dining band; charcoal is the footer. No beige or tinted surfaces. */
 
 :root {
-  --ivory: #efeadd;
-  --ivory-deep: #e4ddca;
-  --teak: #5b3f2c;
-  --charcoal: #34332f;
-  --bronze: #8c6a3f; /* lines, large display text */
-  --bronze-deep: #6b4e2c; /* small text and links on ivory (6.3:1) */
-  --bronze-light: #d2b686; /* lines and links on teak/charcoal (4.9:1 on teak) */
-  --sage-text: #55625b; /* secondary text on ivory (5.3:1) */
-  --ivory-soft: #d5cdbd; /* body text on teak (6.1:1) */
+  --white: #ffffff;
+  --charcoal: #333333; /* main text (12.6:1 on white) and the footer */
+  --teak: #5b3f2c; /* headings, buttons, the dining band (9.6:1 on white) */
+  --bronze: #8c6a3f; /* hairlines, the waterline, small accents (4.9:1 on white) */
+  --bronze-deep: #6b4e2c; /* links and small bronze text (7.6:1 on white) */
+  --bronze-light: #d2b686; /* lines and links on dark (4.9:1 on teak, 6.5:1 on charcoal) */
+  --grey-text: #5c5c5c; /* secondary text (6.7:1 on white) */
+  --on-dark-soft: rgb(255 255 255 / 0.82); /* body text on teak (7.0:1) and charcoal (9.0:1) */
+  --line: #e6e6e6; /* neutral hairlines (header, menu) */
+  --grey-fill: #f2f2f2; /* only visible while a photograph is loading */
 
   /* Typography revision: Montserrat (headings) and Open Sans (text), the two families the original site also loaded. */
   --font-heading: 'Montserrat Variable', 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -46,7 +47,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--ivory);
+  background: var(--white);
   color: var(--charcoal);
   font-family: var(--font-body);
   font-size: var(--step-0);
@@ -160,7 +161,7 @@ a:hover {
   z-index: 100;
   padding: 0.75rem 1rem;
   background: var(--teak);
-  color: var(--ivory);
+  color: var(--white);
 }
 
 .skip-link:focus {
@@ -175,7 +176,7 @@ a:hover {
   min-height: 2.9rem;
   padding: 0.7rem 1.6rem;
   background: var(--teak);
-  color: var(--ivory);
+  color: var(--white);
   border: 1px solid var(--teak);
   font-family: var(--font-body);
   font-size: var(--step--1);
@@ -189,7 +190,7 @@ a:hover {
 }
 
 .btn:hover {
-  background: var(--ivory);
+  background: var(--white);
   color: var(--teak);
 }
 
@@ -202,18 +203,18 @@ a:hover {
 
 .btn--outline:hover {
   background: var(--teak);
-  color: var(--ivory);
+  color: var(--white);
 }
 
 .btn--light {
-  background: var(--ivory);
-  border-color: var(--ivory);
+  background: var(--white);
+  border-color: var(--white);
   color: var(--teak);
 }
 
 .btn--light:hover {
   background: transparent;
-  color: var(--ivory);
+  color: var(--white);
 }
 
 /* The waterline: a hairline with a river-gauge scale hanging from it, the one recurring motif.
