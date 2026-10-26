@@ -19,6 +19,7 @@ To check the production build:
 npm run build && npm run preview
 npm run check          # type and template checks
 npm run fetch:candidates   # review room-photo candidates (needs internet access to the live site)
+npm run apply:room-photos   # after fetch:candidates: use the hotel's own category photos in the room mosaic
 npm run extract:card-images -- post-333.css   # find the original room-card photos in the old homepage CSS
 npm run audit:fonts    # report the fonts a page really renders (needs Playwright; see docs/TYPOGRAPHY.md)
 PUBLIC_HERO_OPTION=B npm run dev   # preview an alternative hero (B, C or D)

@@ -26,7 +26,7 @@ Contrast (WCAG AA): charcoal on white 12.6, teak on white 9.6, grey on white 6.7
 ## Choices against the defaults
 
 - No centred headline over a photo; no numbered markers on the rooms (they are not a sequence); no caps eyebrows; no arrow glyphs; no identical rounded cards.
-- Suites: a four-card photographic grid, as on the original site: photo, name, one-line description, starting price on a bronze hairline, and an Explore button. Four across from 72rem, two across below, one on phones. Prices come from `src/data/pricing.ts` and are labelled indicative.
+- Suites: a full-width photographic mosaic modelled on the existing homepage. Two rows, panels 58/42 then 40/60, 5px gutters, 350 to 400px high. Each photograph fills its panel, with the room name, tagline, starting price and a thin outlined Explore button in white over a black gradient rising from the bottom (the gradient follows the text height; overlay text measures at least 5.3:1 against the brightest pixels behind it). One discreet note says the prices are indicative. On phones the four panels stack. Prices come from `src/data/pricing.ts`.
 - Dining sits on a teak band with a deliberate stagger between the two venues.
 - Motion: one load moment (photo settles, waterline draws), plus responses to the visitor's own actions. All of it is off under `prefers-reduced-motion`.
 

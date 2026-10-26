@@ -2,61 +2,74 @@
 import Photo from './Photo.astro';
 import { suites } from '../content/home';
 import { pricing, startingPrice } from '../data/pricing';
+
+// Two rows of two panels. Each row's columns follow the panels' `width` values (58/42, then 40/60).
+const rows = [suites.items.slice(0, 2), suites.items.slice(2, 4)];
 ---
 
-<section class="suites section" id="suites" aria-labelledby="suites-title">
-  <div class="container">
-    <header class="suites__head">
-      <h2 id="suites-title">{suites.title}</h2>
-      <p>{suites.intro}</p>
-    </header>
+<section class="suites" id="suites" aria-labelledby="suites-title">
+  <div class="container suites__head">
+    <h2 id="suites-title">{suites.title}</h2>
+    <p>{suites.intro}</p>
+  </div>
 
-    <ul class="rooms">
-      {
-        suites.items.map((room) => {
-          const price = startingPrice(room.id);
-          return (
-            <li class="room">
-              <figure class="room__photo">
-                <Photo
-                  name={room.photo}
-                  alt={room.alt}
-                  ratio="4 / 3"
-                  position={room.position}
-                  sizes="(min-width: 72rem) 22vw, (min-width: 40rem) 44vw, 92vw"
-                  label={`${room.name} photograph`}
-                />
-              </figure>
-              <div class="room__body">
-                <h3>{room.name}</h3>
-                <p class="room__note">{room.note}</p>
-                <p class="room__summary">{room.summary}</p>
-                <div class="room__foot">
-                  {price && (
-                    <p class="room__price">
-                      <span class="room__from">{price.label}</span> <span class="room__amount">{price.amount}</span>
-                    </p>
-                  )}
-                  <a class="btn btn--outline" href={room.exploreUrl}>
-                    Explore<span class="sr-only"> {room.name}</span>
-                  </a>
+  <div class="mosaic">
+    {
+      rows.map((row) => (
+        <ul class="mosaic__row" style={`--cols:${row.map((r) => `${r.width}fr`).join(' ')}`}>
+          {row.map((room) => {
+            const price = startingPrice(room.id);
+            return (
+              <li class="room">
+                <div class="room__photo">
+                  <Photo
+                    name={room.photo}
+                    alt={room.alt}
+                    position={room.position}
+                    widths={[640, 960, 1280, 1600, 1920]}
+                    sizes={`(min-width: 56rem) ${room.width}vw, 100vw`}
+                    tone="dark"
+                    label={`${room.name} photograph`}
+                  />
                 </div>
-              </div>
-            </li>
-          );
-        })
-      }
-    </ul>
+                <div class="room__content">
+                  <div class="room__text">
+                    <h3>{room.name}</h3>
+                    <p class="room__note">{room.note}</p>
+                  </div>
+                  <div class="room__action">
+                    {price && (
+                      <p class="room__price">
+                        <span class="room__from">{price.label}</span> <span class="room__amount">{price.amount}</span>
+                      </p>
+                    )}
+                    <a class="btn btn--ghost" href={room.exploreUrl}>
+                      Explore<span class="sr-only"> {room.name}</span>
+                    </a>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      ))
+    }
+  </div>
 
+  <div class="container">
     <p class="suites__note">{pricing.disclaimer}</p>
   </div>
 </section>
 
 <style>
+  .suites {
+    padding-block: var(--section) clamp(2rem, 4vw, 3rem);
+  }
+
   .suites__head {
     display: grid;
     gap: 1.25rem;
-    margin-bottom: clamp(2.25rem, 4.5vw, 3.5rem);
+    margin-bottom: clamp(2rem, 4vw, 3rem);
   }
 
   .suites__head h2 {
@@ -67,54 +80,86 @@ import { pricing, startingPrice } from '../data/pricing';
     color: var(--grey-text);
   }
 
-  /* One column on phones, two on tablets and small laptops, four from 72rem. */
-  .rooms {
+  /* The mosaic runs edge to edge with 5px gutters. Phones: one column of panels. */
+  .mosaic {
+    display: grid;
+    gap: 5px;
+  }
+
+  .mosaic__row {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: clamp(2.5rem, 4vw, 3rem) clamp(1.25rem, 2vw, 1.75rem);
+    gap: 5px;
   }
 
   .room {
-    display: grid;
-    grid-template-rows: auto 1fr;
-    gap: 1.25rem;
-  }
-
-  .room__photo {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    min-height: clamp(19rem, 82vw, 24rem);
     overflow: hidden;
+    background: #2b2b2b;
+    color: var(--white);
   }
 
-  .room__body {
-    display: grid;
-    grid-template-rows: auto auto 1fr auto;
-    gap: 0.45rem;
-    align-content: start;
+  /* The photograph fills the whole panel. */
+  .room__photo {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
   }
 
-  .room__body h3 {
-    color: var(--teak);
+  .room__photo :global(.photo) {
+    height: 100%;
+  }
+
+  /* A black gradient rising from the bottom keeps the white text readable. Its stops follow the height of the
+     text block (taller on phones, where the text stacks), so it is dark where the text is and clear above it. */
+  .room {
+    --g-text: 10rem;
+    --g-mid: 13rem;
+    --g-end: 17rem;
+  }
+
+  .room::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      to top,
+      rgb(0 0 0 / 0.68) 0,
+      rgb(0 0 0 / 0.54) var(--g-text),
+      rgb(0 0 0 / 0.24) var(--g-mid),
+      rgb(0 0 0 / 0) var(--g-end)
+    );
+  }
+
+  .room__content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: clamp(1.1rem, 2.2vw, 1.75rem);
+    text-shadow: 0 1px 3px rgb(0 0 0 / 0.35);
+  }
+
+  .room__text h3 {
+    color: var(--white);
   }
 
   .room__note {
-    color: var(--bronze-deep);
+    margin-top: 0.2rem;
+    color: rgb(255 255 255 / 0.92);
     font-size: var(--step--1);
   }
 
-  .room__summary {
-    margin-top: 0.35rem;
-    max-width: 34ch;
-  }
-
-  /* The price row sits on a bronze hairline, a small echo of the waterline. */
-  .room__foot {
+  .room__action {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem 1rem;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid color-mix(in srgb, var(--bronze) 55%, transparent);
+    gap: 0.75rem 1.5rem;
   }
 
   .room__price {
@@ -124,32 +169,43 @@ import { pricing, startingPrice } from '../data/pricing';
   }
 
   .room__from {
-    color: var(--grey-text);
     font-size: var(--step--1);
   }
 
   .room__amount {
-    color: var(--teak);
     font-family: var(--font-heading);
     font-size: var(--step-1);
   }
 
   .suites__note {
-    margin-top: clamp(2rem, 4vw, 3rem);
-    max-width: 70ch;
+    margin-top: 1rem;
     color: var(--grey-text);
-    font-size: var(--step--1);
+    font-size: 0.8125rem;
   }
 
-  @media (min-width: 40rem) {
-    .rooms {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+  /* From 56rem: two rows of two, widths 58/42 then 40/60, panels 350 to 400px high. */
+  @media (min-width: 56rem) {
+    .mosaic__row {
+      grid-template-columns: var(--cols);
     }
-  }
 
-  @media (min-width: 72rem) {
-    .rooms {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+    .room {
+      min-height: clamp(350px, 27vw, 400px);
+      --g-text: 7.25rem;
+      --g-mid: 9.5rem;
+      --g-end: 13.5rem;
+    }
+
+    .room__content {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .room__action {
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.7rem;
     }
   }
 </style>

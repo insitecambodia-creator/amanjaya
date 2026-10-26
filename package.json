@@ -11,7 +11,8 @@
     "fetch:images": "node scripts/fetch-images.mjs",
     "fetch:candidates": "node scripts/review-candidates.mjs",
     "audit:fonts": "node scripts/audit-fonts.mjs",
-    "extract:card-images": "node scripts/extract-card-images.mjs"
+    "extract:card-images": "node scripts/extract-card-images.mjs",
+    "apply:room-photos": "node scripts/apply-room-photos.mjs"
   },
   "dependencies": {
     "@fontsource-variable/montserrat": "^5.3.0",

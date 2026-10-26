@@ -71,7 +71,7 @@ One button, "Book Your Stay", set in `src/config/site.ts`. It points at the unda
 The four starting rates are shown on the room cards: Junior Suite from $81, Deluxe Room from $76.50, Executive Suite from $112.50, Panoramic Suite from $94.50. They match the "FROM $…" figures on the exported homepage, and were confirmed by the client. They are published under the responsibility of **Avy, the marketing manager**, who should confirm them before launch.
 
 - They live in one file, `src/data/pricing.ts`. Edit them only there.
-- The page presents them as indicative starting rates, not live availability or a quote, and says current rates and availability are shown when booking (`pricing.disclaimer`).
+- The page presents them as indicative starting rates with one short line under the room mosaic: "Starting rates are indicative. Availability and current rates are shown when you book." (`pricing.disclaimer`).
 - The export does not say "per night" or name a currency beyond the "$" sign, so the page does not add either.
 - "Explore" links to the hotel's existing room pages (the same URLs as in the homepage export), until the new room pages exist.
 

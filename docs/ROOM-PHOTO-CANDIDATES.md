@@ -60,3 +60,18 @@ Nothing was substituted: the cards use the best images we already have, and they
 3. Add the chosen files to `images` in `src/data/image-manifest.json`, run `npm run fetch:images`, and change `photo` for the room in `src/content/home.ts`.
 
 If the CSS shows nothing for a card, that image was set another way (for example in a template), and `npm run fetch:candidates` plus a visual check of the shortlist above is the fallback.
+
+## Status for the room mosaic (latest)
+
+The "Four ways to stay" mosaic wants wide photographs of the complete rooms. **The original photographs used by the existing homepage cards could not be recovered**: they are not in the exported HTML, they were set in `post-333.css` (not exported), and the live site is unreachable from the build environment. No stock photography was used.
+
+| Panel | Photo in the mosaic now | The hotel's own category picture (best evidence) | Status |
+|---|---|---|---|
+| Junior Suite | `junior12`: a cabinet and armchair corner | `junior14` | **Missing.** Not downloaded. |
+| Deluxe Room | `deluxe1`: bed with a timber headboard, only 674x449 | `deluxe5` | **Missing.** Not downloaded. The current file is also low resolution. |
+| Executive Suite | `executive12`: pillows and a lit headboard | `executive7` | **Missing.** Not downloaded. |
+| Panoramic Suite | `panoramic2`: the whole suite with windows, bed and desk | `panoramic2` | Present. It is the hotel's own Panoramic picture and a true wide shot. |
+
+"The hotel's own category picture" is inferred from the offers pages' thumbnails (see above), not confirmed as the exact homepage image. Whether they are wide-angle has not been checked, because they have not been seen.
+
+**To fill the three gaps:** on a machine that can reach the live site, run `npm run fetch:candidates`, then `npm run apply:room-photos`. The second command copies `junior14`, `deluxe5` and `executive7` over the three suite photos and updates the manifest; nothing else needs to change, because the mosaic reads those files by name. Check the result with `npm run dev`. If post-333.css is available, `npm run extract:card-images -- post-333.css` will show the exact images the cards used.

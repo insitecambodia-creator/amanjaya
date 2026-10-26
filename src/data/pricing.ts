@@ -21,9 +21,8 @@ export const pricing = {
   /** Shown before the amount, as on the original site ("From $81"). */
   label: 'From',
   currencySymbol: '$',
-  /** Note printed under the room grid. Keep it plain: these figures are not an offer. */
-  disclaimer:
-    'Indicative starting rates, as published on our current website. They are not live availability. Current rates and availability are shown when you book.',
+  /** One discreet line under the room mosaic. Keep it short: these figures are not an offer. */
+  disclaimer: 'Starting rates are indicative. Availability and current rates are shown when you book.',
 } as const;
 
 export type RoomId = keyof typeof startingRates;

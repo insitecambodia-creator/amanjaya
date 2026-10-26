@@ -78,6 +78,9 @@ export const suites = {
   title: 'Four ways to stay',
   intro: 'Every category has a private balcony, air conditioning, a working desk and room service.',
   /**
+   * Layout: a full-width mosaic of two rows. `width` is each panel's share of its row (junior 58 / deluxe 42,
+   * executive 40 / panoramic 60). Panels show photo, name, tagline (`note`), price and Explore only;
+   * `summary` and `description` are kept for the future room pages.
    * Starting prices are NOT here: they live in src/data/pricing.ts so there is one place to edit them.
    * `exploreUrl` points at the hotel's existing room pages (verified in the homepage export) until the new
    * room pages are built; then switch these to internal links.
@@ -87,6 +90,7 @@ export const suites = {
   items: [
     {
       id: 'junior',
+      width: 58,
       name: 'Junior Suite',
       note: 'Our bestselling rooms',
       summary: '45 sqm with a king bed, a lounge area and a private balcony.',
@@ -99,6 +103,7 @@ export const suites = {
     },
     {
       id: 'deluxe',
+      width: 42,
       name: 'Deluxe Room',
       note: 'The comfort of living',
       summary: 'A king canopy bed, bath and shower, and a balcony over the city.',
@@ -111,6 +116,7 @@ export const suites = {
     },
     {
       id: 'executive',
+      width: 40,
       name: 'Executive Suite',
       note: 'Breath-taking view over the river',
       summary: '90 sqm with a living area, a sofa, three armchairs and a desk.',
@@ -123,6 +129,7 @@ export const suites = {
     },
     {
       id: 'panoramic',
+      width: 60,
       name: 'Panoramic Suite',
       note: 'It’s all about space',
       summary: '50 sqm with wide views over both rivers and the pagoda.',
