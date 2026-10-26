@@ -8,7 +8,7 @@ const rows = [suites.items.slice(0, 2), suites.items.slice(2, 4)];
 ---
 
 <section class="suites" id="suites" aria-labelledby="suites-title">
-  <div class="container suites__head">
+  <div class="container suites__head" data-reveal>
     <h2 id="suites-title">{suites.title}</h2>
     <p>{suites.intro}</p>
   </div>
@@ -20,7 +20,7 @@ const rows = [suites.items.slice(0, 2), suites.items.slice(2, 4)];
           {row.map((room) => {
             const price = startingPrice(room.id);
             return (
-              <li class="room">
+              <li class="room" data-reveal>
                 <div class="room__photo">
                   <Photo
                     name={room.photo}

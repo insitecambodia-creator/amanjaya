@@ -34,5 +34,8 @@ const { title = site.title, description = site.description } = Astro.props;
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <slot />
+    <script>
+      import '../scripts/reveal';
+    </script>
   </body>
 </html>

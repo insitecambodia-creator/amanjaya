@@ -6,7 +6,7 @@ import { contact } from '../config/site';
 
 <section class="riverside section" id="riverside" aria-labelledby="riverside-title">
   <div class="container riverside__grid">
-    <figure class="riverside__photo">
+    <figure class="riverside__photo" data-reveal>
       <Photo
         name={riverside.photo}
         alt={riverside.alt}
@@ -17,7 +17,7 @@ import { contact } from '../config/site';
       />
     </figure>
 
-    <div class="riverside__text">
+    <div class="riverside__text" data-reveal>
       <h2 id="riverside-title">{riverside.title}</h2>
       <p>{riverside.text}</p>
       <address>

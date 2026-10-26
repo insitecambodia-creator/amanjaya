@@ -40,6 +40,7 @@ The hotel's own photographs are committed in `src/assets/photos/` (never hotlink
 | Page sections | `src/components/` |
 | Sources, placeholders, questions for the hotel | `docs/CONTENT-SOURCES.md` |
 | Design rationale | `docs/DESIGN-RATIONALE.md` |
+| Scroll-reveal motion (how it works, how to use `data-reveal`) | `docs/MOTION.md`, `src/scripts/reveal.ts` |
 | Photo review, hero options, QA notes | `docs/PHOTO-REVIEW.md` |
 | Room photo shortlist | `docs/ROOM-PHOTO-CANDIDATES.md` |
 | Rooftop & Dining photos: what we have and need | `docs/DINING-PHOTOS.md` |

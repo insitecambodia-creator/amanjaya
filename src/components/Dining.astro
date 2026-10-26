@@ -5,13 +5,13 @@ import { dining } from '../content/home';
 
 <section class="dining section" id="dining" aria-labelledby="dining-title">
   <div class="container">
-    <h2 id="dining-title">{dining.title}</h2>
+    <h2 id="dining-title" data-reveal>{dining.title}</h2>
 
     <div class="venues">
       {
         dining.venues.map((v, i) => (
           <article class:list={['venue', i % 2 === 1 && 'venue--reverse']}>
-            <figure class="venue__photo">
+            <figure class="venue__photo" data-reveal>
               <Photo
                 name={v.photo}
                 alt={v.alt}
@@ -22,7 +22,7 @@ import { dining } from '../content/home';
                 label={`${v.name} photograph`}
               />
             </figure>
-            <div class="venue__text">
+            <div class="venue__text" data-reveal>
               <h3>{v.name}</h3>
               <p class="venue__kind">{v.kind}</p>
               <p class="venue__desc">{v.text}</p>

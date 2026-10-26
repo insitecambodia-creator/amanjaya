@@ -283,3 +283,28 @@ a:hover {
     scroll-behavior: auto;
   }
 }
+
+/* Scroll reveal (see src/scripts/reveal.ts and docs/MOTION.md).
+   The hidden state needs `.reveal-ready`, which the script sets only after confirming support, so without
+   JavaScript, or under reduced motion, nothing is ever hidden. Opacity and transform only: no layout shift. */
+@media (prefers-reduced-motion: no-preference) {
+  /* Hiding is instant (no transition on the hidden state); only the entrance animates. */
+  .reveal-ready [data-reveal]:not(.is-revealed) {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+
+  .reveal-ready [data-reveal].is-revealed {
+    transition:
+      opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+      transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+}
+
+@media print {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

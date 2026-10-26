@@ -7,13 +7,13 @@ const [large, small] = welcome.photos;
 
 <section class="welcome section" aria-labelledby="welcome-title">
   <div class="container welcome__grid">
-    <div class="welcome__text">
+    <div class="welcome__text" data-reveal>
       <h2 id="welcome-title">{welcome.title}</h2>
       {welcome.paragraphs.map((p) => <p>{p}</p>)}
     </div>
 
     <div class="welcome__images">
-      <figure class="welcome__large">
+      <figure class="welcome__large" data-reveal>
         <Photo
           name={large.photo}
           alt={large.alt}
@@ -23,7 +23,7 @@ const [large, small] = welcome.photos;
           label={large.alt}
         />
       </figure>
-      <figure class="welcome__small">
+      <figure class="welcome__small" data-reveal>
         <Photo
           name={small.photo}
           alt={small.alt}
