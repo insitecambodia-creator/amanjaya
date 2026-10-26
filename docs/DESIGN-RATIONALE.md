@@ -10,10 +10,12 @@ The hero text sits on a solid ivory panel that rises from the page into the phot
 
 ## Type
 
-- Headings: Newsreader (variable, light weights, optical sizes), self-hosted.
-- Interface and body: Hanken Grotesk (variable), self-hosted.
-- Fluid scale from `--step--1` to `--step-4`; lines held to about 62 characters. Headings run 20.8 to 27px (H3), 24.8 to 42px (H2) and 30.4 to 58.8px (H1) between 360 and 1280px wide; body text is 17 to 19px. Details and the history of this change are in `docs/TYPOGRAPHY.md`.
-- Both are open-source (SIL OFL). Noto Serif/Sans Khmer are the planned pair for Khmer later.
+Typography experiment 2 (the Newsreader / Hanken Grotesk direction is in git at `15a7fa7`):
+
+- Headings: Montserrat Regular. Text and interface: Open Sans Regular. Both are open source (SIL OFL), self-hosted, and both were loaded by the original site.
+- Fluid scale from `--step--1` to `--step-4` between 360 and 1280px wide. Body 16 to 17px; H3 19 to 23px, H2 24 to 32px, H1 28 to 46px; lines held to about 62 characters, line height 1.65 for text.
+- Quiet by design: regular weights only, sentence case, no oversized display type. Details and the history are in `docs/TYPOGRAPHY.md`.
+- Neither font covers Khmer; Noto Sans Khmer is the planned partner later.
 
 ## Colour
 

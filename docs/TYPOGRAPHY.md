@@ -1,6 +1,8 @@
 # Typography
 
-## 1. Heading scale (changed)
+> **Current direction (typography experiment 2): Montserrat Regular headings + Open Sans Regular text.** Section 5 describes it. Sections 1 to 4 record the earlier Newsreader / Hanken Grotesk direction and the research on the original site, which still stands. The Newsreader version is preserved in git at commit `15a7fa7`.
+
+## 1. Heading scale (earlier Newsreader pass, superseded by section 5)
 
 Headings are about 25% smaller at desktop widths. The change is in the type scale (`--step-2`, `--step-3`, `--step-4` in `src/styles/global.css`), not in individual overrides. Body steps (`--step--1` to `--step-1`) are untouched: every body, caption, navigation and button size measures identically before and after.
 
@@ -58,7 +60,7 @@ Any one of these settles it:
 
 `docs/screenshots/typography/pairing-comparison.jpg` sets four pairings side by side with the same copy: ours, Roboto Slab + Roboto, Montserrat + Open Sans, and Poppins + Open Sans. It is illustrative only, built from the loaded fonts; it does not reproduce the live site.
 
-## 4. Recommendation
+## 4. Recommendation (earlier; the team has since chosen to move closer to the original, see section 5)
 
 **Retain Newsreader and Hanken Grotesk for now, and settle two things before deciding anything more.**
 
@@ -71,3 +73,43 @@ Then:
 - **Hanken Grotesk can stay.** It sits in the same neutral sans lane as Roboto and Open Sans, so body text will not feel foreign to returning guests, and it has slightly more character.
 - **Newsreader is the only choice with real distance from the original** (a quiet, bookish serif against sturdy slabs and geometric sans). That is the point of the creative direction, but it is the thing to revisit if the audit shows the hotel values its slab headings.
 - **Nothing to replace now.** No font family was changed in this pass.
+
+## 5. Typography experiment 2: Montserrat + Open Sans
+
+**Direction from the team:** Newsreader read as too large and dominant, so move closer to the original site's typography with quieter, more contemporary type. Layout, imagery, colours, the waterline and the structure are unchanged.
+
+### Which combination
+
+Montserrat Regular for headings and Open Sans Regular for text, as proposed. The original site's CSS is not in the exports (see section 2), so there is no evidence for a *more* faithful pairing, and no evidence against this one: both families were loaded by the original site. Which roles they play there is still unverified; `npm run audit:fonts` on the live site would show it. If it reveals something different, the swap is two lines in `src/styles/global.css` (`--font-heading`, `--font-body`) and two imports in `src/layouts/Base.astro`.
+
+### Sizes (fluid from 360px to 1280px wide, then fixed)
+
+| Role | Phone (360px) | Desktop (1280px and up) | Brief |
+|---|---|---|---|
+| H1 | 28px | 46px | 44 to 48px max |
+| H2 | 24px | 32px | 30 to 34px |
+| H3 (also suite names, footer name) | 19px | 23px | 22 to 24px |
+| Body | 16px | 17px | 16 to 17px |
+| Lead text (welcome paragraphs), small headings | 17px | 18px | |
+| Small UI text (nav, buttons, captions) | 14px | 15px | unchanged |
+
+Compared with the Newsreader version, the desktop H1 drops from 58.8px to 46px, H2 from 42px to 32px, H3 from 27px to 23px. Body drops from 17 to 19px to 16 to 17px, and the welcome paragraphs from 20 to 24px (they were set in the serif) to 17 to 18px.
+
+### Weight, spacing and detail
+
+- Headings are Montserrat 400 (Regular), sentence case, with slight negative tracking on H1 and H2 and a line height of 1.15 to 1.3. Text is Open Sans 400 with a line height of 1.65. Buttons are Open Sans 600, navigation 500.
+- The header wordmark and footer name are now Montserrat Regular. The wordmark is set in type, not the real logo file, which still needs to come from the hotel.
+- Chromium's font inspector labels the variable Montserrat file "Thin": that is only the default instance name of the variable font. The rendered weight is 400, as the screenshots show.
+- Accessibility: with the smaller type, the unselected suite names would have dropped below 4.5:1 contrast (62% opacity gave 3.6:1). They are now 75% opacity, about 5.2:1. All other text and background colours are unchanged and still pass.
+
+### Measured
+
+`npm run audit:fonts` against the preview reports Montserrat for H1 to H3 and the brand text, and Open Sans for body, paragraphs, buttons and navigation. Computed sizes at 360, 390, 768, 1100, 1440 and 1920px match the table above.
+
+### Cost and caveats
+
+- Same number of families as before (two). Both are open source (SIL OFL) and self-hosted from the build. Neither covers Khmer; Noto Sans Khmer remains the plan for that.
+- Montserrat is a wide face, so it reads larger than its pixel size suggests. That is why the maxima sit at the low end of the briefed ranges.
+- Compared with the Newsreader direction, this is more neutral and closer to a typical hotel template. It gains familiarity with the original site and loses the editorial character. Whether that trade is right is the point of this experiment.
+
+Screenshots: `docs/screenshots/` (desktop and mobile, refreshed), and `docs/screenshots/typography/newsreader-vs-montserrat-desktop.jpg` and `-mobile.jpg` compare the two directions directly.
