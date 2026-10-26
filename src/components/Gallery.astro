@@ -1,27 +1,38 @@
 ---
 import Photo from './Photo.astro';
 import { gallery } from '../content/home';
+import { findPhoto } from '../lib/photos';
+
+/** Flex-grow equal to the photograph's proportions makes every photograph in a row the same height, uncropped. */
+const grow = (name: string) => {
+  const p = findPhoto(name);
+  return p ? (p.width / p.height).toFixed(3) : '1.5';
+};
 ---
 
 <section class="gallery section" id="gallery" aria-labelledby="gallery-title">
   <div class="container">
     <h2 id="gallery-title">{gallery.title}</h2>
-    <ul class="gallery__grid">
+    <div class="gallery__rows">
       {
-        gallery.photos.map((g) => (
-          <li>
-            <Photo
-              name={g.photo}
-              alt={g.alt}
-              ratio={g.ratio}
-              sizes="(min-width: 56rem) 30vw, 46vw"
-              widths={[400, 700, 1000]}
-              label={g.alt}
-            />
-          </li>
+        gallery.rows.map((row) => (
+          <ul class="gallery__row">
+            {row.map((g) => (
+              <li style={`--grow:${grow(g.photo)}`}>
+                <Photo
+                  name={g.photo}
+                  alt={g.alt}
+                  natural
+                  sizes="(min-width: 56rem) 45vw, 92vw"
+                  widths={[480, 800, 1200, 1600]}
+                  label={g.alt}
+                />
+              </li>
+            ))}
+          </ul>
         ))
       }
-    </ul>
+    </div>
   </div>
 </section>
 
@@ -35,20 +46,26 @@ import { gallery } from '../content/home';
     margin-bottom: clamp(2rem, 4vw, 3rem);
   }
 
-  /* Columns let photographs of different proportions sit together without cropping to one ratio. */
-  .gallery__grid {
-    columns: 2;
-    column-gap: clamp(0.75rem, 2vw, 1.5rem);
+  .gallery__rows {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(0.75rem, 1.6vw, 1.5rem);
   }
 
-  .gallery__grid li {
-    break-inside: avoid;
-    margin-bottom: clamp(0.75rem, 2vw, 1.5rem);
+  .gallery__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(0.75rem, 1.6vw, 1.5rem);
   }
 
-  @media (min-width: 56rem) {
-    .gallery__grid {
-      columns: 3;
+  @media (min-width: 40rem) {
+    .gallery__row {
+      display: flex;
+    }
+
+    .gallery__row li {
+      flex: var(--grow) 1 0%;
+      min-width: 0;
     }
   }
 </style>

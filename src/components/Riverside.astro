@@ -11,6 +11,7 @@ import { contact } from '../config/site';
         name={riverside.photo}
         alt={riverside.alt}
         ratio="3 / 2"
+        position={riverside.position}
         sizes="(min-width: 56rem) 58vw, 92vw"
         label="The hotel seen from the riverside"
       />
@@ -20,7 +21,6 @@ import { contact } from '../config/site';
       <h2 id="riverside-title">{riverside.title}</h2>
       <p>{riverside.text}</p>
       <address>
-        <span>{contact.crossStreets}</span>
         {contact.addressLines.map((line) => <span>{line}</span>)}
       </address>
       <a href={contact.mapUrl} rel="noopener">Open in Google Maps</a>

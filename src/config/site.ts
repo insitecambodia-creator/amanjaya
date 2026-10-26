@@ -25,7 +25,7 @@ export const booking = {
 } as const;
 
 export const contact = {
-  addressLines: ['1, Street 154', 'Phnom Penh, Cambodia'],
+  addressLines: ['1, Street 154', 'Corner of Sisowath Quay', 'Phnom Penh, Cambodia'],
   crossStreets: 'Corner of Sisowath Quay and Street 154',
   mapUrl: 'https://maps.app.goo.gl/sRyy9dE4pWAoMCVM7',
   /** Shown as written on the existing Contact page. verify: international format and whether this is the front desk line. */

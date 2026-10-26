@@ -14,7 +14,6 @@ import { site, booking, contact, social } from '../config/site';
     <div class="footer__col">
       <h2>Find us</h2>
       <address>
-        <span>{contact.crossStreets}</span>
         {contact.addressLines.map((line) => <span>{line}</span>)}
       </address>
       <a href={contact.mapUrl} rel="noopener">Open in Google Maps</a>

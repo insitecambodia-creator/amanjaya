@@ -24,24 +24,32 @@ Copy is rewritten in a quieter voice; facts are not extended.
 
 ## Images
 
-None could be downloaded: this build environment's network policy blocks `www.amanjaya-suites-phnom-penh.com` (all 17 requests failed). No substitute stock photography was used. Every photo slot renders a labelled placeholder until the file exists.
+The 17 original photographs are committed in `src/assets/photos/` (they could not be downloaded from the build environment, so the hotel uploaded them). `src/data/image-manifest.json` records each file's original URL on the existing site and where it is used. Files are named by role. Two are kept in `src/assets/photos/unused/`.
 
-To fill them: on a machine that can reach the live site, run `npm run fetch:images`. Files are saved to `src/assets/photos/` named by role (for example `hero.png`), and the page picks them up automatically. The full list, with original URLs, is `src/data/image-manifest.json`.
+| Key | Original file | Shows | Used for |
+|---|---|---|---|
+| hero | `2024/08/022_A74240503_1929-scaled` | A couple in front of the hotel at golden hour (2560x1707) | Hero. The site's own 16:9 cover is a crop of this scene, kept as `unused/social-cover.png` for the future og:image. |
+| welcome-lobby | `Amanjaya-lobby1` | Hallway with a Khmer mural and a polished wood floor | Welcome |
+| welcome-balcony | `001_A74240503_037-scaled` | A couple having coffee on a private balcony | Welcome inset |
+| suite-junior | `Amanjaya-junior12` | Lattice cabinet, armchair, flowers | Junior Suite |
+| suite-deluxe | `Amanjaya-deluxe1` | Bed with timber headboard (**only 674x449**) | Deluxe Room |
+| suite-executive | `Amanjaya-executive12` | Headboard, linen and sheer curtains | Executive Suite |
+| suite-panoramic | `Amanjaya-panoramic2` | Full suite with tall windows, king bed, desk | Panoramic Suite |
+| dining-le-moon | `Amanjaya-facade3` | The hotel at night with the Le Moon sign | Le Moon Rooftop (not a photograph of the bar itself) |
+| dining-sombok | `sombok.jpeg` | Two chefs at the Sombok entrance (960x640) | Sombok |
+| riverside | `Amanjaya-facade2` | The quay and river from a balcony (1200px wide) | Riverside |
+| gallery-pagoda | `Amanjaya-facade1` | Golden stupa and pagoda roofs beside the street | Gallery |
+| gallery-mural | `Amanjaya-corridor1` | Bright Khmer mural above a terracotta floor | Gallery |
+| gallery-reception | `Amanjaya-lobby2` | Reception desk with the "Amanjaya Pancam Suites Hotel" sign | Gallery |
+| gallery-breakfast | `010_A74240503_637-scaled` | Breakfast in bed in a suite | Gallery |
+| gallery-work | `IMG_3372-scaled` | A working breakfast in a suite | Gallery |
+| unused/yoga | `IMG_3918-scaled` | Two guests meditating | Left out: it would imply a wellness offer that is not confirmed |
 
-Choices were made from file names only, because the images could not be seen. Please review them once downloaded; swap any file in the manifest for a better one.
+Alt text now describes what each photograph shows. The room photographs were taken from each room page's gallery, so please confirm each one is the right lead image for its category. Several look like details rather than the whole room.
 
-| Key | Original file | Note |
-|---|---|---|
-| hero | `2024/08/amh-homepage-cover.png` | The site's `og:image` (1920x1080). The live hero may be a different image; the real one is set in Elementor styles that were not exported. |
-| welcome-facade, riverside, gallery-3 | `Amanjaya-facade1/2/3.jpg` | |
-| welcome-lobby, gallery-2 | `Amanjaya-lobby1/2.jpg` | |
-| suite-junior / deluxe / executive / panoramic | `Amanjaya-junior12`, `deluxe1`, `executive12`, `panoramic2` | First image of each room gallery |
-| dining-sombok | `2021/04/sombok.jpeg` | Only 768x512 is referenced; ask for a larger original |
-| gallery-1, 4 to 8 | corridor1, 2024 shoot (3 files), `IMG_3372`, `IMG_3918` | Chosen blind |
+Rights: the hero, welcome, gallery and some room photographs show identifiable models. Please confirm the hotel holds usage releases for them, and for the licence plate visible in the hero.
 
-**Missing:** no Le Moon Rooftop image appears anywhere in the export. The hotel needs to supply one (`dining-le-moon`).
-
-Alt text is written from file names and room names, not from the photographs. Revise it once the photos are in.
+See `docs/PHOTO-REVIEW.md` for the composition review and the hero recommendation.
 
 ## Booking
 
@@ -52,7 +60,7 @@ One button, "Book Your Stay", set in `src/config/site.ts`. It points at the unda
 1. Booking URL and engine (above).
 2. Phone: written as "081 559 748" in the export. The prototype links it as +855 81 559 748; confirm that is correct and is the front desk.
 3. Email: hidden by Cloudflare protection in the export, so omitted. Needs supplying.
-4. Legal and display name. The export uses "Amanjaya Pancam", "Amanjaya Pancam Suites Hotel", "Riverside Suites Hotel" and "Amanjaya Suites" (site name).
+4. Legal and display name. The export uses "Amanjaya Pancam", "Amanjaya Pancam Suites Hotel", "Riverside Suites Hotel" and "Amanjaya Suites" (site name). The reception sign in the photographs reads "Amanjaya Pancam Suites Hotel".
 5. "Built in 2002" is used as the hotel's own statement. The homepage also says Le Moon opened in 2010, "nearly a decade after" construction, which does not add up to 2002 (eight years). Confirm both dates.
 6. Is Sombok inside the hotel? The export links to it from the homepage without saying so. The prototype lists it under dining without claiming it is on site.
 7. Floor wood: Junior Suite says rosewood, Executive says cherrywood. Each is attributed to its own room.

@@ -10,7 +10,6 @@ Requires Node 22.22 or newer (Astro 7).
 
 ```sh
 npm install
-npm run fetch:images   # downloads the hotel's original photos; see below
 npm run dev            # http://localhost:4321
 ```
 
@@ -23,7 +22,7 @@ npm run check          # type and template checks
 
 ## Photographs
 
-The prototype uses the hotel's own images, saved locally in `src/assets/photos/` and never hotlinked. Until a file exists, its slot shows a labelled placeholder. `npm run fetch:images` downloads them from the existing site (it needs normal internet access to that site). The list is `src/data/image-manifest.json`. One image, Le Moon Rooftop, is missing from the export and must be supplied.
+The hotel's own photographs are committed in `src/assets/photos/` (never hotlinked) and processed to responsive WebP at build time. If a file is missing, its slot shows a labelled placeholder. `src/data/image-manifest.json` lists each photo's original URL and where it is used; `npm run fetch:images` re-downloads them from the existing site if ever needed. Composition notes and the hero recommendation are in `docs/PHOTO-REVIEW.md`.
 
 ## Where things live
 
@@ -35,6 +34,8 @@ The prototype uses the hotel's own images, saved locally in `src/assets/photos/`
 | Page sections | `src/components/` |
 | Sources, placeholders, questions for the hotel | `docs/CONTENT-SOURCES.md` |
 | Design rationale | `docs/DESIGN-RATIONALE.md` |
+| Photo review and hero recommendation | `docs/PHOTO-REVIEW.md` |
+| Screenshots | `docs/screenshots/` |
 
 The booking button reads one setting (`booking.url`). It currently points at the engine's undated property page, flagged as unverified.
 

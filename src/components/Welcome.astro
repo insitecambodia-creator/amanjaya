@@ -14,10 +14,25 @@ const [large, small] = welcome.photos;
 
     <div class="welcome__images">
       <figure class="welcome__large">
-        <Photo name={large.photo} alt={large.alt} ratio="4 / 5" sizes="(min-width: 56rem) 44vw, 90vw" label={large.alt} />
+        <Photo
+          name={large.photo}
+          alt={large.alt}
+          position={large.position}
+          ratio="4 / 3"
+          sizes="(min-width: 56rem) 50vw, 90vw"
+          label={large.alt}
+        />
       </figure>
       <figure class="welcome__small">
-        <Photo name={small.photo} alt={small.alt} ratio="3 / 2" sizes="(min-width: 56rem) 24vw, 55vw" label={small.alt} />
+        <Photo
+          name={small.photo}
+          alt={small.alt}
+          position={small.position}
+          ratio="4 / 5"
+          sizes="(min-width: 56rem) 22vw, 48vw"
+          widths={[320, 480, 720, 960]}
+          label={small.alt}
+        />
       </figure>
     </div>
   </div>
@@ -48,11 +63,11 @@ const [large, small] = welcome.photos;
 
   .welcome__images {
     position: relative;
-    padding-bottom: 22%;
+    padding-bottom: 18%;
   }
 
   .welcome__large {
-    width: 82%;
+    width: 86%;
     margin-left: auto;
   }
 
@@ -60,7 +75,7 @@ const [large, small] = welcome.photos;
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 46%;
+    width: 38%;
     border: 0.5rem solid var(--ivory);
   }
 
@@ -76,11 +91,12 @@ const [large, small] = welcome.photos;
     }
 
     .welcome__large {
-      width: 78%;
+      width: 90%;
     }
 
     .welcome__small {
-      width: 44%;
+      width: 34%;
+      border-width: 0.65rem;
     }
   }
 </style>

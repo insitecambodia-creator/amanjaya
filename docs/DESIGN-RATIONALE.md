@@ -29,6 +29,6 @@ Ivory `#EFEADD`, teak `#5B3F2C`, charcoal `#34332F`, bronze `#8C6A3F`, plus a de
 ## Performance and access
 
 - Static HTML. JavaScript is only the mobile menu button (about 20 lines); the page works without it.
-- Photographs are processed to responsive WebP sets; the hero loads eagerly with high priority, everything else lazily, with fixed aspect ratios to avoid layout shift.
+- Photographs are committed locally and processed to responsive WebP sets; the hero loads eagerly with high priority, everything else lazily, with fixed aspect ratios to avoid layout shift.
 - Skip link, visible focus rings, landmarks, one `h1`, sensible heading order.
 - `noindex` meta tag, `robots.txt` disallow-all and an `X-Robots-Tag` header file for Cloudflare Pages.

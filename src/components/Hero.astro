@@ -10,12 +10,13 @@ import { booking, contact } from '../config/site';
       <Photo
         name={hero.photo}
         alt={hero.alt}
+        position={hero.position}
         sizes="100vw"
         widths={[640, 960, 1280, 1600, 1920]}
         loading="eager"
         fetchpriority="high"
         tone="dark"
-        label="Hero photograph of the hotel on the riverside"
+        label="Hero photograph"
       />
     </div>
 
@@ -115,7 +116,7 @@ import { booking, contact } from '../config/site';
     }
 
     .hero__panel {
-      width: min(36rem, 100% + var(--gutter));
+      width: min(36rem, 46vw);
       margin-left: calc(-1 * var(--gutter));
       padding: clamp(2rem, 3.4vw, 3.25rem) clamp(1.75rem, 3vw, 3rem) 2.25rem var(--gutter);
       background: var(--ivory);

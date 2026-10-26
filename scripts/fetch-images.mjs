@@ -9,16 +9,21 @@ const root = fileURLToPath(new URL('..', import.meta.url));
 const manifest = JSON.parse(await readFile(join(root, 'src/data/image-manifest.json'), 'utf8'));
 const outDir = join(root, 'src/assets/photos');
 const force = process.argv.includes('--force');
-await mkdir(outDir, { recursive: true });
+await mkdir(join(outDir, 'unused'), { recursive: true });
 
 const exists = (p) => access(p).then(() => true, () => false);
 let saved = 0;
 let skipped = 0;
 const failed = [];
 
-for (const img of manifest.images) {
+const targets = [
+  ...manifest.images.map((img) => ({ key: img.key, path: img.path, dest: join(outDir, img.key + extname(img.path).toLowerCase()) })),
+  ...(manifest.unused ?? []).map((u) => ({ key: u.file, path: u.path, dest: join(outDir, u.file) })),
+];
+
+for (const img of targets) {
   const url = manifest.base + img.path;
-  const dest = join(outDir, img.key + extname(img.path).toLowerCase());
+  const dest = img.dest;
   if (!force && (await exists(dest))) {
     skipped++;
     continue;
