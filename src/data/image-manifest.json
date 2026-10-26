@@ -1,0 +1,26 @@
+{
+  "_readme": "Original hotel photography referenced in the existing WordPress export (see docs/CONTENT-SOURCES.md). `key` is the local file name stem under src/assets/photos/ and is what components refer to. Run `npm run fetch:images` from a machine that can reach the live site. Nothing here is hotlinked at runtime.",
+  "base": "https://www.amanjaya-suites-phnom-penh.com/wp-content/uploads/",
+  "images": [
+    { "key": "hero",            "path": "2024/08/amh-homepage-cover.png",            "usedFor": "Homepage hero (the site's og:image cover, 1920x1080)" },
+    { "key": "welcome-facade",  "path": "2020/09/Amanjaya-facade1.jpg",               "usedFor": "Welcome section, large image" },
+    { "key": "welcome-lobby",   "path": "2020/09/Amanjaya-lobby1.jpg",                "usedFor": "Welcome section, small image" },
+    { "key": "suite-junior",    "path": "2020/09/Amanjaya-junior12.jpg",              "usedFor": "Junior Suite (first image of its gallery)" },
+    { "key": "suite-deluxe",    "path": "2020/09/Amanjaya-deluxe1.jpg",               "usedFor": "Deluxe Room (first image of its gallery)" },
+    { "key": "suite-executive", "path": "2020/09/Amanjaya-executive12.jpg",           "usedFor": "Executive Suite (first image of its gallery)" },
+    { "key": "suite-panoramic", "path": "2020/09/Amanjaya-panoramic2.jpg",            "usedFor": "Panoramic Suite (first image of its gallery)" },
+    { "key": "dining-sombok",   "path": "2021/04/sombok.jpeg",                         "usedFor": "Sombok restaurant (768x512 on the homepage; a larger original may exist)" },
+    { "key": "riverside",       "path": "2020/09/Amanjaya-facade2.jpg",               "usedFor": "Riverside / find us section" },
+    { "key": "gallery-1",       "path": "2020/09/Amanjaya-corridor1.jpg",             "usedFor": "Gallery" },
+    { "key": "gallery-2",       "path": "2020/09/Amanjaya-lobby2.jpg",                "usedFor": "Gallery" },
+    { "key": "gallery-3",       "path": "2020/09/Amanjaya-facade3.jpg",               "usedFor": "Gallery" },
+    { "key": "gallery-4",       "path": "2024/08/001_A74240503_037-scaled.jpg",       "usedFor": "Gallery (2024 shoot)" },
+    { "key": "gallery-5",       "path": "2024/08/010_A74240503_637-scaled.jpg",       "usedFor": "Gallery (2024 shoot)" },
+    { "key": "gallery-6",       "path": "2024/08/022_A74240503_1929-scaled.jpg",      "usedFor": "Gallery (2024 shoot)" },
+    { "key": "gallery-7",       "path": "2020/10/IMG_3372-scaled.jpg",                "usedFor": "Gallery" },
+    { "key": "gallery-8",       "path": "2020/10/IMG_3918-scaled.jpg",                "usedFor": "Gallery" }
+  ],
+  "missing": [
+    { "key": "dining-le-moon", "reason": "No Le Moon Rooftop image is referenced in the exported HTML (likely inside Elementor CSS that was not exported). Hotel to supply." }
+  ]
+}

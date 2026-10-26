@@ -1,0 +1,133 @@
+---
+import Photo from './Photo.astro';
+import { hero } from '../content/home';
+import { booking, contact } from '../config/site';
+---
+
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="hero__stage">
+    <div class="hero__media">
+      <Photo
+        name={hero.photo}
+        alt={hero.alt}
+        sizes="100vw"
+        widths={[640, 960, 1280, 1600, 1920]}
+        loading="eager"
+        fetchpriority="high"
+        tone="dark"
+        label="Hero photograph of the hotel on the riverside"
+      />
+    </div>
+
+    <div class="hero__overlay">
+      <div class="container">
+        <div class="hero__panel">
+          <h1 id="hero-title">{hero.title}</h1>
+          <p>{hero.intro}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__quay">
+    <span class="waterline waterline--draw" aria-hidden="true"></span>
+    <div class="container hero__quay-inner">
+      <p>{contact.crossStreets}</p>
+      <a class="btn" href={booking.url}>{booking.label}</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero__stage {
+    position: relative;
+  }
+
+  .hero__media {
+    height: clamp(22rem, 62svh, 40rem);
+    overflow: hidden;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* The one load moment: the photograph settles as the waterline is drawn. */
+    .hero__media :global(.photo > img),
+    .hero__media :global(.photo__placeholder) {
+      animation: settle 2.2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+
+    @keyframes settle {
+      from {
+        transform: scale(1.045);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+  }
+
+  /* Small screens: the text sits below the photograph. */
+  .hero__panel {
+    padding-block: 2.25rem 1.5rem;
+  }
+
+  .hero__panel h1 {
+    color: var(--teak);
+  }
+
+  .hero__panel p {
+    margin-top: 1.25rem;
+  }
+
+  .hero__quay-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    padding-block: 1.1rem 1.25rem;
+  }
+
+  .hero__quay-inner p {
+    color: var(--sage-text);
+    font-size: var(--step--1);
+  }
+
+  @media (max-width: 39.99rem) {
+    .hero__quay-inner p {
+      display: none;
+    }
+
+    .hero__quay-inner .btn {
+      width: 100%;
+    }
+  }
+
+  /* Larger screens: an ivory panel rises from the page into the photograph and ends on the waterline. */
+  @media (min-width: 56rem) {
+    .hero__media {
+      height: clamp(34rem, 80svh, 52rem);
+    }
+
+    .hero__overlay {
+      position: absolute;
+      inset: auto 0 0 0;
+      pointer-events: none;
+    }
+
+    .hero__panel {
+      width: min(36rem, 100% + var(--gutter));
+      margin-left: calc(-1 * var(--gutter));
+      padding: clamp(2rem, 3.4vw, 3.25rem) clamp(1.75rem, 3vw, 3rem) 2.25rem var(--gutter);
+      background: var(--ivory);
+      pointer-events: auto;
+    }
+
+    .hero__panel h1 {
+      max-width: 11ch;
+    }
+
+    .hero__panel p {
+      max-width: 38ch;
+    }
+  }
+</style>

@@ -1,0 +1,229 @@
+---
+import Photo from './Photo.astro';
+import { suites } from '../content/home';
+---
+
+<section class="suites section" id="suites" aria-labelledby="suites-title">
+  <div class="container">
+    <header class="suites__head">
+      <h2 id="suites-title">{suites.title}</h2>
+      <p>{suites.intro}</p>
+    </header>
+
+    <!-- A CSS-only radio group: choosing a category opens its description and shows its photograph.
+         On small screens every category is simply listed with its photograph. -->
+    <div class="suites__list" role="radiogroup" aria-label="Suite categories">
+      {
+        suites.items.map((s, i) => (
+          <div class="suite">
+            <input class="suite__input" type="radio" name="suite" id={`suite-${s.id}`} checked={i === 0} />
+            <label class="suite__label" for={`suite-${s.id}`}>
+              <span class="suite__name">{s.name}</span>
+              <span class="suite__size">{s.size ?? ''}</span>
+              <span class="suite__note">{s.note}</span>
+            </label>
+            <div class="suite__body">
+              <p>{s.text}</p>
+            </div>
+            <figure class="suite__photo">
+              <Photo
+                name={s.photo}
+                alt={s.alt}
+                ratio="4 / 3"
+                sizes="(min-width: 56rem) 52vw, 92vw"
+                label={`${s.name} photograph`}
+              />
+            </figure>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .suites {
+    background: var(--ivory);
+  }
+
+  .suites__head {
+    display: grid;
+    gap: 1.25rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .suites__head h2 {
+    color: var(--teak);
+  }
+
+  .suites__head p {
+    color: var(--sage-text);
+  }
+
+  /* Small screens: stacked, photograph first. */
+  .suite {
+    display: flex;
+    flex-direction: column;
+    padding-block: 2rem;
+    border-top: 1px solid color-mix(in srgb, var(--bronze) 45%, transparent);
+  }
+
+  .suite__input {
+    display: none;
+  }
+
+  .suite__photo {
+    order: -1;
+    margin-bottom: 1.25rem;
+  }
+
+  .suite__label {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    gap: 0.15rem 1rem;
+  }
+
+  .suite__name {
+    font-family: var(--font-serif);
+    font-size: var(--step-2);
+    font-weight: 340;
+    line-height: 1.1;
+    color: var(--teak);
+  }
+
+  .suite__size {
+    font-size: var(--step--1);
+    font-variant-numeric: tabular-nums;
+    color: var(--sage-text);
+  }
+
+  .suite__note {
+    grid-column: 1 / -1;
+    font-size: var(--step--1);
+    color: var(--bronze-deep);
+  }
+
+  .suite__body {
+    margin-top: 0.9rem;
+  }
+
+  .suite__body p {
+    max-width: 52ch;
+  }
+
+  @media (min-width: 56rem) {
+    .suites__list {
+      display: grid;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+      column-gap: clamp(3rem, 7vw, 7rem);
+      grid-template-rows: repeat(8, auto) 1fr;
+      align-items: start;
+    }
+
+    .suite {
+      display: contents;
+    }
+
+    .suite__input {
+      display: block;
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+    }
+
+    .suite__label {
+      grid-column: 1;
+      padding-top: 1.5rem;
+      cursor: pointer;
+      border-top: 1px solid color-mix(in srgb, var(--bronze) 45%, transparent);
+      transition: border-color 0.3s ease;
+    }
+
+    .suite__name {
+      font-size: var(--step-3);
+      color: var(--charcoal);
+      opacity: 0.62;
+      transition:
+        color 0.3s ease,
+        opacity 0.3s ease;
+    }
+
+    .suite__label:hover .suite__name {
+      opacity: 1;
+    }
+
+    .suite__input:checked + .suite__label {
+      border-top: 2px solid var(--bronze);
+    }
+
+    .suite__input:checked + .suite__label .suite__name {
+      color: var(--teak);
+      opacity: 1;
+    }
+
+    .suite__input:focus-visible + .suite__label {
+      outline: 2px solid var(--teak);
+      outline-offset: 4px;
+    }
+
+    .suite__label {
+      padding-bottom: 1.25rem;
+    }
+
+    /* The description opens when its category is chosen. */
+    .suite__body {
+      grid-column: 1;
+      display: grid;
+      grid-template-rows: 0fr;
+      margin: 0;
+      transition: grid-template-rows 0.4s ease;
+    }
+
+    .suite__body p {
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    .suite__input:checked ~ .suite__body {
+      grid-template-rows: 1fr;
+      padding-bottom: 1.5rem;
+    }
+
+    .suite__input:checked ~ .suite__body p {
+      padding-bottom: 0.25rem;
+    }
+
+    /* All four photographs share one frame; only the chosen one shows. */
+    .suite__photo {
+      grid-column: 2;
+      grid-row: 1 / span 9;
+      position: sticky;
+      top: calc(var(--header-h) + 1.5rem);
+      order: 0;
+      margin: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.45s ease;
+    }
+
+    .suite__input:checked ~ .suite__photo {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Stacking: the sticky frames overlap exactly in one grid cell. */
+    .suite__photo {
+      align-self: start;
+    }
+  }
+
+  @media (min-width: 56rem) and (prefers-reduced-motion: reduce) {
+    .suite__body,
+    .suite__photo,
+    .suite__name {
+      transition: none;
+    }
+  }
+</style>

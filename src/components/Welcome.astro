@@ -1,0 +1,86 @@
+---
+import Photo from './Photo.astro';
+import { welcome } from '../content/home';
+
+const [large, small] = welcome.photos;
+---
+
+<section class="welcome section" aria-labelledby="welcome-title">
+  <div class="container welcome__grid">
+    <div class="welcome__text">
+      <h2 id="welcome-title">{welcome.title}</h2>
+      {welcome.paragraphs.map((p) => <p>{p}</p>)}
+    </div>
+
+    <div class="welcome__images">
+      <figure class="welcome__large">
+        <Photo name={large.photo} alt={large.alt} ratio="4 / 5" sizes="(min-width: 56rem) 44vw, 90vw" label={large.alt} />
+      </figure>
+      <figure class="welcome__small">
+        <Photo name={small.photo} alt={small.alt} ratio="3 / 2" sizes="(min-width: 56rem) 24vw, 55vw" label={small.alt} />
+      </figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .welcome__grid {
+    display: grid;
+    gap: 3rem;
+  }
+
+  .welcome__text {
+    display: grid;
+    align-content: start;
+    gap: 1.5rem;
+  }
+
+  .welcome__text h2 {
+    color: var(--teak);
+    max-width: 14ch;
+  }
+
+  .welcome__text p {
+    font-family: var(--font-serif);
+    font-size: var(--step-1);
+    line-height: 1.55;
+  }
+
+  .welcome__images {
+    position: relative;
+    padding-bottom: 22%;
+  }
+
+  .welcome__large {
+    width: 82%;
+    margin-left: auto;
+  }
+
+  .welcome__small {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 46%;
+    border: 0.5rem solid var(--ivory);
+  }
+
+  @media (min-width: 56rem) {
+    .welcome__grid {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: clamp(3rem, 7vw, 7rem);
+      align-items: start;
+    }
+
+    .welcome__text {
+      padding-top: 3rem;
+    }
+
+    .welcome__large {
+      width: 78%;
+    }
+
+    .welcome__small {
+      width: 44%;
+    }
+  }
+</style>

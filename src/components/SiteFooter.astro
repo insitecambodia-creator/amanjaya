@@ -1,0 +1,118 @@
+---
+import { site, booking, contact, social } from '../config/site';
+---
+
+<footer class="footer on-dark" id="contact">
+  <span class="waterline waterline--light" aria-hidden="true"></span>
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <p class="footer__name">{site.name}</p>
+      <p class="footer__place">{site.descriptor}</p>
+      <a class="btn btn--light" href={booking.url}>{booking.label}</a>
+    </div>
+
+    <div class="footer__col">
+      <h2>Find us</h2>
+      <address>
+        <span>{contact.crossStreets}</span>
+        {contact.addressLines.map((line) => <span>{line}</span>)}
+      </address>
+      <a href={contact.mapUrl} rel="noopener">Open in Google Maps</a>
+    </div>
+
+    <div class="footer__col">
+      <h2>Contact</h2>
+      <p><a href={`tel:${contact.phoneHref}`}>{contact.phoneDisplay}</a></p>
+      {contact.email && <p><a href={`mailto:${contact.email}`}>{contact.email}</a></p>}
+      <ul class="footer__social">
+        {social.map((s) => <li><a href={s.url} rel="noopener">{s.label}</a></li>)}
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer__legal">
+    <p>Design preview of a new homepage. This is not the live website and is hidden from search engines.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--charcoal);
+    color: var(--ivory-soft);
+  }
+
+  .footer__grid {
+    display: grid;
+    gap: 2.75rem;
+    padding-block: clamp(3.5rem, 7vw, 6rem);
+  }
+
+  .footer__brand {
+    display: grid;
+    gap: 0.35rem;
+    justify-items: start;
+  }
+
+  .footer__name {
+    font-family: var(--font-serif);
+    font-size: var(--step-3);
+    font-weight: 300;
+    line-height: 1;
+    color: var(--ivory);
+  }
+
+  .footer__place {
+    margin-bottom: 1.5rem;
+    color: var(--bronze-light);
+  }
+
+  .footer__col {
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+    justify-items: start;
+  }
+
+  .footer__col h2 {
+    margin-bottom: 0.4rem;
+    font-family: var(--font-serif);
+    font-size: var(--step-1);
+    font-weight: 400;
+    color: var(--ivory);
+  }
+
+  address {
+    display: grid;
+    font-style: normal;
+  }
+
+  .footer a:not(.btn) {
+    color: var(--ivory);
+    text-decoration-color: var(--bronze-light);
+  }
+
+  .footer a:not(.btn):hover {
+    color: var(--bronze-light);
+  }
+
+  .footer__social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin-top: 0.6rem;
+  }
+
+  .footer__legal {
+    padding-block: 1.25rem 1.75rem;
+    border-top: 1px solid color-mix(in srgb, var(--ivory) 16%, transparent);
+    font-size: var(--step--1);
+    color: var(--ivory-soft);
+  }
+
+  @media (min-width: 56rem) {
+    .footer__grid {
+      grid-template-columns: 1.3fr 1fr 1fr;
+      gap: clamp(2rem, 5vw, 5rem);
+    }
+  }
+</style>

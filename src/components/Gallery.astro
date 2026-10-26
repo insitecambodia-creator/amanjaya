@@ -1,0 +1,54 @@
+---
+import Photo from './Photo.astro';
+import { gallery } from '../content/home';
+---
+
+<section class="gallery section" id="gallery" aria-labelledby="gallery-title">
+  <div class="container">
+    <h2 id="gallery-title">{gallery.title}</h2>
+    <ul class="gallery__grid">
+      {
+        gallery.photos.map((g) => (
+          <li>
+            <Photo
+              name={g.photo}
+              alt={g.alt}
+              ratio={g.ratio}
+              sizes="(min-width: 56rem) 30vw, 46vw"
+              widths={[400, 700, 1000]}
+              label={g.alt}
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .gallery {
+    padding-top: 0;
+  }
+
+  .gallery h2 {
+    color: var(--teak);
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  /* Columns let photographs of different proportions sit together without cropping to one ratio. */
+  .gallery__grid {
+    columns: 2;
+    column-gap: clamp(0.75rem, 2vw, 1.5rem);
+  }
+
+  .gallery__grid li {
+    break-inside: avoid;
+    margin-bottom: clamp(0.75rem, 2vw, 1.5rem);
+  }
+
+  @media (min-width: 56rem) {
+    .gallery__grid {
+      columns: 3;
+    }
+  }
+</style>

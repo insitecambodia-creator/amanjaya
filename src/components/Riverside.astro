@@ -1,0 +1,62 @@
+---
+import Photo from './Photo.astro';
+import { riverside } from '../content/home';
+import { contact } from '../config/site';
+---
+
+<section class="riverside section" id="riverside" aria-labelledby="riverside-title">
+  <div class="container riverside__grid">
+    <figure class="riverside__photo">
+      <Photo
+        name={riverside.photo}
+        alt={riverside.alt}
+        ratio="3 / 2"
+        sizes="(min-width: 56rem) 58vw, 92vw"
+        label="The hotel seen from the riverside"
+      />
+    </figure>
+
+    <div class="riverside__text">
+      <h2 id="riverside-title">{riverside.title}</h2>
+      <p>{riverside.text}</p>
+      <address>
+        <span>{contact.crossStreets}</span>
+        {contact.addressLines.map((line) => <span>{line}</span>)}
+      </address>
+      <a href={contact.mapUrl} rel="noopener">Open in Google Maps</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .riverside__grid {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .riverside__text {
+    display: grid;
+    gap: 1.4rem;
+    align-content: center;
+    justify-items: start;
+  }
+
+  .riverside__text h2 {
+    color: var(--teak);
+    max-width: 12ch;
+  }
+
+  address {
+    display: grid;
+    padding-left: 1rem;
+    border-left: 1px solid var(--bronze);
+    font-style: normal;
+  }
+
+  @media (min-width: 56rem) {
+    .riverside__grid {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+      gap: clamp(3rem, 7vw, 7rem);
+    }
+  }
+</style>

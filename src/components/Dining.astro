@@ -1,0 +1,106 @@
+---
+import Photo from './Photo.astro';
+import { dining } from '../content/home';
+---
+
+<section class="dining on-dark" id="dining" aria-labelledby="dining-title">
+  <div class="container dining__inner">
+    <h2 id="dining-title">{dining.title}</h2>
+
+    <div class="dining__venues">
+      {
+        dining.venues.map((v) => (
+          <article class="venue">
+            <figure>
+              <Photo
+                name={v.photo}
+                alt={v.alt}
+                ratio="3 / 2"
+                sizes="(min-width: 56rem) 40vw, 92vw"
+                tone="dark"
+                label={`${v.name} photograph`}
+              />
+            </figure>
+            <div class="venue__text">
+              <h3>{v.name}</h3>
+              <p class="venue__kind">{v.kind}</p>
+              <p>{v.text}</p>
+              <a href={v.link.url} rel="noopener">
+                {v.link.label}
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .dining {
+    background: var(--teak);
+    color: var(--ivory-soft);
+    padding-block: var(--section);
+  }
+
+  .dining h2,
+  .dining h3 {
+    color: var(--ivory);
+  }
+
+  .dining__inner {
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  .dining__venues {
+    display: grid;
+    gap: 3.5rem;
+  }
+
+  .venue {
+    display: grid;
+    gap: 1.5rem;
+    align-content: start;
+  }
+
+  .venue__text {
+    display: grid;
+    gap: 0.6rem;
+    justify-items: start;
+  }
+
+  .venue__kind {
+    color: var(--bronze-light);
+    font-size: var(--step--1);
+  }
+
+  .venue__text p:not(.venue__kind) {
+    margin-top: 0.4rem;
+    max-width: 44ch;
+  }
+
+  .venue a {
+    margin-top: 0.6rem;
+    color: var(--ivory);
+    text-decoration-color: var(--bronze-light);
+    text-decoration-thickness: 1px;
+  }
+
+  .venue a:hover {
+    color: var(--bronze-light);
+  }
+
+  @media (min-width: 56rem) {
+    .dining__venues {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: clamp(3rem, 6vw, 6rem);
+      align-items: start;
+    }
+
+    /* A deliberate stagger: the second venue sits lower. */
+    .venue:nth-child(2) {
+      margin-top: clamp(3rem, 8vw, 7rem);
+    }
+  }
+</style>

@@ -1,0 +1,194 @@
+---
+import { site, nav, booking } from '../config/site';
+---
+
+<header class="header">
+  <div class="header__bar container">
+    <a class="wordmark" href="#top" aria-label={`${site.name} ${site.descriptor}, back to top`}>
+      <span class="wordmark__name">{site.name}</span>
+      <span class="wordmark__place">{site.descriptor}</span>
+    </a>
+
+    <nav id="site-nav" class="nav" aria-label="Main">
+      <ul>
+        {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <div class="header__actions">
+      <a class="btn" href={booking.url}>{booking.label}</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="menu-toggle__label">Menu</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu only. Without JavaScript the navigation simply stays visible.
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const nav = document.getElementById('site-nav');
+  if (toggle && nav) {
+    const set = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      nav.classList.toggle('is-open', open);
+      toggle.querySelector('.menu-toggle__label')!.textContent = open ? 'Close' : 'Menu';
+    };
+    toggle.addEventListener('click', () => set(toggle.getAttribute('aria-expanded') !== 'true'));
+    nav.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) set(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        set(false);
+        toggle.focus();
+      }
+    });
+  }
+</script>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--ivory);
+    border-bottom: 1px solid color-mix(in srgb, var(--bronze) 28%, transparent);
+  }
+
+  .header__bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: var(--header-h);
+  }
+
+  .wordmark {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    color: var(--teak);
+    text-decoration: none;
+  }
+
+  .wordmark__name {
+    font-family: var(--font-serif);
+    font-size: 1.45rem;
+    font-weight: 380;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+
+  .wordmark__place {
+    display: none;
+    font-size: var(--step--1);
+    color: var(--sage-text);
+  }
+
+  .header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .header__actions .btn {
+    min-height: 2.5rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .menu-toggle {
+    display: none;
+    min-height: 2.5rem;
+    padding: 0 0.9rem;
+    border: 1px solid color-mix(in srgb, var(--teak) 45%, transparent);
+    background: transparent;
+    color: var(--teak);
+    font: inherit;
+    font-size: var(--step--1);
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  /* Small screens: navigation becomes a panel under the bar. */
+  .nav {
+    position: absolute;
+    inset: 100% 0 auto 0;
+    padding: 0.5rem var(--gutter) 1.5rem;
+    background: var(--ivory);
+    border-bottom: 1px solid color-mix(in srgb, var(--bronze) 28%, transparent);
+  }
+
+  :global(.js) .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  :global(.js) .nav:not(.is-open) {
+    display: none;
+  }
+
+  .nav ul {
+    display: grid;
+  }
+
+  .nav a {
+    display: block;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--bronze) 22%, transparent);
+    color: var(--charcoal);
+    font-family: var(--font-serif);
+    font-size: var(--step-1);
+    text-decoration: none;
+  }
+
+  .nav a:hover {
+    color: var(--bronze-deep);
+  }
+
+  @media (min-width: 56rem) {
+    .wordmark__place {
+      display: inline;
+    }
+
+    .menu-toggle {
+      display: none !important;
+    }
+
+    .nav,
+    :global(.js) .nav:not(.is-open) {
+      position: static;
+      display: block;
+      padding: 0;
+      background: none;
+      border: 0;
+    }
+
+    .nav ul {
+      display: flex;
+      gap: clamp(1.25rem, 2.6vw, 2.5rem);
+    }
+
+    .nav a {
+      padding: 0.4rem 0;
+      border: 0;
+      font-family: var(--font-sans);
+      font-size: var(--step--1);
+      font-weight: 480;
+      letter-spacing: 0.01em;
+      background: linear-gradient(var(--bronze), var(--bronze)) 0 100% / 0 1px no-repeat;
+      transition: background-size 0.25s ease;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      background-size: 100% 1px;
+    }
+
+    .header__actions .btn {
+      min-height: 2.6rem;
+      padding-inline: 1.4rem;
+    }
+  }
+</style>
