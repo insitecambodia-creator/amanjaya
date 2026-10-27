@@ -9,8 +9,8 @@
   --bronze: #8c6a3f; /* hairlines, the waterline, small accents (4.9:1 on white) */
   --bronze-deep: #6b4e2c; /* links and small bronze text (7.6:1 on white) */
   --bronze-light: #d2b686; /* lines and links on dark (4.9:1 on teak, 6.5:1 on charcoal) */
-  --grey-text: #5c5c5c; /* secondary text (6.7:1 on white) */
-  --ink: #52585a; /* body text: a softer charcoal-grey (7.2:1 on white) */
+  --grey-text: #5f5f5f; /* secondary text: the same dark grey as the body (6.4:1 on white) */
+  --ink: #5f5f5f; /* body text: dark grey, as set in the design file (6.4:1 on white) */
   --on-dark-soft: rgb(255 255 255 / 0.82); /* body text on teak (7.0:1) and charcoal (9.0:1) */
   --line: #e6e6e6; /* neutral hairlines (header, menu) */
   --grey-fill: #f2f2f2; /* only visible while a photograph is loading */
@@ -23,9 +23,16 @@
   --font-heading: 'Montserrat Variable', 'Segoe UI', system-ui, -apple-system, sans-serif;
   --font-text: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
-  /* Fluid between 360px and 1280px wide, then fixed. Body 16 to 16.5px. */
+  /* Body text, as set in the design file (Adobe XD): Helvetica Regular 14, character spacing 20 (thousandths of an
+     em, so 0.02em), line height 28 (so 2.0), dark grey. Small notes and labels sit a step below (13px). */
+  --text-size: 0.875rem;
+  --text-small: 0.8125rem;
+  --text-leading: 2;
+  --text-tracking: 0.02em;
+
+  /* Fluid between 360px and 1280px wide, then fixed. Larger steps are for buttons and interface, not body text. */
   --step--1: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem); /* small UI text: 14 to 15px */
-  --step-0: clamp(1rem, 0.995rem + 0.03vw, 1.03125rem); /* body: 16 to 16.5px */
+  --step-0: clamp(1rem, 0.995rem + 0.03vw, 1.03125rem); /* prominent buttons: 16 to 16.5px */
   --step-1: clamp(1.0625rem, 1.038rem + 0.109vw, 1.125rem); /* lead text and small headings: 17 to 18px */
   --step-2: clamp(1.1875rem, 1.09rem + 0.435vw, 1.4375rem); /* h3 */
   --step-3: clamp(1.5rem, 1.304rem + 0.87vw, 2rem); /* h2 */
@@ -60,9 +67,10 @@ body {
   background: var(--white);
   color: var(--ink);
   font-family: var(--font-text);
-  font-size: var(--step-0);
+  font-size: var(--text-size);
   font-weight: 400;
-  line-height: 1.75;
+  line-height: var(--text-leading);
+  letter-spacing: var(--text-tracking);
   font-optical-sizing: auto;
   text-rendering: optimizeLegibility;
 }
@@ -129,19 +137,18 @@ p {
   text-wrap: pretty;
 }
 
-/* Main body paragraphs (typography experiment): Helvetica 400 at 16 to 16.5px in a soft charcoal-grey, line height
-   1.75, almost no letter spacing, on a measure of about 52 characters of the font's width (roughly 60 characters
-   of text) so lines stay short and calm. Justification needs a long line to look even: in a column under about
+/* Main body paragraphs: Helvetica Regular 14px, character spacing 0.02em, line height 28px, dark grey #5F5F5F (the
+   values in the design file), on a measure of about 52 characters of the font's width so lines stay short and calm. Justification needs a long line to look even: in a column under about
    550px (phones, and the side-by-side columns from 56rem up) word gaps stretch to two to five times normal, so
    those are left-aligned. It is justified only where the sections stack into a wide single column (40rem to
    56rem). To justify everywhere, remove the max-width below; see docs/TYPOGRAPHY.md. */
 .copy {
   max-width: 52ch;
   font-family: var(--font-text);
-  font-size: var(--step-0);
+  font-size: var(--text-size);
   font-weight: 400;
-  line-height: 1.75;
-  letter-spacing: 0.1px;
+  line-height: var(--text-leading);
+  letter-spacing: var(--text-tracking);
   color: var(--ink);
   text-align: left;
 }
@@ -211,6 +218,7 @@ a:hover {
 
 /* The single call to action. */
 .btn {
+  line-height: 1.65; /* buttons keep their own height; the 28px body line height is for paragraphs */
   display: inline-flex;
   align-items: center;
   justify-content: center;

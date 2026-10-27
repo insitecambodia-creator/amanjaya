@@ -36,6 +36,7 @@ import { site, booking, contact, social } from '../config/site';
 
 <style>
   .footer {
+    line-height: 1.7; /* lists and addresses are set closer than paragraphs */
     background: var(--charcoal);
     color: var(--on-dark-soft);
   }
@@ -104,7 +105,8 @@ import { site, booking, contact, social } from '../config/site';
   .footer__legal {
     padding-block: 1.25rem 1.75rem;
     border-top: 1px solid color-mix(in srgb, var(--white) 16%, transparent);
-    font-size: var(--step--1);
+    font-size: var(--text-small);
+    line-height: 1.6;
     color: var(--on-dark-soft);
   }
 

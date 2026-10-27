@@ -136,6 +136,8 @@ const rows = [suites.items.slice(0, 2), suites.items.slice(2, 4)];
   }
 
   .room__content {
+    line-height: 1.65; /* the photo overlay keeps its original spacing; the 28px body line height is for paragraphs */
+    letter-spacing: 0;
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -178,6 +180,7 @@ const rows = [suites.items.slice(0, 2), suites.items.slice(2, 4)];
   }
 
   .suites__note {
+    line-height: 1.6;
     margin-top: 1rem;
     color: var(--grey-text);
     font-size: 0.8125rem;

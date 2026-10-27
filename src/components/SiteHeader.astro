@@ -91,6 +91,8 @@ const { home = '' } = Astro.props;
   }
 
   .wordmark__place {
+    line-height: 1.2;
+    letter-spacing: 0;
     display: none;
     font-size: var(--step--1);
     color: var(--grey-text);
@@ -132,6 +134,7 @@ const { home = '' } = Astro.props;
     background: transparent;
     color: var(--teak);
     font: inherit;
+    line-height: 1.2;
     font-size: 0.8125rem;
     font-weight: 500;
     cursor: pointer;
@@ -139,6 +142,7 @@ const { home = '' } = Astro.props;
 
   /* Small screens: navigation becomes a panel under the bar. */
   .nav {
+    line-height: 1.65;
     position: absolute;
     inset: 100% 0 auto 0;
     padding: 0.5rem var(--gutter) 1.5rem;
