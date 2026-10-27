@@ -168,9 +168,10 @@ export const dining = {
       name: 'Le Moon Rooftop',
       kind: 'Rooftop bar',
       text: 'Our rooftop bar since 2010. Early evening is for a sundowner before dinner; later it belongs to friends and couples, for dinner or just a drink.',
-      photo: 'dining-le-moon',
-      position: '50% 55%',
-      alt: 'The hotel at night with the Le Moon sign lit on the roof',
+      photo: 'lemoon_rooftop',
+      // The file is square (1080 x 1080); the 3:2 frame keeps the skyline across the river and the lit lamps.
+      position: '50% 70%',
+      alt: 'The Le Moon rooftop terrace at sunset: low tables with lit lamps and cushions among palms, with the river and city towers beyond',
       link: { label: 'Discover Le Moon', url: 'https://www.le-moon-rooftop.com/' },
     },
     {

@@ -6,7 +6,7 @@ The "Rooftop & Dining" section works best with two large, atmospheric photograph
 
 | Venue | Photograph now | Why it is only temporary |
 |---|---|---|
-| Le Moon Rooftop | `dining-le-moon`: the hotel at night with the Le Moon sign lit on the roof (1319 px wide) | It shows the building, not the rooftop experience: no guests, no view, no sunset. It is at least authentic and identifies the venue. |
+| Le Moon Rooftop | **Now `lemoon_rooftop`** (uploaded by the hotel team): the rooftop terrace at sunset with lit lamps, palms, the river and the city skyline (1080 x 1080, so it is shown cropped to 3:2; a larger landscape original would be better). Previously `dining-le-moon`: the hotel at night with the Le Moon sign lit on the roof (1319 px wide), still used on the gallery page | It shows the building, not the rooftop experience: no guests, no view, no sunset. It is at least authentic and identifies the venue. |
 | Sombok | `dining-sombok`: two chefs in front of the Sombok sign (960x640) | A formal portrait, not the food or the dining room. It is also small. |
 
 ## What the existing sources reference (checked, not yet viewed)
