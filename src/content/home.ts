@@ -6,19 +6,30 @@
  */
 
 /**
- * Hero photograph options. A is the approved hero; B to D are kept for the next creative review
- * (comparison in docs/screenshots/hero-options.jpg and docs/PHOTO-REVIEW.md).
+ * Hero photograph options. A is the approved hero; B to E are kept for review
+ * (comparison in docs/screenshots/hero-options.jpg and docs/PHOTO-REVIEW.md). E is the previous hero.
+ * `position` is the desktop focal point and `positionMobile` the phone one (CSS object-position).
  * To preview another option locally:  PUBLIC_HERO_OPTION=B npm run dev
  * Builds use A unless that variable is set.
  */
 export const heroOptions = [
   {
     id: 'A',
+    photo: 'amanajaya-hero',
+    /** Desktop: both faces sit left of centre, so the right stays open for the text. */
+    position: '50% 20%',
+    /** Phones: a narrow window centred on the two faces (they span about 35% to 55% across the photograph). */
+    positionMobile: '50% 35%',
+    alt: 'A smiling couple takes a selfie in front of the Royal Palace in Phnom Penh, the man holding his phone at arm’s length and the woman in a sun hat leaning in beside him',
+    note: 'Couple taking a selfie in front of the Royal Palace (2048 px, uploaded by the hotel team). Current.',
+  },
+  {
+    id: 'E',
     photo: 'hero',
-    /** Focal point so the crop keeps the smiling guest and the hotel balconies on every screen shape. */
-    position: '60% 18%',
+    position: '60% 14%',
+    positionMobile: '66% 30%',
     alt: 'A couple walks hand in hand at sunset in front of the Amanjaya Pancam hotel',
-    note: 'Couple in front of the hotel at golden hour (2560 px). Current.',
+    note: 'Couple in front of the hotel at golden hour (2560 px). The previous hero.',
   },
   {
     id: 'B',
@@ -48,6 +59,7 @@ const chosenHero = heroOptions.find((o) => o.id === import.meta.env.PUBLIC_HERO_
 export const hero = {
   photo: chosenHero.photo,
   position: chosenHero.position,
+  positionMobile: 'positionMobile' in chosenHero ? chosenHero.positionMobile : chosenHero.position,
   alt: chosenHero.alt,
   title: 'Your Phnom Penh story begins here.',
   support: 'Discover Phnom Penh from Amanjaya Pancam, your riverside retreat.',

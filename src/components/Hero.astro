@@ -9,7 +9,7 @@ const keepTogether = (t: string) => t.replace(/Phnom Penh/g, 'Phnom\u00a0Penh').
 
 <section class="hero" id="top" aria-labelledby="hero-title">
   <div class="hero__stage">
-    <div class="hero__media">
+    <div class="hero__media" style={`--focus-m: ${hero.positionMobile}; --focus-d: ${hero.position}`}>
       <Photo
         name={hero.photo}
         alt={hero.alt}
@@ -61,9 +61,9 @@ const keepTogether = (t: string) => t.replace(/Phnom Penh/g, 'Phnom\u00a0Penh').
     overflow: hidden;
   }
 
-  /* Phone crop: the woman, her smile and the balconies stay in frame; the man's shoulder is left partly out. */
+  /* Phone crop: a window on the two faces (focal points are set in src/content/home.ts). */
   .hero__media :global(.photo) {
-    --focus: 66% 30% !important;
+    --focus: var(--focus-m) !important;
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -169,17 +169,23 @@ const keepTogether = (t: string) => t.replace(/Phnom Penh/g, 'Phnom\u00a0Penh').
     }
 
     .hero__media :global(.photo) {
-      --focus: 60% 14% !important;
+      --focus: var(--focus-d) !important;
     }
+  }
 
-    /* Right-hand gradient, gone before the woman (about 60% across). */
+  /* Wide screens: the text block moves to the upper right, above the couple and clear of the palace spire.
+     Below this width it stays at the foot of the photograph, where it cannot meet either. */
+  @media (min-width: 72rem) {
+    /* A soft neutral shade rising from the top-right corner, where the text sits: strongest behind the text and
+       gone well before the couple. It is a vignette rather than a patch, so it reads as light falloff. */
     .hero__shade {
-      background: linear-gradient(
-        270deg,
-        rgb(0 0 0 / 0.34) 0%,
-        rgb(0 0 0 / 0.22) 30%,
-        rgb(0 0 0 / 0.07) 46%,
-        rgb(0 0 0 / 0) 58%
+      background: radial-gradient(
+        ellipse 78% 86% at 100% 0%,
+        rgb(0 0 0 / 0.82) 0%,
+        rgb(0 0 0 / 0.72) 36%,
+        rgb(0 0 0 / 0.46) 64%,
+        rgb(0 0 0 / 0.16) 86%,
+        rgb(0 0 0 / 0) 100%
       );
     }
 
@@ -190,25 +196,13 @@ const keepTogether = (t: string) => t.replace(/Phnom Penh/g, 'Phnom\u00a0Penh').
     .hero__overlay .container {
       display: flex;
       justify-content: flex-end;
-      padding-top: clamp(2.5rem, 13svh, 7rem);
+      padding-top: clamp(2rem, 8svh, 5rem);
       padding-bottom: 0;
     }
 
     .hero__text {
       width: 26rem;
       max-width: 100%;
-    }
-
-    /* A soft neutral shade that travels with the text block, so contrast holds against the pale facade while the
-       rest of the photograph keeps its own light. */
-    .hero__text::before {
-      content: '';
-      position: absolute;
-      z-index: -1;
-      inset: -2.5rem -5rem -2.5rem -4rem;
-      pointer-events: none;
-      background: rgb(0 0 0 / 0.46);
-      filter: blur(3.25rem);
     }
 
     .hero__text h1,
