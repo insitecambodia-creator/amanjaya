@@ -91,6 +91,51 @@
       "key": "gallery-work",
       "path": "2020/10/IMG_3372-scaled.jpg",
       "usedFor": "Gallery: a working breakfast in a suite"
+    },
+    {
+      "key": "deluxe-3",
+      "path": "2020/09/Amanjaya-deluxe3.jpg",
+      "usedFor": "Deluxe page lead slide (3:2). NOT in the repository yet: the room page shows a labelled placeholder until the hotel team supplies the file (any of .jpg/.webp, named deluxe-3)."
+    },
+    {
+      "key": "deluxe-5",
+      "path": "2020/09/Amanjaya-deluxe5.jpg",
+      "usedFor": "Deluxe page, 2nd slide. NOT in the repository yet: the room page shows a labelled placeholder until the hotel team supplies the file (any of .jpg/.webp, named deluxe-5)."
+    },
+    {
+      "key": "deluxe-4",
+      "path": "2020/09/Amanjaya-deluxe4.jpg",
+      "usedFor": "Deluxe page, 3rd slide. NOT in the repository yet: the room page shows a labelled placeholder until the hotel team supplies the file (any of .jpg/.webp, named deluxe-4)."
+    },
+    {
+      "key": "executive-3",
+      "path": "2020/09/Amanjaya-executive3.jpg",
+      "usedFor": "Executive page lead slide. NOT in the repository yet: the room page shows a labelled placeholder until the hotel team supplies the file (any of .jpg/.webp, named executive-3)."
+    },
+    {
+      "key": "executive-2",
+      "path": "2020/09/Amanjaya-executive2.jpg",
+      "usedFor": "Executive page, 2nd slide. NOT in the repository yet: the room page shows a labelled placeholder until the hotel team supplies the file (any of .jpg/.webp, named executive-2)."
+    },
+    {
+      "key": "executive-4",
+      "path": "2020/09/Amanjaya-executive4.jpg",
+      "usedFor": "Executive page, 3rd slide. NOT in the repository yet: the room page shows a labelled placeholder until the hotel team supplies the file (any of .jpg/.webp, named executive-4)."
+    },
+    {
+      "key": "panoramic-3",
+      "path": "2020/09/Amanjaya-panoramic3.jpg",
+      "usedFor": "Panoramic page lead slide. NOT in the repository yet: the room page shows a labelled placeholder until the hotel team supplies the file (any of .jpg/.webp, named panoramic-3)."
+    },
+    {
+      "key": "panoramic-6",
+      "path": "2020/09/Amanjaya-panoramic6.jpg",
+      "usedFor": "Panoramic page, 3rd slide. NOT in the repository yet: the room page shows a labelled placeholder until the hotel team supplies the file (any of .jpg/.webp, named panoramic-6)."
+    },
+    {
+      "key": "panoramic-4",
+      "path": "2020/09/Amanjaya-panoramic4.jpg",
+      "usedFor": "Panoramic page, 4th slide. NOT in the repository yet: the room page shows a labelled placeholder until the hotel team supplies the file (any of .jpg/.webp, named panoramic-4)."
     }
   ],
   "unused": [

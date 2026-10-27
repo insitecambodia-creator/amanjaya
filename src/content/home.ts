@@ -120,7 +120,7 @@ export const suites = {
       summary: 'A king canopy bed, bath and shower, and a balcony over the city.',
       description:
         'A king-size canopy bed, a bathroom with both bath and shower, and a living area with armchairs. The balcony looks over the city.',
-      exploreUrl: 'https://www.amanjaya-suites-phnom-penh.com/4-types-of-rooms/deluxe-suite/',
+      exploreUrl: '/4-types-of-rooms/deluxe-suite/',
       photo: 'suite-deluxe',
       position: '50% 50%',
       alt: 'A Deluxe Room bed with a timber headboard and sheer curtains',
@@ -133,7 +133,7 @@ export const suites = {
       summary: '90 sqm with a living area, a sofa, three armchairs and a desk.',
       description:
         'A genuine living area with a sofa, three armchairs and a desk. Cambodian raw silk, replica artefacts and polished local cherrywood, with furniture made to order. For business or leisure.',
-      exploreUrl: 'https://www.amanjaya-suites-phnom-penh.com/4-types-of-rooms/executive/',
+      exploreUrl: '/4-types-of-rooms/executive/',
       photo: 'suite-executive',
       position: '62% 50%',
       alt: 'An Executive Suite bed with a carved timber headboard, linen and sheer curtains',
@@ -146,7 +146,7 @@ export const suites = {
       summary: '50 sqm with wide views over both rivers and the pagoda.',
       description:
         'A wide view over the two rivers and the pagoda, a lounge area, a king bed, and windows that let the light in.',
-      exploreUrl: 'https://www.amanjaya-suites-phnom-penh.com/4-types-of-rooms/panoramic/',
+      exploreUrl: '/4-types-of-rooms/panoramic/',
       photo: 'suite-panoramic',
       position: '50% 55%',
       alt: 'A Panoramic Suite with a king bed, a writing desk and tall windows full of light',

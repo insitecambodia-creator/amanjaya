@@ -1,6 +1,6 @@
 # Accommodation page template (Phase 2)
 
-The Junior Suite is the master template. The other three suites reuse it by adding an entry to `src/content/rooms.ts`.
+The Junior Suite is the master template. The Deluxe, Executive and Panoramic pages reuse it: each is one entry in `src/content/rooms.ts`.
 
 ## How it fits together
 
@@ -16,7 +16,7 @@ The Junior Suite is the master template. The other three suites reuse it by addi
 
 The page is built at the same path the existing WordPress site uses, so URLs carry over: `/4-types-of-rooms/junior-suite-phnom-penh/`.
 
-To add a room: add an object to `rooms` (copy the Junior entry), fill in only what the hotel's own page for that room says, set `published: true`. Nothing else changes. The slugs on the existing site are `deluxe-suite`, `executive` and `panoramic` (taken from the homepage links; confirm against each room's own export).
+To add a room: add an object to `rooms` (copy the Junior entry), fill in only what the hotel's own page for that room says, set `published: true`. Nothing else changes. The slugs `deluxe-suite`, `executive` and `panoramic` are the canonical paths in each room's own export.
 
 ## Where each fact on the Junior page comes from
 
@@ -95,3 +95,34 @@ To add an amenity that another room lists: copy its icon's shapes from lucide.de
 - The parent page `/4-types-of-rooms/` (the existing site has one; the back link goes to the homepage categories for now).
 - The French page (`/fr/4-types-de-suites/suite-junior/` on the existing site), hreflang, canonical tags and structured data (the existing page has a breadcrumb: Home, 4 types of suites, Junior Suite). All wait for the multilingual and SEO phase; the preview stays `noindex`.
 - A 301 map for the old URLs (the Junior path is unchanged, so it needs none).
+
+
+## The other three rooms
+
+Pages: `/4-types-of-rooms/deluxe-suite/`, `/4-types-of-rooms/executive/`, `/4-types-of-rooms/panoramic/`. Facts come from `Deluxe Room - Amanjaya Suites.html`, `Executive Suite - ...html` and `Panoramic Suite - ...html` in the repository root. The homepage "Explore" buttons now lead to them. Prices are the existing ones in `src/data/pricing.ts` ($76.50, $112.50, $94.50).
+
+| Room | Size | Spec line (from the description) | Amenities |
+|---|---|---|---|
+| Deluxe Room | **not stated on the existing page, so none is shown** | King size canopy bed, bathtub and shower, private balcony | 10: the existing page does not list Malongo espresso, so it is not shown |
+| Executive Suite | 90 sqm (the page says the hotel has three) | 90 sqm, lounge corner, working desk (no bed is stated) | 11 |
+| Panoramic Suite | 50 sqm | 50 sqm, king size bed, river and pagoda views | 11 |
+
+Points for the hotel to confirm:
+
+- **Deluxe, 15% rooftop lounge discount.** The existing page promises Deluxe guests this. It is an offer, so it is left out until the hotel confirms it still stands.
+- **Deluxe size.** The existing page gives none. Please supply it, or leave it out.
+- **Panoramic materials.** The existing page says "the flooring and furniture are made from Cambodian raw silk and rosewood", which cannot be right for a floor. The new text says "the finishes use Cambodian raw silk and rosewood".
+- **Executive.** The balcony and espresso machine come only from the shared amenities block; the description does not mention a balcony or a bed, so none is claimed in the text.
+- Copy is lightly edited for grammar and the sales adjectives ("stunning", "luxurious", "ultimate") are dropped, as on the Junior page.
+
+### Photographs: one real photograph per room so far
+
+Each existing page has a five-slide carousel. Only one photograph of each is in the repository, so each gallery shows it large with three labelled **placeholders**. To finish, add the files below to `src/assets/photos/` (`.webp` or `.jpg`, named exactly), and the placeholders are replaced with no code change.
+
+| Room | In the repository | Needed (existing page order) |
+|---|---|---|
+| Deluxe | `suite-deluxe` (= deluxe1, only 674px wide, so it looks soft when large: a bigger original is needed) | `deluxe-3` (the page's lead), `deluxe-5`, `deluxe-4` (and `deluxe2` if wanted) |
+| Executive | `suite-executive` (= executive12) | `executive-3` (the page's lead), `executive-2`, `executive-4` (and `executive5`) |
+| Panoramic | `suite-panoramic` (= panoramic2) | `panoramic-3` (the page's lead), `panoramic-6`, `panoramic-4` (and `panoramic7`) |
+
+The gallery uses the first four entries of each room's `photos` list in `rooms.ts`; once the files arrive, reorder that list (the hotel's own order starts with the `-3` photograph) and write the alt text for each. Placeholder alt text is deliberately generic until someone has looked at the photograph.
