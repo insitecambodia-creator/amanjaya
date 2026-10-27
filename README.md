@@ -36,7 +36,7 @@ The hotel's own photographs are committed in `src/assets/photos/` (never hotlink
 | Hotel facts, booking link, contact, nav | `src/config/site.ts` |
 | Homepage copy and photo choices | `src/content/home.ts` |
 | Room starting prices (edit here only) | `src/data/pricing.ts` |
-| Colours (white, charcoal, teak, bronze), type scale (Instrument Serif headings, Montserrat interface, Helvetica text) | `src/styles/global.css` |
+| Colours (white, charcoal, teak, bronze), type scale (Montserrat headings and interface, Helvetica text) | `src/styles/global.css` |
 | Page sections | `src/components/` |
 | Sources, placeholders, questions for the hotel | `docs/CONTENT-SOURCES.md` |
 | Design rationale | `docs/DESIGN-RATIONALE.md` |
@@ -45,7 +45,7 @@ The hotel's own photographs are committed in `src/assets/photos/` (never hotlink
 | Accommodation page template and the Junior Suite page (content, sources, pending photos) | `docs/ROOM-TEMPLATE.md`, `src/content/rooms.ts`, `src/components/rooms/` |
 | Room photo shortlist | `docs/ROOM-PHOTO-CANDIDATES.md` |
 | Rooftop & Dining photos: what we have and need | `docs/DINING-PHOTOS.md` |
-| Type scale, original-site typography, the current serif-headings experiment | `docs/TYPOGRAPHY.md` |
+| Type scale, original-site typography, the current heading and body-text settings | `docs/TYPOGRAPHY.md` |
 | Screenshots | `docs/screenshots/` |
 
 The booking button reads one setting (`booking.url`). It currently points at the engine's undated property page, flagged as unverified.

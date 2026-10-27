@@ -24,9 +24,9 @@ A full-width, immersive photograph with the text set directly on it in white Mon
 
 Typography experiment 2 (the Newsreader / Hanken Grotesk direction is in git at `15a7fa7`):
 
-- **Experiment (current): section headings and room titles in Instrument Serif Regular (30 to 34px and 36 to 40px); body Helvetica 14px with character spacing 20 (0.02em), line height 28px, in dark grey `#5F5F5F` (the design file's values); see `docs/TYPOGRAPHY.md` section 7.** Navigation, buttons and the homepage hero stay Montserrat. Before the experiment: headings and interface (nav, buttons): Montserrat Regular, open source (SIL OFL) and self-hosted. Body paragraphs: the original site's Helvetica, as a system stack (`Helvetica Neue`, Helvetica, Arial, sans-serif) with no font files bundled. Open Sans was dropped (typography experiment 3, see `docs/TYPOGRAPHY.md` section 6).
-- Fluid scale from `--step--1` to `--step-4` between 360 and 1280px wide. Main paragraphs 17.6px (1.1rem), line height 1.7, letter spacing 0.4px; H3 19 to 23px, H2 24 to 32px, H1 28 to 46px; lines held to about 62 characters, line height 1.65 for text.
-- Quiet by design: regular weights only, sentence case, no oversized display type. Details and the history are in `docs/TYPOGRAPHY.md`.
+- **Current: headings and interface in Montserrat (section headings and room titles Light 300 at 30 to 34px and 36 to 40px, sub-headings Regular 400), body Helvetica 14px with character spacing 20 (0.02em), line height 28px, dark grey `#5F5F5F` (the design file's values); see `docs/TYPOGRAPHY.md` section 7.** A serif heading trial was dropped. Montserrat is open source (SIL OFL) and self-hosted.
+- Fluid scale between 360 and 1280px wide: body 14px, section headings 30 to 34px, room titles 36 to 40px, sub-headings 19 to 23px; paragraphs held to about 52 characters of the font's width, line height 28px.
+- Quiet by design: large headings in Light, small ones in Regular, sentence case, no oversized display type. Details and the history are in `docs/TYPOGRAPHY.md`.
 - Neither font covers Khmer; Noto Sans Khmer is the planned partner later.
 
 ## Colour

@@ -1,6 +1,6 @@
 # Typography
 
-> **Current experiment (typography experiment 4, section 7): Instrument Serif headings, softer smaller Helvetica body.** Before it, the direction was (experiment 3): Montserrat Regular headings and interface + Helvetica system stack for body paragraphs (section 6).** Experiment 2 was Montserrat + Open Sans. Section 5 describes it. Sections 1 to 4 record the earlier Newsreader / Hanken Grotesk direction and the research on the original site, which still stands. The Newsreader version is preserved in git at commit `15a7fa7`.
+> **Current typography (section 7): light Montserrat headings, 14px Helvetica body in dark grey.** Before it, the direction was (experiment 3): Montserrat Regular headings and interface + Helvetica system stack for body paragraphs (section 6).** Experiment 2 was Montserrat + Open Sans. Section 5 describes it. Sections 1 to 4 record the earlier Newsreader / Hanken Grotesk direction and the research on the original site, which still stands. The Newsreader version is preserved in git at commit `15a7fa7`.
 
 ## 1. Heading scale (earlier Newsreader pass, superseded by section 5)
 
@@ -125,29 +125,28 @@ The hotel verified the original site's body text in Elementor: Helvetica, 1.1em 
 - **Header:** Montserrat is wider than Open Sans, so the nav needed a slightly tighter gap and a non-wrapping wordmark to stay on one line from 896px up.
 - **Screenshots:** `docs/screenshots/typography/body-copy-*.jpg`. This environment has no Helvetica, so it renders the stack with Liberation Sans (metric-compatible with Arial and close to Helvetica); on real devices the letterforms will differ slightly and the line breaks may shift by a word.
 
-## 7. Typography experiment 4: a quieter, lighter register
+## 7. Current typography: light Montserrat headings, 14px Helvetica body
 
-Studied from a reference screenshot of a heritage hotel website (not copied: only its proportions and rhythm). What it showed: a light serif heading about 2.5 times the body size; small soft slate-grey sans body text on a narrow measure of about 50 characters; very open line spacing; links in regular weight with a thin pale underline; wide, even gaps from heading to paragraph to link.
+Two directions were tried in this round and one was dropped: **Instrument Serif headings were tried and reverted at the hotel's request; the site uses Montserrat for every heading, and no serif font is loaded.** What stayed: lighter headings and the body-text values from the design file.
 
-The change (typography only: no layout, photography, room information, background colours or booking behaviour changed):
+Typography only: no layout, photography, room information, background colours or booking behaviour changed.
 
-| | Before | After |
+| | Before this round | Now |
 |---|---|---|
-| Section headings (h2) | Montserrat 400, 24 to 32px | **Instrument Serif Regular, 30 to 34px** (34px from about 1000px wide) |
-| Room titles (room-page h1) | Montserrat 400, 28 to 46px | **Instrument Serif Regular, 36 to 40px** |
-| Sub-headings (h3: venue names, mosaic room names, price figure) | Montserrat, 19 to 23px | Instrument Serif Regular, 24 to 28px |
-| Body text | Helvetica 17.6px, `#333333`, line height 1.7, letter spacing 0.4px | **Helvetica Regular 14px, `#5F5F5F`, line height 28px (2.0), character spacing 20 (0.02em)**, as set in the design file |
-| Paragraph measure | 62 characters | 52 characters (about 55 to 60 characters of text) |
-| Links under venues | Bronze, bold | Bronze, regular, thin underline set a little lower |
+| Section headings (h2) | Montserrat 400, 24 to 32px | **Montserrat Light (300), 30 to 34px** (34px from about 1000px wide) |
+| Room titles (room-page h1) | Montserrat 400, 28 to 46px | **Montserrat Light (300), 36 to 40px** |
+| Sub-headings (h3: venue names, the room names on the photo mosaic) | Montserrat 400, 19 to 23px | Montserrat Regular (400), 19 to 23px (unchanged) |
+| Price figure on room pages | Montserrat 400, 24 to 32px | Montserrat Light (300), 24 to 32px |
+| Homepage hero | Montserrat 500 headline, 400 supporting line | unchanged |
+| Navigation, buttons, footer headings, wordmark | Montserrat | unchanged |
+| **Body text** | Helvetica 17.6px, `#333333`, line height 1.7, letter spacing 0.4px | **Helvetica Regular 14px, `#5F5F5F`, line height 28px (2.0), character spacing 20 (0.02em)** |
 
-Unchanged: the homepage hero (Montserrat 500 headline and supporting line), navigation, buttons, the footer's small headings, the wordmark, the room-page spec line's wording and all content. The spec line moves to Helvetica (it reads as body text now); the price figure moves to the display serif.
+**Weights, and why.** The large headings (30 to 40px) are Light: at that size the thin strokes stay clear and the headings sit quietly instead of dominating the page. The sub-headings are Regular: they are small (19 to 23px) and the mosaic names sit white over photographs, where Light would lose strength. The price figure is Light to match the headings beside it. The hero is Medium because it is white text over a photograph. Letter spacing on the large headings is slightly negative (-0.01 to -0.015em), as before.
 
-- **Font:** Instrument Serif, regular weight only (no italic loaded), self-hosted through `@fontsource/instrument-serif` (SIL OFL), Latin subset, about 21KB. It has no Khmer, so Noto Sans Khmer remains the plan for the Khmer pages. Fallback: Iowan Old Style, Georgia, Times New Roman.
-- **Why the sizes look smaller than the numbers:** Instrument Serif is a condensed face with a small x-height, so 34px reads about like 26px of Montserrat. That is the quieter effect asked for. If the headings feel too small in review, 38 to 44px is the range to try, set in `--display-2`, `--display-1` and `--display-3` in `global.css`.
-- **Body text values come from the design file (an Adobe XD text panel): Helvetica Regular, size 14, character spacing 20, line height 28, fill `#5F5F5F`.** XD's character spacing is in thousandths of an em, so 20 is 0.02em (0.28px at 14px); its sizes are CSS pixels. An earlier pass in this experiment guessed 16.5px, 1.75 and `#52585A`; these replace it.
-- **Colour:** body `#5F5F5F` on white is 6.4:1 (AA needs 4.5:1). The secondary grey is now the same value, so every body-style text is one grey. The room names over the homepage photographs, now in the thin serif at 28px, measure 5.0:1 or better against the brightest pixels behind them. Teak headings, the footer charcoal and all backgrounds are unchanged.
-- **Small notes and labels** (price note, "From", venue type, the back link, the footer note) are 13px so they stay a step below the body; the spec line and the venue links are 14px. **Interface elements keep their original line height** (buttons and navigation 1.65, the photo-mosaic overlay, the footer's lists and addresses 1.6 to 1.7): the 28px line height is for paragraphs, and applying it everywhere would have made buttons and panels taller. A layout comparison against the previous build shows every photograph, panel and grid at identical size; the footer is about 30px shorter because its text is smaller.
-- **Mobile:** 14px at 28px leading reads comfortably at 6.4:1, but 14px is on the small side for phones. If it feels small in review, 15px is the first thing to try (`--text-size` in `global.css`).
-- **Rhythm:** a little more room between a heading and its first paragraph (about 32px against 24px), 24px between paragraphs, and heading widths relaxed (16 characters) so the serif headings still break onto two lines where they did before.
-- **To revert:** `git revert` the experiment commit, or set `--font-display` to the Montserrat stack, `--ink` to `#333333`, and restore `.copy` (1.1rem, line height 1.7, letter spacing 0.4px, 62 characters). The body values are the `--text-size`, `--text-leading`, `--text-tracking` and `--ink` tokens at the top of `global.css`.
-- **Evidence:** `docs/screenshots/typography-experiment/`: `compare-welcome-*`, `compare-junior-description-*` and `compare-dining-*` (desktop and mobile, before above after), plus the individual `before-*` and `after-*` images (including the Riverside section, the Suites intro and the Amenities).
+**Body text values come from the design file (an Adobe XD text panel): Helvetica Regular, size 14, character spacing 20, line height 28, fill `#5F5F5F`.** XD's character spacing is in thousandths of an em, so 20 is 0.02em (0.28px at 14px); its sizes are CSS pixels. They are the tokens `--text-size`, `--text-leading`, `--text-tracking` and `--ink` at the top of `global.css`, and `.copy` (paragraphs) uses them with a measure of 52 characters.
+
+- **Colour:** body `#5F5F5F` on white is 6.4:1 (AA needs 4.5:1). The secondary grey is the same value, so all body-style text is one grey. The room names over the homepage photographs (white, Montserrat Regular) measure 5.1:1 or better against the brightest pixels behind them.
+- **Small notes and labels** (price note, "From", venue type, the back link, the footer note) are 13px so they stay a step below the body; the spec line and the venue links are 14px. **Interface elements keep their original line height** (buttons and navigation 1.65, the photo-mosaic overlay, the footer's lists and addresses 1.6 to 1.7): the 28px line height is for paragraphs, and applying it everywhere would have made buttons and panels taller. A layout comparison against the previous build showed every photograph, panel and grid at identical size.
+- **Mobile:** 14px at 28px leading reads comfortably at 6.4:1, but 14px is on the small side for phones. If it feels small in review, 15px is the first thing to try (`--text-size`).
+- **Sizes:** the heading sizes are `--heading-2` (30 to 34px) and `--heading-1` (36 to 40px) in `global.css`; the sub-headings use `--step-2`.
+- **Evidence:** `docs/screenshots/typography-experiment/`: `compare-welcome-*`, `compare-junior-description-*` and `compare-dining-*` (desktop and mobile, the original typography above the current), plus the individual `before-*` and `after-*` images (including the Riverside section, the Suites intro and the Amenities). The git history holds the serif attempt if it is ever wanted again.
