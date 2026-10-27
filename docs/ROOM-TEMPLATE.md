@@ -51,11 +51,23 @@ Photograph quality: the photographs are 1325 to 1368px wide, and the gallery sta
 ## Design
 
 - White page; Montserrat headings; Helvetica body copy (the `.copy` style, 17.6px, line height 1.7, 0.4px tracking).
-- **Gallery (reproduces the approved mockup).** The large photograph on the left takes about 76% of the gallery width and is 16:9; three photographs stack on the right (about 23%). The stack takes the large photograph's height exactly, so top and bottom edges align, and one gap size (about 19px at 1440px, scaling down) is used across and down. Plain rectangles: no borders, rounded corners or shadows. Phones: the large photograph (4:3) edge to edge, then a flush row of three small ones. The photographs are not clickable (no JavaScript is needed).
+- **Gallery (reproduces the approved mockup).** The large photograph on the left takes about 76% of the gallery width and is 16:9; three photographs stack on the right (about 23%). The stack takes the large photograph's height exactly, so top and bottom edges align, and one gap size (about 19px at 1440px, scaling down) is used across and down. Plain rectangles: no borders, rounded corners or shadows. Phones: the large photograph (4:3) edge to edge, then a flush row of three small ones. The photographs are interactive; see "Gallery interaction" below.
 - **Information below the gallery.** On desktop, about 65% for the title, the spec line (45 sqm, king size bed, private balcony) and the description, and 35% for the starting price and the single teak Book Your Stay button with the "indicative rates" note. No cards, boxes or vertical dividers. On phones they stack in that order.
 - A discreet "All accommodation" text link above the title returns to the room categories on the homepage (`/#suites`). The header's section links also lead back to the homepage.
 - **Amenities.** Heading and a one-line introduction, then the list in hairline-separated rows: four columns on wide screens, three on tablets, two on phones.
 - Fade-in-up (`data-reveal`) on the same terms as the homepage: once only, off for reduced motion, content visible without JavaScript. The large photograph is not faded in; it settles once on load, as on the homepage.
+
+## Gallery interaction
+
+Built into the shared `RoomGallery` component (`src/components/rooms/RoomGallery.astro`, with `src/scripts/room-gallery.ts`), so every room page has it. No library: about 100 lines of script, inlined by Astro.
+
+- **Behaviour.** Choosing a thumbnail swaps it with the large photograph; the previous large photograph takes the clicked thumbnail's place. Desktop and phones behave the same: one large photograph, the thumbnails beside it or beneath it. The frames never change size, so nothing shifts (measured: identical frame boxes before and after, layout shift 0.0002).
+- **Crossfade.** About 200ms, using the browser's View Transitions API. Where that is unavailable, or the visitor prefers reduced motion, the swap is instant.
+- **How the swap works.** Each photograph is one responsive `<img>` with Astro's full set of widths. Position decides the role (the first item in the list is large), so swapping reorders the list and the layout does the rest. A thumbnail starts with a small `sizes` hint. When a visitor hovers, focuses or touches it, the larger image is fetched in advance and the swap waits for it (up to 0.9s), so the large photograph is never blurry. A photograph that has been large keeps the large hint, so it is not fetched again.
+- **Indication.** A small square "+" mark in each thumbnail's corner (also shown on touch screens, where there is no hover), a pointer cursor and a slightly darker mark on hover.
+- **Keyboard and screen readers.** Each thumbnail is a real button, labelled "Show larger: Bathroom" (the names come from each photograph's `label` in `rooms.ts`), reachable with Tab in visual order and activated with Enter or Space. Focus shows as a white band inside a teak line and stays in the same slot after a swap. A hidden live region announces "Showing: ...". The large photograph carries the full description; thumbnails are named by their buttons, so their images are decorative.
+- **Without JavaScript** the gallery is the static layout; no buttons are shown.
+- **Adding a room** needs nothing for this: give each photograph a `label` in `rooms.ts`. The component uses up to four photographs; with fewer it adapts (the thumbnails share the height; a single photograph fills the width).
 
 ## Not done yet (for the migration)
 

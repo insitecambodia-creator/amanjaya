@@ -1,8 +1,13 @@
 ---
 /**
- * The room's photographs: one large photograph with up to three smaller ones stacked beside it (desktop), or one
- * large photograph followed by a row of small ones (phones). The first photograph is the large one; the next
- * three are the stack, top to bottom. Plain rectangles: no borders, rounded corners or shadows.
+ * The room's photographs: one large photograph with up to three smaller ones beside it (desktop) or beneath it
+ * (phones). The first photograph starts as the large one. With JavaScript, choosing a thumbnail swaps it with the
+ * large photograph (see src/scripts/room-gallery.ts); without it the gallery is simply static.
+ *
+ * Every photograph is one responsive <img> (Astro's image pipeline, full set of widths). The large photograph and
+ * the thumbnails differ only in the `sizes` hint, so a thumbnail fetches a larger image only when it is chosen.
+ * Position decides the role: the first <li> is the large photograph, the rest are thumbnails, so the layout is the
+ * same whichever photograph is where. Plain rectangles: no borders, rounded corners or shadows.
  * A missing file shows a labelled placeholder (nothing is hotlinked; see docs/ROOM-TEMPLATE.md).
  */
 import Photo from '../Photo.astro';
@@ -10,55 +15,67 @@ import type { RoomPhoto } from '../../content/rooms';
 
 interface Props {
   roomName: string;
+  /** The first four are used. */
   photos: RoomPhoto[];
 }
 const { roomName, photos } = Astro.props;
-const [main, ...rest] = photos;
-const side = rest.slice(0, 3);
+const shown = photos.slice(0, 4);
+const thumbs = Math.max(shown.length - 1, 1);
+
+// What the browser is told about the displayed size, per role. The script switches a photograph to the large hint
+// the first time it becomes the large photograph (kept in sync with the layout in the styles below).
+const sizesMain = '(min-width: 90rem) 1030px, (min-width: 48rem) 76vw, 135vw';
+const sizesThumb = '(min-width: 48rem) 23vw, 34vw';
+const widths = [320, 480, 640, 800, 1030, 1280, 1600, 2048];
 ---
 
 {
-  main && (
-    <section class="gallery" aria-label={`Photographs of the ${roomName}`}>
+  shown.length > 0 && (
+    <section
+      class="gallery"
+      aria-label={`Photographs of the ${roomName}`}
+      data-gallery
+      data-sizes-main={sizesMain}
+    >
       <div class="container gallery__frame">
-        <div class:list={['gallery__grid', { 'gallery__grid--single': side.length === 0 }]}>
-          {/* The large photograph is the first thing seen, so it loads at once and is not faded in. */}
-          <div class="gallery__main">
-            <Photo
-              name={main.key}
-              alt={main.alt}
-              position={main.position}
-              ratio="16 / 9"
-              sizes="(min-width: 90rem) 1030px, (min-width: 40rem) 77vw, 135vw"
-              widths={[640, 960, 1280, 1600, 2048]}
-              loading="eager"
-              fetchpriority="high"
-              tone="dark"
-              label={`${roomName}, main photograph`}
-            />
-          </div>
-
-          {side.length > 0 && (
-            <ul class="gallery__side">
-              {side.map((p) => (
-                <li data-reveal>
-                  <Photo
-                    name={p.key}
-                    alt={p.alt}
-                    position={p.position}
-                    sizes="(min-width: 40rem) 23vw, 34vw"
-                    widths={[320, 480, 640, 800]}
-                    label={`${roomName}, photograph`}
-                  />
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+        <ul class="gallery__grid" style={`--thumbs:${thumbs}`}>
+          {shown.map((p, i) => (
+            <li
+              class:list={['gallery__item', { 'gallery__item--settle': i === 0 }]}
+              data-alt={p.alt}
+              data-label={p.label}
+            >
+              <Photo
+                name={p.key}
+                alt={p.alt}
+                position={p.position}
+                sizes={i === 0 ? sizesMain : sizesThumb}
+                widths={widths}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                fetchpriority={i === 0 ? 'high' : undefined}
+                tone="dark"
+                label={`${roomName}, ${p.label.toLowerCase()}`}
+              />
+              {shown.length > 1 && (
+                <button
+                  type="button"
+                  class="gallery__select"
+                  aria-label={`Show larger: ${p.label}`}
+                  hidden={i === 0}
+                />
+              )}
+            </li>
+          ))}
+        </ul>
+        <p class="sr-only" role="status" data-gallery-status></p>
       </div>
     </section>
   )
 }
+
+<script>
+  import '../../scripts/room-gallery';
+</script>
 
 <style>
   /* One gap size, used both across and down. Phones: the photographs run edge to edge. */
@@ -71,33 +88,83 @@ const side = rest.slice(0, 3);
     padding-inline: 0;
   }
 
+  /* Phones: the large photograph across the full width, the thumbnails in a row beneath it. */
   .gallery__grid {
     display: grid;
-    gap: var(--gap);
-  }
-
-  /* Phones: the large photograph is a little taller than 16:9 (the crop is set per photograph in rooms.ts). */
-  .gallery__main :global(.photo) {
-    aspect-ratio: 4 / 3 !important;
-  }
-
-  .gallery__side {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(var(--thumbs), minmax(0, 1fr));
     gap: var(--gap);
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  .gallery__side :global(.photo) {
+  .gallery__item {
+    position: relative;
+    min-width: 0;
+  }
+
+  .gallery__item:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .gallery__item :global(.photo) {
     aspect-ratio: 4 / 3;
   }
 
+  /* The thumbnail control: a transparent button over the photograph. It exists only with JavaScript. */
+  .gallery__select {
+    display: none;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+
+  :global(.js) .gallery__select:not([hidden]) {
+    display: block;
+  }
+
+  /* A small, quiet "enlarge" mark in the corner tells visitors a thumbnail can be chosen (it also shows on touch
+     screens, where there is no hover). A plain square with a plus: no rounding, no shadow. */
+  .gallery__select::after {
+    content: '';
+    position: absolute;
+    right: 0.4rem;
+    bottom: 0.4rem;
+    width: 1.35rem;
+    height: 1.35rem;
+    background:
+      linear-gradient(#fff, #fff) center / 0.62rem 1.5px no-repeat,
+      linear-gradient(#fff, #fff) center / 1.5px 0.62rem no-repeat,
+      rgb(0 0 0 / 0.42);
+    background-color: rgb(0 0 0 / 0.42);
+  }
+
+  .gallery__select:hover::after {
+    background-color: rgb(0 0 0 / 0.68);
+  }
+
+  /* A clear keyboard focus: a white band inside a teak line, so it shows on any photograph. */
+  .gallery__select:focus-visible {
+    outline: 2px solid transparent; /* kept for forced-colours modes */
+    box-shadow:
+      inset 0 0 0 3px #fff,
+      inset 0 0 0 5px var(--teak);
+  }
+
   @media (prefers-reduced-motion: no-preference) {
-    /* The same quiet settle as the homepage photograph. */
-    .gallery__main :global(.photo > img),
-    .gallery__main :global(.photo__placeholder) {
+    .gallery__select::after {
+      transition: background-color 0.2s ease;
+    }
+
+    /* The same quiet settle as the homepage photograph, once, on the first large photograph. The script removes
+       the class when the visitor changes the photograph, so it cannot replay. */
+    .gallery__item--settle :global(.photo > img),
+    .gallery__item--settle :global(.photo__placeholder) {
       animation: gallery-settle 2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
     }
 
@@ -123,34 +190,59 @@ const side = rest.slice(0, 3);
     }
   }
 
-  /* Tablet and up: the large photograph on the left (about 77%), the others stacked on the right (about 23%).
-     The stack takes the large photograph's height exactly, so the top and bottom edges align. */
+  /* Tablet and up: the large photograph on the left (about 77%), the thumbnails stacked on the right (about 23%).
+     The stack takes the large photograph's height exactly, so top and bottom edges align, and nothing changes size
+     when photographs are swapped. */
   @media (min-width: 48rem) {
-    .gallery__grid:not(.gallery__grid--single) {
+    .gallery__grid {
       grid-template-columns: minmax(0, 3.35fr) minmax(0, 1fr);
+      grid-template-rows: repeat(var(--thumbs), minmax(0, 1fr));
     }
 
-    .gallery__main :global(.photo) {
-      aspect-ratio: 16 / 9 !important;
+    .gallery__item:first-child {
+      grid-column: 1;
+      grid-row: 1 / span var(--thumbs);
     }
 
-    .gallery__side {
-      grid-template-columns: none;
-      grid-template-rows: repeat(3, minmax(0, 1fr));
-      min-height: 0;
+    .gallery__item:first-child :global(.photo) {
+      aspect-ratio: 16 / 9;
     }
 
-    .gallery__side > li {
-      position: relative;
+    .gallery__item:not(:first-child) {
       min-height: 0;
     }
 
     /* Filled into the row by the grid, not sized by the photograph, so the stack cannot change the height. */
-    .gallery__side :global(.photo) {
+    .gallery__item:not(:first-child) :global(.photo) {
       position: absolute;
       inset: 0;
       aspect-ratio: auto;
       height: 100%;
     }
+
+    .gallery__select::after {
+      right: 0.5rem;
+      bottom: 0.5rem;
+    }
+  }
+
+  /* With one photograph only, it simply fills the width. */
+  .gallery__grid:has(.gallery__item:only-child) {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+  }
+
+  .gallery__grid :global(.gallery__item:only-child) {
+    grid-row: auto;
+  }
+</style>
+
+<style is:global>
+  /* The ~200ms crossfade when photographs swap (the browser's view transition, only while a swap runs). */
+  html.gallery-swapping::view-transition-group(root),
+  html.gallery-swapping::view-transition-old(root),
+  html.gallery-swapping::view-transition-new(root) {
+    animation-duration: 200ms;
+    animation-timing-function: ease;
   }
 </style>

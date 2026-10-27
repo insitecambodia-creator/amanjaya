@@ -18,6 +18,8 @@ export interface RoomPhoto {
   key: string;
   /** Describes what is in the photograph. Only written for photographs someone has actually looked at. */
   alt: string;
+  /** Two or three words naming what it shows. Used by the gallery for button labels and announcements. */
+  label: string;
   /** Focal point for cropping, as CSS object-position. */
   position?: string;
   /** Where the original lives on the existing site (relative to /wp-content/uploads/), for re-downloading. */
@@ -87,6 +89,7 @@ export const rooms: Room[] = [
     photos: [
       {
         key: 'junior-8',
+        label: 'Bed and headboard',
         alt: 'The bed in the Junior Suite against a headboard wall of warm wood with lattice panels, a square textile panel and brass reading lights, with a sheer curtain, a small sofa with patterned cushions and framed prints to the left',
         // On phones the 4:3 crop keeps the whole headboard and bed and trims the framed prints on the left.
         position: '75% 50%',
@@ -94,18 +97,21 @@ export const rooms: Room[] = [
       },
       {
         key: 'junior-6',
+        label: 'Bathroom',
         alt: 'The bathroom of the Junior Suite: a wooden vanity with a basin and round wall lights, a wood lattice door, and a bathtub with pale tiled walls',
         position: '52% 50%',
         source: '2020/09/Amanjaya-junior6.jpg',
       },
       {
         key: 'suite-junior',
+        label: 'Lounge corner',
         alt: 'A corner of the Junior Suite: two armchairs and a dark wood cabinet with a lattice front around a round marble table with white flowers, framed prints on the wall and the edge of the bed',
         position: '60% 50%',
         source: '2020/09/Amanjaya-junior12.jpg',
       },
       {
         key: 'junior-14',
+        label: 'Work corner',
         alt: 'The work corner of the Junior Suite: a wooden desk with a brass and white lamp and an upholstered chair, large plants, a bench at the foot of the bed, and tall windows with sheer curtains onto the balcony',
         position: '42% 50%',
         source: '2020/09/Amanjaya-junior14.jpg',
