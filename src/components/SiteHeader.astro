@@ -12,6 +12,7 @@ import { site, nav, booking } from '../config/site';
     <nav id="site-nav" class="nav" aria-label="Main">
       <ul>
         {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        <li class="nav__book"><a href={booking.url}>{booking.label}</a></li>
       </ul>
     </nav>
 
@@ -102,10 +103,18 @@ import { site, nav, booking } from '../config/site';
     letter-spacing: 0;
   }
 
-  /* Very narrow phones: the hero carries its own Book Your Stay button, so the header gives the room to the menu. */
+  /* Very narrow phones (under 360px): the bar has no room for the button, so Book Your Stay moves into the menu. */
+  .nav__book {
+    display: none;
+  }
+
   @media (max-width: 22.49rem) {
     .header__actions .btn {
       display: none;
+    }
+
+    .nav__book {
+      display: block;
     }
   }
 

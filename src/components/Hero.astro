@@ -1,7 +1,6 @@
 ---
 import Photo from './Photo.astro';
 import { hero } from '../content/home';
-import { booking, contact } from '../config/site';
 
 // Keep place names and the hotel name together when the text wraps (display only; the content is unchanged).
 const keepTogether = (t: string) => t.replace(/Phnom Penh/g, 'Phnom\u00a0Penh').replace(/Amanjaya Pancam/g, 'Amanjaya\u00a0Pancam');
@@ -14,7 +13,7 @@ const keepTogether = (t: string) => t.replace(/Phnom Penh/g, 'Phnom\u00a0Penh').
         name={hero.photo}
         alt={hero.alt}
         position={hero.position}
-        sizes="100vw"
+        sizes="(min-width: 56rem) 114vw, 100vw"
         widths={[640, 960, 1280, 1600, 1920, 2560]}
         loading="eager"
         fetchpriority="high"
@@ -35,20 +34,11 @@ const keepTogether = (t: string) => t.replace(/Phnom Penh/g, 'Phnom\u00a0Penh').
       </div>
     </div>
   </div>
-
-  <div class="hero__quay">
-    <span class="waterline waterline--draw" aria-hidden="true"></span>
-    <div class="container hero__quay-inner">
-      <p>{contact.crossStreets}</p>
-      <a class="btn" href={booking.url}>{booking.label}</a>
-    </div>
-  </div>
 </section>
 
 <style>
-  /* Full-width, immersive photograph with the text set directly on it, as one block (headline, then a quieter line
-     beneath it, both left-aligned on the same edge). Phones: the block sits at the foot, under the couple's faces.
-     From 56rem: it sits on the right, above the woman and over the facade, so her face stays clear. */
+  /* Full-width, immersive photograph with the text centred in its upper third, above the couple's faces. The
+     headline and the quieter line beneath it are one block, centre-aligned. */
   .hero__stage {
     position: relative;
     isolation: isolate;
@@ -67,7 +57,7 @@ const keepTogether = (t: string) => t.replace(/Phnom Penh/g, 'Phnom\u00a0Penh').
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    /* The one load moment: the photograph settles as the waterline is drawn. */
+    /* The one load moment: the photograph settles. */
     .hero__media :global(.photo > img),
     .hero__media :global(.photo__placeholder) {
       animation: settle 2.2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
@@ -83,17 +73,20 @@ const keepTogether = (t: string) => t.replace(/Phnom Penh/g, 'Phnom\u00a0Penh').
     }
   }
 
+  /* A discreet neutral gradient over the top of the photograph, behind the text. Black only, no colour grade. */
   .hero__shade {
     position: absolute;
     inset: 0;
     z-index: 1;
     pointer-events: none;
     background: linear-gradient(
-      to top,
-      rgb(0 0 0 / 0.68) 0%,
-      rgb(0 0 0 / 0.48) 28%,
-      rgb(0 0 0 / 0.14) 54%,
-      rgb(0 0 0 / 0) 72%
+      to bottom,
+      rgb(0 0 0 / 0.66) 0%,
+      rgb(0 0 0 / 0.58) 20%,
+      rgb(0 0 0 / 0.5) 34%,
+      rgb(0 0 0 / 0.28) 48%,
+      rgb(0 0 0 / 0.08) 60%,
+      rgb(0 0 0 / 0) 70%
     );
   }
 
@@ -102,18 +95,19 @@ const keepTogether = (t: string) => t.replace(/Phnom Penh/g, 'Phnom\u00a0Penh').
     inset: 0;
     z-index: 2;
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
+    justify-content: center;
     pointer-events: none;
   }
 
   .hero__overlay .container {
-    padding-bottom: clamp(1.75rem, 6svh, 2.75rem);
+    padding-top: clamp(1.75rem, 7svh, 4.5rem);
   }
 
   .hero__text {
-    position: relative;
-    isolation: isolate;
-    max-width: 24rem;
+    max-width: 26rem;
+    margin-inline: auto;
+    text-align: center;
   }
 
   .hero__text h1 {
@@ -124,10 +118,11 @@ const keepTogether = (t: string) => t.replace(/Phnom Penh/g, 'Phnom\u00a0Penh').
     line-height: 1.18;
     letter-spacing: -0.01em;
     text-wrap: balance;
+    text-shadow: 0 0 1.25rem rgb(0 0 0 / 0.25);
   }
 
   .hero__text p {
-    margin-top: 0.85rem;
+    margin: 0.85rem auto 0;
     max-width: none;
     color: rgb(255 255 255 / 0.94);
     font-family: var(--font-heading);
@@ -135,32 +130,9 @@ const keepTogether = (t: string) => t.replace(/Phnom Penh/g, 'Phnom\u00a0Penh').
     font-weight: 400;
     line-height: 1.6;
     letter-spacing: 0.005em;
-    text-align: left;
+    text-align: center;
     text-wrap: balance;
-  }
-
-  .hero__quay-inner {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem 2rem;
-    padding-block: 1.1rem 1.25rem;
-  }
-
-  .hero__quay-inner p {
-    color: var(--grey-text);
-    font-size: var(--step--1);
-  }
-
-  @media (max-width: 39.99rem) {
-    .hero__quay-inner p {
-      display: none;
-    }
-
-    .hero__quay-inner .btn {
-      width: 100%;
-    }
+    text-shadow: 0 0 1.25rem rgb(0 0 0 / 0.25);
   }
 
   @media (min-width: 56rem) {
@@ -168,46 +140,12 @@ const keepTogether = (t: string) => t.replace(/Phnom Penh/g, 'Phnom\u00a0Penh').
       height: clamp(34rem, calc(100svh - var(--header-h)), 54rem);
     }
 
+    /* The photograph is enlarged about 14% and anchored to the right edge, which moves the man's raised phone left,
+       out from behind the centred headline, and brings the couple nearer the middle. Both faces stay well inside. */
     .hero__media :global(.photo) {
       --focus: var(--focus-d) !important;
-    }
-  }
-
-  /* Wide screens: the text block moves to the upper right, above the couple and clear of the palace spire.
-     Below this width it stays at the foot of the photograph, where it cannot meet either. */
-  @media (min-width: 72rem) {
-    /* A soft neutral shade rising from the top-right corner, where the text sits: strongest behind the text and
-       gone well before the couple. It is a vignette rather than a patch, so it reads as light falloff. */
-    .hero__shade {
-      background: radial-gradient(
-        ellipse 78% 86% at 100% 0%,
-        rgb(0 0 0 / 0.82) 0%,
-        rgb(0 0 0 / 0.72) 36%,
-        rgb(0 0 0 / 0.46) 64%,
-        rgb(0 0 0 / 0.16) 86%,
-        rgb(0 0 0 / 0) 100%
-      );
-    }
-
-    .hero__overlay {
-      align-items: flex-start;
-    }
-
-    .hero__overlay .container {
-      display: flex;
-      justify-content: flex-end;
-      padding-top: clamp(2rem, 8svh, 5rem);
-      padding-bottom: 0;
-    }
-
-    .hero__text {
-      width: 26rem;
-      max-width: 100%;
-    }
-
-    .hero__text h1,
-    .hero__text p {
-      text-shadow: 0 0 1.25rem rgb(0 0 0 / 0.25);
+      width: 114%;
+      margin-left: -14%;
     }
   }
 </style>
