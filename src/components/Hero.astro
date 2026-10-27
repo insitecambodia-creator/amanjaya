@@ -2,6 +2,9 @@
 import Photo from './Photo.astro';
 import { hero } from '../content/home';
 import { booking, contact } from '../config/site';
+
+// Keep place names and the hotel name together when the text wraps (display only; the content is unchanged).
+const keepTogether = (t: string) => t.replace(/Phnom Penh/g, 'Phnom\u00a0Penh').replace(/Amanjaya Pancam/g, 'Amanjaya\u00a0Pancam');
 ---
 
 <section class="hero" id="top" aria-labelledby="hero-title">
@@ -26,7 +29,8 @@ import { booking, contact } from '../config/site';
     <div class="hero__overlay">
       <div class="container">
         <div class="hero__text">
-          <h1 id="hero-title">{hero.title}</h1>
+          <h1 id="hero-title">{keepTogether(hero.title)}</h1>
+          <p>{keepTogether(hero.support)}</p>
         </div>
       </div>
     </div>
@@ -42,8 +46,9 @@ import { booking, contact } from '../config/site';
 </section>
 
 <style>
-  /* Full-width, immersive photograph with the headline set directly on it. Phones: the headline sits at the foot,
-     under the couple's faces. From 56rem: it sits on the left, over the sky, clear of the woman and the facade. */
+  /* Full-width, immersive photograph with the text set directly on it, as one block (headline, then a quieter line
+     beneath it, both left-aligned on the same edge). Phones: the block sits at the foot, under the couple's faces.
+     From 56rem: it sits on the right, above the woman and over the facade, so her face stays clear. */
   .hero__stage {
     position: relative;
     isolation: isolate;
@@ -52,7 +57,7 @@ import { booking, contact } from '../config/site';
   }
 
   .hero__media {
-    height: clamp(31rem, 84svh, 40rem);
+    height: clamp(32rem, 86svh, 42rem);
     overflow: hidden;
   }
 
@@ -85,10 +90,10 @@ import { booking, contact } from '../config/site';
     pointer-events: none;
     background: linear-gradient(
       to top,
-      rgb(0 0 0 / 0.66) 0%,
-      rgb(0 0 0 / 0.46) 26%,
-      rgb(0 0 0 / 0.14) 52%,
-      rgb(0 0 0 / 0) 70%
+      rgb(0 0 0 / 0.68) 0%,
+      rgb(0 0 0 / 0.48) 28%,
+      rgb(0 0 0 / 0.14) 54%,
+      rgb(0 0 0 / 0) 72%
     );
   }
 
@@ -108,12 +113,30 @@ import { booking, contact } from '../config/site';
   .hero__text {
     position: relative;
     isolation: isolate;
+    max-width: 24rem;
   }
 
   .hero__text h1 {
-    max-width: 11em;
+    max-width: none;
     color: var(--white);
-    font-weight: 300;
+    font-size: clamp(1.75rem, 1.35rem + 1.45vw, 2.5rem);
+    font-weight: 500;
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  .hero__text p {
+    margin-top: 0.85rem;
+    max-width: none;
+    color: rgb(255 255 255 / 0.94);
+    font-family: var(--font-heading);
+    font-size: clamp(0.9375rem, 0.88rem + 0.25vw, 1.0625rem);
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0.005em;
+    text-align: left;
+    text-wrap: balance;
   }
 
   .hero__quay-inner {
@@ -149,39 +172,48 @@ import { booking, contact } from '../config/site';
       --focus: 60% 14% !important;
     }
 
-    /* Left-hand gradient: strongest at the edge, gone before the woman (about 50% across). */
+    /* Right-hand gradient, gone before the woman (about 60% across). */
     .hero__shade {
       background: linear-gradient(
-        90deg,
-        rgb(0 0 0 / 0.3) 0%,
-        rgb(0 0 0 / 0.2) 30%,
-        rgb(0 0 0 / 0.06) 46%,
+        270deg,
+        rgb(0 0 0 / 0.34) 0%,
+        rgb(0 0 0 / 0.22) 30%,
+        rgb(0 0 0 / 0.07) 46%,
         rgb(0 0 0 / 0) 58%
       );
     }
 
     .hero__overlay {
-      align-items: center;
+      align-items: flex-start;
     }
 
-    /* A soft neutral cloud that travels with the headline, so contrast holds wherever the white shirt falls
-       behind it, while the rest of the photograph keeps its own light. */
+    .hero__overlay .container {
+      display: flex;
+      justify-content: flex-end;
+      padding-top: clamp(2.5rem, 13svh, 7rem);
+      padding-bottom: 0;
+    }
+
+    .hero__text {
+      width: 26rem;
+      max-width: 100%;
+    }
+
+    /* A soft neutral shade that travels with the text block, so contrast holds against the pale facade while the
+       rest of the photograph keeps its own light. */
     .hero__text::before {
       content: '';
       position: absolute;
       z-index: -1;
-      inset: -2.5rem -4rem -2.5rem -16rem;
+      inset: -2.5rem -5rem -2.5rem -4rem;
       pointer-events: none;
       background: rgb(0 0 0 / 0.46);
       filter: blur(3.25rem);
     }
 
-    .hero__text h1 {
-      text-shadow: 0 0 1.5rem rgb(0 0 0 / 0.25);
-    }
-
-    .hero__overlay .container {
-      padding-bottom: 0;
+    .hero__text h1,
+    .hero__text p {
+      text-shadow: 0 0 1.25rem rgb(0 0 0 / 0.25);
     }
   }
 </style>

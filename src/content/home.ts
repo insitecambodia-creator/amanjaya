@@ -49,7 +49,8 @@ export const hero = {
   photo: chosenHero.photo,
   position: chosenHero.position,
   alt: chosenHero.alt,
-  title: 'Phnom Penh, at the water’s edge.',
+  title: 'Your Phnom Penh story begins here.',
+  support: 'Discover Phnom Penh from Amanjaya Pancam, your riverside retreat.',
 };
 
 export const welcome = {

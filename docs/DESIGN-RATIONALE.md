@@ -8,15 +8,15 @@ A hairline in bronze with a river-gauge scale hanging from it marks the join bet
 
 ## The hero
 
-A full-width, immersive photograph of the couple in front of the hotel, with the headline set directly on it in white Montserrat Light (46px at most). It replaces the earlier white text panel.
+A full-width, immersive photograph of the couple in front of the hotel, with the text set directly on it in white Montserrat. It replaced the earlier white text panel.
 
-- **No colour treatment.** The only overlay is neutral black: a light gradient from the left edge, plus a soft blurred shade that travels with the headline so the white shirt behind it never washes the text out. No golden, brown or blend-mode filter; the warm light is the photograph's own.
-- **Readability, measured.** Headline against the brightest pixels behind it: 3.7 to 4.1:1 at the worst (desktop widths) and 4.8 to 5.6:1 on tablets and phones, against the 3:1 that WCAG AA asks of large text.
-- **Crops.** Desktop shows the whole scene, with the headline over the sky and tree line on the left; the woman's face and the hotel's balconies stay clear. Phones crop in on the woman and the facade (focal point 66% 30%) and put the headline at the foot, below both faces.
-- **The intro sentence is gone from the hero** (the address still sits under the photograph beside the booking button, and the Welcome text carries the story). A restrained headline reads better over this photograph than a headline plus paragraph, and the paragraph could not be kept readable over the shirt.
-- The waterline still marks the join between photograph and page and draws once on load. The photograph still settles once on load (off under reduced motion).
-- The photograph is served up to 2560px wide, in the usual responsive WebP set; the hero loads eagerly with high priority.
-
+- **Words.** Headline: "Your Phnom Penh story begins here." (Medium 500, up to 40px). Beneath it, in the same block and on the same left edge: "Discover Phnom Penh from Amanjaya Pancam, your riverside retreat." (Regular 400, 15 to 17px, so clearly quieter). Both wrap to two balanced lines at every width, and "Phnom Penh" and "Amanjaya Pancam" never split across lines.
+- **Placement.** Desktop (56rem and up): the block sits on the right, in the upper part of the photograph, over the facade and above the woman's hat, so her face and the couple stay clear. Phones and tablets: the block sits at the foot, below both faces.
+- **No colour treatment.** The only overlay is neutral black: a light gradient from the right edge, plus a soft blurred shade that travels with the text block so the pale facade never washes it out. No golden, brown or blend-mode filter; the warm light is the photograph's own.
+- **Readability, measured** against the brightest pixels behind the text: headline 3.9:1 or better at the worst (typically 5 to 8:1); supporting line 4.5:1 or better at the worst (typically 6 to 10:1). AA asks 3:1 for large text and 4.5:1 for small.
+- **Crops.** Desktop shows the whole scene (focal point 60% 14%). Phones crop in on the woman and the facade (66% 30%).
+- The waterline still marks the join between photograph and page and draws once on load; the photograph settles once on load (off under reduced motion). The photograph is served up to 2560px wide in the usual responsive WebP set, loaded eagerly with high priority.
+- A left-hand version of the same block is in `docs/screenshots/hero-text-left-comparison.jpg`. It crowds the man's head, which is why the right was kept. To move the block, change `justify-content` on `.hero__overlay .container` (and mirror the gradient) in `Hero.astro`.
 
 ## Type
 
