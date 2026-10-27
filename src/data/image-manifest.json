@@ -20,7 +20,22 @@
     {
       "key": "suite-junior",
       "path": "2020/09/Amanjaya-junior12.jpg",
-      "usedFor": "Junior Suite. Currently junior12 (2nd in the room page order); the page leads with junior14."
+      "usedFor": "Junior Suite (homepage mosaic and the second photograph on the Junior Suite page). This is junior12, the second carousel slide on the existing Junior Suite page; the page leads with junior14."
+    },
+    {
+      "key": "junior-14",
+      "path": "2020/09/Amanjaya-junior14.jpg",
+      "usedFor": "Junior Suite page: the lead photograph on the existing Junior Suite page (first carousel slide). 16:9. Not yet downloaded: the live site could not be reached from the build environment, so the page shows a labelled placeholder until `npm run fetch:images` is run."
+    },
+    {
+      "key": "junior-6",
+      "path": "2020/09/Amanjaya-junior6.jpg",
+      "usedFor": "Junior Suite page: third carousel slide on the existing Junior Suite page. 16:9. Not yet downloaded (see junior-14)."
+    },
+    {
+      "key": "junior-8",
+      "path": "2020/09/Amanjaya-junior8.jpg",
+      "usedFor": "Junior Suite page: fourth carousel slide on the existing Junior Suite page. Ratio not stated in the export. Not yet downloaded (see junior-14)."
     },
     {
       "key": "suite-deluxe",

@@ -1,0 +1,145 @@
+---
+/**
+ * Title, key facts, description and booking for one room. Content comes from src/content/rooms.ts, the price
+ * from src/data/pricing.ts and the booking link from src/config/site.ts, so nothing is typed here.
+ */
+import { booking } from '../../config/site';
+import { pricing, startingPrice } from '../../data/pricing';
+import type { Room } from '../../content/rooms';
+
+interface Props {
+  room: Room;
+  /** Where "All accommodation" leads: the room categories on the homepage. */
+  allRoomsHref: string;
+}
+const { room, allRoomsHref } = Astro.props;
+const price = startingPrice(room.id);
+---
+
+<section class="overview section" aria-labelledby="room-title">
+  <div class="container overview__grid">
+    <div class="overview__lead" data-reveal>
+      <a class="overview__back" href={allRoomsHref}>All accommodation</a>
+      <h1 id="room-title">{room.name}</h1>
+
+      <dl class="facts">
+        <div>
+          <dt>Size</dt>
+          <dd>{room.sizeSqm} sqm</dd>
+        </div>
+        <div>
+          <dt>Bed</dt>
+          <dd>{room.bed}</dd>
+        </div>
+        {
+          price && (
+            <div>
+              <dt>{price.label}</dt>
+              <dd>{price.amount}</dd>
+            </div>
+          )
+        }
+      </dl>
+    </div>
+
+    <div class="overview__body" data-reveal>
+      {room.description.map((p) => <p class="copy">{p}</p>)}
+
+      <div class="overview__book">
+        <a class="btn btn--book" href={booking.url}>{booking.label}</a>
+        <p class="overview__note">{pricing.disclaimer}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .overview {
+    padding-top: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .overview__grid {
+    display: grid;
+    gap: clamp(1.75rem, 4vw, 3rem);
+  }
+
+  .overview__back {
+    display: inline-block;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.1rem;
+    border-bottom: 1px solid var(--bronze);
+    color: var(--bronze-deep);
+    font-size: var(--step--1);
+    text-decoration: none;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .overview__back:hover {
+    color: var(--teak);
+    border-color: var(--teak);
+  }
+
+  h1 {
+    color: var(--teak);
+    max-width: none;
+    font-size: var(--step-4);
+  }
+
+  .facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem 2.25rem;
+    margin: 1.75rem 0 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .facts dt {
+    color: var(--grey-text);
+    font-size: var(--step--1);
+  }
+
+  .facts dd {
+    margin: 0.15rem 0 0;
+    color: var(--charcoal);
+    font-family: var(--font-heading);
+    font-size: var(--step-1);
+  }
+
+  .overview__body {
+    display: grid;
+    gap: 1.25rem;
+    align-content: start;
+  }
+
+  .overview__book {
+    display: grid;
+    gap: 0.85rem;
+    justify-items: start;
+    margin-top: 0.75rem;
+  }
+
+  /* The one prominent call to action on the page. */
+  .btn--book {
+    min-height: 3.35rem;
+    padding-inline: 2.4rem;
+    font-size: var(--step-0);
+  }
+
+  .overview__note {
+    max-width: 44ch;
+    color: var(--grey-text);
+    font-size: var(--step--1);
+    line-height: 1.5;
+  }
+
+  @media (min-width: 56rem) {
+    .overview__grid {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      column-gap: clamp(3rem, 7vw, 6rem);
+      align-items: start;
+    }
+  }
+</style>

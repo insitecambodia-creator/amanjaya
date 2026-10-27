@@ -1,0 +1,95 @@
+---
+/**
+ * The room's other photographs. Each tile is a real photograph of the room, or a labelled placeholder if the
+ * original has not been downloaded yet (see docs/ROOM-TEMPLATE.md). Nothing is hotlinked.
+ */
+import Photo from '../Photo.astro';
+import type { RoomPhoto } from '../../content/rooms';
+
+interface Props {
+  roomName: string;
+  photos: RoomPhoto[];
+}
+const { roomName, photos } = Astro.props;
+// Phones: one column. Tablets: two columns (with an odd count the first runs the full width so the rest pair up).
+// Wide screens: one row, up to four across.
+const wideFirst = photos.length % 2 === 1;
+const columns = Math.min(Math.max(photos.length, 1), 4);
+---
+
+{
+  photos.length > 0 && (
+    <section class="room-gallery section" aria-labelledby="room-gallery-title">
+      <div class="container">
+        <h2 id="room-gallery-title" data-reveal>
+          Photographs of the {roomName}
+        </h2>
+        <ul class:list={['room-gallery__grid', { 'room-gallery__grid--wide-first': wideFirst }]} style={`--cols:${columns}`}>
+          {photos.map((p) => (
+            <li data-reveal>
+              <Photo
+                name={p.key}
+                alt={p.alt}
+                position={p.position}
+                ratio="3 / 2"
+                sizes="(min-width: 40rem) 50vw, 100vw"
+                widths={[480, 800, 1200, 1600]}
+                label={`${roomName}, photograph`}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .room-gallery {
+    padding-top: clamp(1rem, 3vw, 2rem);
+  }
+
+  .room-gallery h2 {
+    margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+    padding-top: clamp(2.5rem, 6vw, 4.5rem);
+    border-top: 1px solid var(--line);
+    color: var(--teak);
+  }
+
+  .room-gallery__grid {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 40rem) {
+    .room-gallery__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .room-gallery__grid--wide-first > li:first-child {
+      grid-column: 1 / -1;
+    }
+
+    .room-gallery__grid--wide-first > li:first-child :global(.photo) {
+      aspect-ratio: 16 / 9 !important;
+    }
+  }
+
+  @media (min-width: 72rem) {
+    .room-gallery__grid {
+      grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+    }
+
+    .room-gallery__grid--wide-first > li:first-child {
+      grid-column: auto;
+    }
+
+    .room-gallery__grid--wide-first > li:first-child :global(.photo) {
+      aspect-ratio: 3 / 2 !important;
+    }
+  }
+</style>

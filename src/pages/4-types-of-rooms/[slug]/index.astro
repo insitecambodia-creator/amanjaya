@@ -1,0 +1,37 @@
+---
+/**
+ * The shared accommodation page. One entry in src/content/rooms.ts gives one page, at the same path the existing
+ * WordPress site uses (/4-types-of-rooms/<slug>/), so the URLs carry over.
+ */
+import Base from '../../../layouts/Base.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooter from '../../../components/SiteFooter.astro';
+import RoomHero from '../../../components/rooms/RoomHero.astro';
+import RoomOverview from '../../../components/rooms/RoomOverview.astro';
+import RoomAmenities from '../../../components/rooms/RoomAmenities.astro';
+import RoomGallery from '../../../components/rooms/RoomGallery.astro';
+import { findPhoto } from '../../../lib/photos';
+import { publishedRooms, type Room } from '../../../content/rooms';
+
+export function getStaticPaths() {
+  return publishedRooms.map((room) => ({ params: { slug: room.slug }, props: { room } }));
+}
+
+const { room } = Astro.props as { room: Room };
+
+// The large photograph is the first one that exists, in the order the hotel's page shows them. The rest form the
+// gallery (labelled placeholders until their originals are downloaded). If none exist yet, the first is a placeholder.
+const lead = room.photos.find((p) => findPhoto(p.key)) ?? room.photos[0];
+const gallery = room.photos.filter((p) => p !== lead);
+---
+
+<Base title={room.seoTitle} description={room.seoDescription}>
+  <SiteHeader home="/" />
+  <main id="main">
+    <RoomHero photo={lead} />
+    <RoomOverview room={room} allRoomsHref="/#suites" />
+    <RoomAmenities intro={room.amenitiesIntro} items={room.amenities} />
+    <RoomGallery roomName={room.name} photos={gallery} />
+  </main>
+  <SiteFooter />
+</Base>

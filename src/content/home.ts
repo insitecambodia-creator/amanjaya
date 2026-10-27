@@ -107,7 +107,7 @@ export const suites = {
       summary: '45 sqm with a king bed, a lounge area and a private balcony.',
       description:
         'A king bed and a lounge area. Local rosewood floors, black-out curtains in Cambodian raw silk, and reproductions of artefacts from the neighbouring National Museum.',
-      exploreUrl: 'https://www.amanjaya-suites-phnom-penh.com/4-types-of-rooms/junior-suite-phnom-penh/',
+      exploreUrl: '/4-types-of-rooms/junior-suite-phnom-penh/', // the new page, at the same path as the existing one
       photo: 'suite-junior',
       position: '62% 50%',
       alt: 'A Junior Suite corner with a carved lattice cabinet, an armchair and fresh flowers',

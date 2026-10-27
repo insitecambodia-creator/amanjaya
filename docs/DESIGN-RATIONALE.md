@@ -42,6 +42,10 @@ Contrast (WCAG AA): charcoal on white 12.6, teak on white 9.6, grey on white 6.7
 - Rooftop & Dining: two alternating editorial rows on white. Le Moon has its photograph on the left, Sombok on the right, each photograph 57% of the content width, with a name, a short descriptor, a 20 to 30 word description and a plain "Discover" link. No coloured band, cards or decoration. Phones stack photo above text. Images are temporary; see `docs/DINING-PHOTOS.md`.
 - Motion: one load moment (the photograph settles), a gentle fade-in-up as sections scroll into view (selective, once only, staggered by 100ms; see `docs/MOTION.md`), plus responses to the visitor's own actions. All of it is off under `prefers-reduced-motion`.
 
+## Accommodation pages
+
+The Junior Suite page (`/4-types-of-rooms/junior-suite-phnom-penh/`) is the master template for the four room pages; see `docs/ROOM-TEMPLATE.md`. It keeps the homepage identity: white, Montserrat headings, Helvetica copy, one teak button, hairlines instead of cards. The photograph leads, the facts and one booking button follow, and everything shown comes from the hotel's own page.
+
 ## Performance and access
 
 - Static HTML. JavaScript is the mobile menu button (about 20 lines) and the scroll-reveal observer (about 40 lines, no library); the page works fully without either, and content is never hidden unless the script has run.

@@ -42,6 +42,7 @@ The hotel's own photographs are committed in `src/assets/photos/` (never hotlink
 | Design rationale | `docs/DESIGN-RATIONALE.md` |
 | Scroll-reveal motion (how it works, how to use `data-reveal`) | `docs/MOTION.md`, `src/scripts/reveal.ts` |
 | Photo review, hero options, QA notes | `docs/PHOTO-REVIEW.md` |
+| Accommodation page template and the Junior Suite page (content, sources, pending photos) | `docs/ROOM-TEMPLATE.md`, `src/content/rooms.ts`, `src/components/rooms/` |
 | Room photo shortlist | `docs/ROOM-PHOTO-CANDIDATES.md` |
 | Rooftop & Dining photos: what we have and need | `docs/DINING-PHOTOS.md` |
 | Type scale, original-site typography, font recommendation | `docs/TYPOGRAPHY.md` |
@@ -51,4 +52,4 @@ The booking button reads one setting (`booking.url`). It currently points at the
 
 ## Not yet done
 
-Room pages, other pages, French and other languages, structured data, deployment, and the redirect map. Each waits for review.
+The Deluxe, Executive and Panoramic pages (the Junior Suite page is the template), other pages, French and other languages, structured data, deployment, and the redirect map. Each waits for review.
