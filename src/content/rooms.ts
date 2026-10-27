@@ -79,11 +79,21 @@ export const rooms: Room[] = [
       'Hair dryer',
       'Room service',
     ],
-    // The existing page's carousel shows exactly these four, in this order.
+    // The four photographs on the existing page's carousel (originals under /wp-content/uploads/). The team chose
+    // junior-8 to lead (the bed and the room's wood detailing); on the existing page it is the fourth slide.
+    // Each description says only what the photograph shows.
     photos: [
       {
+        key: 'junior-8',
+        alt: 'The bed in the Junior Suite against a headboard wall of warm wood with lattice panels, a square textile panel and brass reading lights, with a sheer curtain, a small sofa with patterned cushions and framed prints to the left',
+        // On phones the 4:3 crop keeps the whole headboard and bed and trims the framed prints on the left.
+        position: '75% 50%',
+        source: '2020/09/Amanjaya-junior8.jpg',
+      },
+      {
         key: 'junior-14',
-        alt: 'The Junior Suite at Amanjaya Pancam',
+        alt: 'The work corner of the Junior Suite: a wooden desk with a brass and white lamp and an upholstered chair, large plants, a bench at the foot of the bed, and tall windows with sheer curtains onto the balcony',
+        position: '42% 50%',
         source: '2020/09/Amanjaya-junior14.jpg',
       },
       {
@@ -94,13 +104,9 @@ export const rooms: Room[] = [
       },
       {
         key: 'junior-6',
-        alt: 'The Junior Suite at Amanjaya Pancam',
+        alt: 'The bathroom of the Junior Suite: a wooden vanity with a basin and round wall lights, a wood lattice door, and a bathtub with pale tiled walls',
+        position: '52% 50%',
         source: '2020/09/Amanjaya-junior6.jpg',
-      },
-      {
-        key: 'junior-8',
-        alt: 'The Junior Suite at Amanjaya Pancam',
-        source: '2020/09/Amanjaya-junior8.jpg',
       },
     ],
   },

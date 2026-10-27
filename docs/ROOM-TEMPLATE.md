@@ -29,22 +29,24 @@ All from the existing page, `Junior Suite - Amanjaya Suites.html` in the reposit
 
 Nothing else is stated: no occupancy, view, bathroom, floor or bed-size detail was added because the export does not give them.
 
-## Photographs: what is in place and what is pending
+## Photographs
 
-The existing page's carousel shows exactly four photographs, in this order. The build environment cannot reach the live site, so only one could be downloaded; the others appear as clearly labelled placeholders until fetched.
+All four photographs from the existing page's carousel are in `src/assets/photos/` (supplied by the hotel team), so the page has no placeholders. The order on the new page is the team's choice; on the existing page the order is junior14, junior12, junior6, junior8.
 
-| Order | Key | Original (under `https://www.amanjaya-suites-phnom-penh.com/wp-content/uploads/`) | State |
-|---|---|---|---|
-| 1 | `junior-14` | `2020/09/Amanjaya-junior14.jpg` | **Pending** (the lead photograph on the existing page; 16:9) |
-| 2 | `suite-junior` | `2020/09/Amanjaya-junior12.jpg` | In the repository; leads the page until `junior-14` arrives |
-| 3 | `junior-6` | `2020/09/Amanjaya-junior6.jpg` | **Pending** (16:9) |
-| 4 | `junior-8` | `2020/09/Amanjaya-junior8.jpg` | **Pending** (ratio not stated in the export) |
+| Page position | Key | Original (under `https://www.amanjaya-suites-phnom-penh.com/wp-content/uploads/`) | Shows | Crop |
+|---|---|---|---|---|
+| Main photograph | `junior-8` | `2020/09/Amanjaya-junior8.jpg` | The bed against a warm wood headboard wall with lattice panels, a square textile panel, brass reading lights; sheer curtain, small sofa, framed prints | 16:9 as is; on phones 4:3 at 75% 50%, which keeps the headboard and bed and trims the prints |
+| Gallery 1 | `junior-14` | `2020/09/Amanjaya-junior14.jpg` | The work corner: desk, lamp, chair, plants, bench, tall windows onto the balcony | 3:2 at 42% 50% |
+| Gallery 2 | `suite-junior` | `2020/09/Amanjaya-junior12.jpg` | A lounge corner: armchairs, lattice-fronted cabinet, marble table with flowers, framed prints | 3:2 at 60% 50% |
+| Gallery 3 | `junior-6` | `2020/09/Amanjaya-junior6.jpg` | The bathroom: wooden vanity, round wall lights, wood lattice door, bathtub | 3:2 at 52% 50% |
 
-To fill them in, on a machine that can reach the existing site run `npm run fetch:images` (downloads the three missing files into `src/assets/photos/`), or drop files with those names into that folder. The large photograph is always the first one that exists, so `junior-14` takes over automatically and `suite-junior` moves into the gallery. Then replace the generic alt text for `junior-14`, `junior-6` and `junior-8` in `rooms.ts` with a description of what each shows (they were not viewed, so they were not described).
+The large photograph is the first entry in the room's `photos` list whose file exists; the rest form the gallery. To change the lead, reorder the list in `rooms.ts`. If a file is missing, its tile shows a labelled placeholder (nothing is hotlinked); run `npm run fetch:images` where the existing site is reachable to download any that are registered in the manifest.
+
+The descriptions (alt text) say only what each photograph shows. The bathroom photograph shows a bathtub, but the amenities list is taken only from the hotel's amenities block, so no bathroom features are listed or claimed.
 
 More Junior photographs exist on the existing site (`junior1`, `junior2`, `junior5`, `junior13`; see `candidates.rooms.junior` in the manifest) but are not on the Junior page's own carousel, so they are not used.
 
-Photograph quality: `junior12` is 1368px wide, so the large photograph sits within the page margins rather than running edge to edge, to avoid enlarging it.
+Photograph quality: the three photographs are 1325 to 1368px wide, so the large photograph sits within the page margins (at most 1344px) rather than running edge to edge, to avoid enlarging it.
 
 ## Design
 

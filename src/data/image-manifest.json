@@ -25,17 +25,17 @@
     {
       "key": "junior-14",
       "path": "2020/09/Amanjaya-junior14.jpg",
-      "usedFor": "Junior Suite page: the lead photograph on the existing Junior Suite page (first carousel slide). 16:9. Not yet downloaded: the live site could not be reached from the build environment, so the page shows a labelled placeholder until `npm run fetch:images` is run."
+      "usedFor": "Junior Suite page, gallery: the work corner (desk, lamp, windows onto the balcony). 16:9, 1366x769. First carousel slide on the existing page. Supplied by the hotel team (uploaded to the repository)."
     },
     {
       "key": "junior-6",
       "path": "2020/09/Amanjaya-junior6.jpg",
-      "usedFor": "Junior Suite page: third carousel slide on the existing Junior Suite page. 16:9. Not yet downloaded (see junior-14)."
+      "usedFor": "Junior Suite page, gallery: the bathroom (vanity, wood lattice door, bathtub). 16:9, 1368x770. Third carousel slide on the existing page. Supplied by the hotel team (uploaded to the repository)."
     },
     {
       "key": "junior-8",
       "path": "2020/09/Amanjaya-junior8.jpg",
-      "usedFor": "Junior Suite page: fourth carousel slide on the existing Junior Suite page. Ratio not stated in the export. Not yet downloaded (see junior-14)."
+      "usedFor": "Junior Suite page: the main photograph (the bed against a wood headboard wall with lattice panels). 16:9, 1325x745. Fourth carousel slide on the existing page; chosen by the team to lead. Supplied by the hotel team (uploaded to the repository)."
     },
     {
       "key": "suite-deluxe",
