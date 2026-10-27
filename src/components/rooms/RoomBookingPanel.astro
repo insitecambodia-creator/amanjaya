@@ -1,0 +1,70 @@
+---
+/**
+ * Starting price and the booking button for one room. The price comes from src/data/pricing.ts and the link from
+ * src/config/site.ts, so nothing is typed here. No card, border or shadow: just type and one button.
+ */
+import { booking } from '../../config/site';
+import { pricing, startingPrice } from '../../data/pricing';
+import type { Room } from '../../content/rooms';
+
+interface Props {
+  room: Room;
+}
+const { room } = Astro.props;
+const price = startingPrice(room.id);
+---
+
+<aside class="booking" aria-label={`Price and booking for the ${room.name}`}>
+  {
+    price && (
+      <p class="booking__price">
+        <span class="booking__from">{price.label}</span>
+        <span class="booking__amount">{price.amount}</span>
+      </p>
+    )
+  }
+  <a class="btn btn--book" href={booking.url}>{booking.label}</a>
+  <p class="booking__note">{pricing.disclaimer}</p>
+</aside>
+
+<style>
+  .booking {
+    display: grid;
+    gap: 1rem;
+    justify-items: start;
+    align-content: start;
+  }
+
+  .booking__price {
+    display: grid;
+    gap: 0.1rem;
+    max-width: none;
+  }
+
+  .booking__from {
+    color: var(--grey-text);
+    font-size: var(--step--1);
+  }
+
+  .booking__amount {
+    color: var(--charcoal);
+    font-family: var(--font-heading);
+    font-size: var(--step-3);
+    line-height: 1.1;
+  }
+
+  /* The one prominent call to action on the page, in the established teak. */
+  .btn--book {
+    width: 100%;
+    max-width: 22rem;
+    min-height: 3.35rem;
+    font-size: var(--step-0);
+  }
+
+  .booking__note {
+    max-width: 34ch;
+    color: var(--grey-text);
+    font-size: var(--step--1);
+    line-height: 1.5;
+  }
+</style>

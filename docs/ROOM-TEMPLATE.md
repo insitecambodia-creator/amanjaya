@@ -8,7 +8,7 @@ The Junior Suite is the master template. The other three suites reuse it by addi
 |---|---|
 | Route (one page per published room) | `src/pages/4-types-of-rooms/[slug]/index.astro` |
 | Structured content (facts, copy, amenities, photographs) | `src/content/rooms.ts` |
-| Components | `src/components/rooms/`: `RoomHero`, `RoomOverview`, `RoomAmenities`, `RoomGallery` |
+| Components | `src/components/rooms/`: `RoomGallery`, `RoomOverview` (with `RoomBookingPanel`), `RoomAmenities` |
 | Price (one place to edit) | `src/data/pricing.ts`, keyed by the room's `id` |
 | Booking link (the external boundary) | `booking` in `src/config/site.ts` |
 | Photographs | `src/assets/photos/<key>.*`, registered in `src/data/image-manifest.json` |
@@ -31,30 +31,31 @@ Nothing else is stated: no occupancy, view, bathroom, floor or bed-size detail w
 
 ## Photographs
 
-All four photographs from the existing page's carousel are in `src/assets/photos/` (supplied by the hotel team), so the page has no placeholders. The order on the new page is the team's choice; on the existing page the order is junior14, junior12, junior6, junior8.
+All four photographs from the existing page's carousel are in `src/assets/photos/` (supplied by the hotel team), so the page has no placeholders. The order follows the approved gallery mockup (the first is the large photograph, the next three stack beside it, top to bottom); on the existing page the order is junior14, junior12, junior6, junior8.
 
-| Page position | Key | Original (under `https://www.amanjaya-suites-phnom-penh.com/wp-content/uploads/`) | Shows | Crop |
+| Position | Key | Original (under `https://www.amanjaya-suites-phnom-penh.com/wp-content/uploads/`) | Shows | Crop |
 |---|---|---|---|---|
-| Main photograph | `junior-8` | `2020/09/Amanjaya-junior8.jpg` | The bed against a warm wood headboard wall with lattice panels, a square textile panel, brass reading lights; sheer curtain, small sofa, framed prints | 16:9 as is; on phones 4:3 at 75% 50%, which keeps the headboard and bed and trims the prints |
-| Gallery 1 | `junior-14` | `2020/09/Amanjaya-junior14.jpg` | The work corner: desk, lamp, chair, plants, bench, tall windows onto the balcony | 3:2 at 42% 50% |
-| Gallery 2 | `suite-junior` | `2020/09/Amanjaya-junior12.jpg` | A lounge corner: armchairs, lattice-fronted cabinet, marble table with flowers, framed prints | 3:2 at 60% 50% |
-| Gallery 3 | `junior-6` | `2020/09/Amanjaya-junior6.jpg` | The bathroom: wooden vanity, round wall lights, wood lattice door, bathtub | 3:2 at 52% 50% |
+| Large photograph | `junior-8` | `2020/09/Amanjaya-junior8.jpg` | The bed against a warm wood headboard wall with lattice panels, a square textile panel, brass reading lights; sheer curtain, small sofa, framed prints | 16:9 as is; on phones 4:3 at 75% 50%, which keeps the headboard and bed and trims the prints |
+| Stack, top | `junior-6` | `2020/09/Amanjaya-junior6.jpg` | The bathroom: wooden vanity, round wall lights, wood lattice door, bathtub | Fills its slot (about 1.7:1), 52% 50% |
+| Stack, middle | `suite-junior` | `2020/09/Amanjaya-junior12.jpg` | A lounge corner: armchairs, lattice-fronted cabinet, marble table with flowers, framed prints | 60% 50% |
+| Stack, bottom | `junior-14` | `2020/09/Amanjaya-junior14.jpg` | The work corner: desk, lamp, chair, plants, bench, tall windows onto the balcony | 42% 50% |
 
-The large photograph is the first entry in the room's `photos` list whose file exists; the rest form the gallery. To change the lead, reorder the list in `rooms.ts`. If a file is missing, its tile shows a labelled placeholder (nothing is hotlinked); run `npm run fetch:images` where the existing site is reachable to download any that are registered in the manifest.
+The gallery uses the first four entries of a room's `photos` list; reorder the list in `rooms.ts` to change which is large. If a file is missing, its tile shows a labelled placeholder (nothing is hotlinked); run `npm run fetch:images` where the existing site is reachable to download any that are registered in the manifest.
 
 The descriptions (alt text) say only what each photograph shows. The bathroom photograph shows a bathtub, but the amenities list is taken only from the hotel's amenities block, so no bathroom features are listed or claimed.
 
 More Junior photographs exist on the existing site (`junior1`, `junior2`, `junior5`, `junior13`; see `candidates.rooms.junior` in the manifest) but are not on the Junior page's own carousel, so they are not used.
 
-Photograph quality: the three photographs are 1325 to 1368px wide, so the large photograph sits within the page margins (at most 1344px) rather than running edge to edge, to avoid enlarging it.
+Photograph quality: the photographs are 1325 to 1368px wide, and the gallery stays within the page margins (the large photograph is about 934px wide on a 1440px screen and 1030px at most), so none is enlarged.
 
 ## Design
 
 - White page; Montserrat headings; Helvetica body copy (the `.copy` style, 17.6px, line height 1.7, 0.4px tracking).
-- A large 16:9 photograph (4:3 on phones) within the page margins; then the title, facts (size, bed, starting price) and a hairline; the description beside it; and one prominent Book Your Stay button with the same "indicative rates" note as the homepage.
+- **Gallery (reproduces the approved mockup).** The large photograph on the left takes about 76% of the gallery width and is 16:9; three photographs stack on the right (about 23%). The stack takes the large photograph's height exactly, so top and bottom edges align, and one gap size (about 19px at 1440px, scaling down) is used across and down. Plain rectangles: no borders, rounded corners or shadows. Phones: the large photograph (4:3) edge to edge, then a flush row of three small ones. The photographs are not clickable (no JavaScript is needed).
+- **Information below the gallery.** On desktop, about 65% for the title, the spec line (45 sqm, king size bed, private balcony) and the description, and 35% for the starting price and the single teak Book Your Stay button with the "indicative rates" note. No cards, boxes or vertical dividers. On phones they stack in that order.
 - A discreet "All accommodation" text link above the title returns to the room categories on the homepage (`/#suites`). The header's section links also lead back to the homepage.
-- Amenities as a hairline-separated list; photographs in a row of three on wide screens, two on tablets, one on phones.
-- Fade-in-up (`data-reveal`) on the same terms as the homepage: once only, off for reduced motion, content visible without JavaScript. The large photograph settles once on load, as on the homepage.
+- **Amenities.** Heading and a one-line introduction, then the list in hairline-separated rows: four columns on wide screens, three on tablets, two on phones.
+- Fade-in-up (`data-reveal`) on the same terms as the homepage: once only, off for reduced motion, content visible without JavaScript. The large photograph is not faded in; it settles once on load, as on the homepage.
 
 ## Not done yet (for the migration)
 

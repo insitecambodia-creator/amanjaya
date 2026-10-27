@@ -36,8 +36,8 @@ export interface Room {
   seoDescription: string;
   /** Room size in square metres, as published. */
   sizeSqm: number;
-  /** Bed, as published. */
-  bed: string;
+  /** The short spec line under the title, as published (size, bed, balcony). */
+  features: string[];
   /** Description, one string per paragraph. */
   description: string[];
   amenitiesIntro: string;
@@ -56,7 +56,8 @@ export const rooms: Room[] = [
     seoDescription:
       'The Junior Suite at Amanjaya Pancam in Phnom Penh: 45 sqm of living space with a king size bed, a lounge area, a private balcony and a floor fitted from local rosewood.',
     sizeSqm: 45,
-    bed: 'King size bed',
+    // Size and bed from the description; the balcony from the amenities block of the existing page.
+    features: ['45 sqm', 'King size bed', 'Private balcony'],
     // Source: "With 45 sqm of living space..." on the existing Junior Suite page. Lightly edited for grammar
     // ("they are expansive and relaying" read as a slip) and "famous" dropped; the facts are unchanged.
     description: [
@@ -79,9 +80,10 @@ export const rooms: Room[] = [
       'Hair dryer',
       'Room service',
     ],
-    // The four photographs on the existing page's carousel (originals under /wp-content/uploads/). The team chose
-    // junior-8 to lead (the bed and the room's wood detailing); on the existing page it is the fourth slide.
-    // Each description says only what the photograph shows.
+    // The four photographs on the existing page's carousel (originals under /wp-content/uploads/), in the order of
+    // the approved gallery mockup: the first is the large photograph, the next three stack beside it, top to bottom.
+    // (On the existing page the order is junior14, junior12, junior6, junior8.) Each description says only what
+    // the photograph shows. Only the first four are used.
     photos: [
       {
         key: 'junior-8',
@@ -91,10 +93,10 @@ export const rooms: Room[] = [
         source: '2020/09/Amanjaya-junior8.jpg',
       },
       {
-        key: 'junior-14',
-        alt: 'The work corner of the Junior Suite: a wooden desk with a brass and white lamp and an upholstered chair, large plants, a bench at the foot of the bed, and tall windows with sheer curtains onto the balcony',
-        position: '42% 50%',
-        source: '2020/09/Amanjaya-junior14.jpg',
+        key: 'junior-6',
+        alt: 'The bathroom of the Junior Suite: a wooden vanity with a basin and round wall lights, a wood lattice door, and a bathtub with pale tiled walls',
+        position: '52% 50%',
+        source: '2020/09/Amanjaya-junior6.jpg',
       },
       {
         key: 'suite-junior',
@@ -103,10 +105,10 @@ export const rooms: Room[] = [
         source: '2020/09/Amanjaya-junior12.jpg',
       },
       {
-        key: 'junior-6',
-        alt: 'The bathroom of the Junior Suite: a wooden vanity with a basin and round wall lights, a wood lattice door, and a bathtub with pale tiled walls',
-        position: '52% 50%',
-        source: '2020/09/Amanjaya-junior6.jpg',
+        key: 'junior-14',
+        alt: 'The work corner of the Junior Suite: a wooden desk with a brass and white lamp and an upholstered chair, large plants, a bench at the foot of the bed, and tall windows with sheer curtains onto the balcony',
+        position: '42% 50%',
+        source: '2020/09/Amanjaya-junior14.jpg',
       },
     ],
   },

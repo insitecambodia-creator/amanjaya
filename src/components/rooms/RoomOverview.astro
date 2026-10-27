@@ -1,10 +1,9 @@
 ---
 /**
- * Title, key facts, description and booking for one room. Content comes from src/content/rooms.ts, the price
- * from src/data/pricing.ts and the booking link from src/config/site.ts, so nothing is typed here.
+ * Title, spec line and description (about 65% of the width on desktop) beside the price and booking (about 35%).
+ * On phones they stack in reading order. Content comes from src/content/rooms.ts.
  */
-import { booking } from '../../config/site';
-import { pricing, startingPrice } from '../../data/pricing';
+import RoomBookingPanel from './RoomBookingPanel.astro';
 import type { Room } from '../../content/rooms';
 
 interface Props {
@@ -13,54 +12,37 @@ interface Props {
   allRoomsHref: string;
 }
 const { room, allRoomsHref } = Astro.props;
-const price = startingPrice(room.id);
 ---
 
 <section class="overview section" aria-labelledby="room-title">
   <div class="container overview__grid">
-    <div class="overview__lead" data-reveal>
+    <div class="overview__main" data-reveal>
       <a class="overview__back" href={allRoomsHref}>All accommodation</a>
       <h1 id="room-title">{room.name}</h1>
 
-      <dl class="facts">
-        <div>
-          <dt>Size</dt>
-          <dd>{room.sizeSqm} sqm</dd>
-        </div>
-        <div>
-          <dt>Bed</dt>
-          <dd>{room.bed}</dd>
-        </div>
-        {
-          price && (
-            <div>
-              <dt>{price.label}</dt>
-              <dd>{price.amount}</dd>
-            </div>
-          )
-        }
-      </dl>
+      <ul class="features">
+        {room.features.map((f) => <li>{f}</li>)}
+      </ul>
+
+      <div class="overview__text">
+        {room.description.map((p) => <p class="copy">{p}</p>)}
+      </div>
     </div>
 
-    <div class="overview__body" data-reveal>
-      {room.description.map((p) => <p class="copy">{p}</p>)}
-
-      <div class="overview__book">
-        <a class="btn btn--book" href={booking.url}>{booking.label}</a>
-        <p class="overview__note">{pricing.disclaimer}</p>
-      </div>
+    <div class="overview__side" data-reveal>
+      <RoomBookingPanel room={room} />
     </div>
   </div>
 </section>
 
 <style>
   .overview {
-    padding-top: clamp(1.5rem, 4vw, 3rem);
+    padding-block: clamp(1.25rem, 3vw, 2.5rem) clamp(2rem, 5vw, 3.5rem);
   }
 
   .overview__grid {
     display: grid;
-    gap: clamp(1.75rem, 4vw, 3rem);
+    gap: clamp(1.75rem, 4vw, 2.5rem);
   }
 
   .overview__back {
@@ -87,59 +69,42 @@ const price = startingPrice(room.id);
     font-size: var(--step-4);
   }
 
-  .facts {
+  /* The spec line: plain type with space between the items, no dividers. */
+  .features {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.25rem 2.25rem;
-    margin: 1.75rem 0 0;
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--line);
-  }
-
-  .facts dt {
-    color: var(--grey-text);
-    font-size: var(--step--1);
-  }
-
-  .facts dd {
-    margin: 0.15rem 0 0;
+    gap: 0.35rem 1.25rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
     color: var(--charcoal);
     font-family: var(--font-heading);
     font-size: var(--step-1);
   }
 
-  .overview__body {
+  .overview__text {
     display: grid;
     gap: 1.25rem;
-    align-content: start;
+    margin-top: clamp(1.5rem, 3vw, 2.25rem);
   }
 
-  .overview__book {
-    display: grid;
-    gap: 0.85rem;
-    justify-items: start;
-    margin-top: 0.75rem;
+  @media (min-width: 40rem) {
+    .features {
+      column-gap: 2rem;
+    }
   }
 
-  /* The one prominent call to action on the page. */
-  .btn--book {
-    min-height: 3.35rem;
-    padding-inline: 2.4rem;
-    font-size: var(--step-0);
-  }
-
-  .overview__note {
-    max-width: 44ch;
-    color: var(--grey-text);
-    font-size: var(--step--1);
-    line-height: 1.5;
-  }
-
+  /* Desktop: about 65% for the description and features, 35% for the price and booking. */
   @media (min-width: 56rem) {
     .overview__grid {
-      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      grid-template-columns: minmax(0, 13fr) minmax(0, 7fr);
       column-gap: clamp(3rem, 7vw, 6rem);
       align-items: start;
+    }
+
+    /* Level with the title's first line rather than the "All accommodation" link above it. */
+    .overview__side {
+      padding-top: 3.1rem;
     }
   }
 </style>

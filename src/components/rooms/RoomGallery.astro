@@ -1,7 +1,9 @@
 ---
 /**
- * The room's other photographs. Each tile is a real photograph of the room, or a labelled placeholder if the
- * original has not been downloaded yet (see docs/ROOM-TEMPLATE.md). Nothing is hotlinked.
+ * The room's photographs: one large photograph with up to three smaller ones stacked beside it (desktop), or one
+ * large photograph followed by a row of small ones (phones). The first photograph is the large one; the next
+ * three are the stack, top to bottom. Plain rectangles: no borders, rounded corners or shadows.
+ * A missing file shows a labelled placeholder (nothing is hotlinked; see docs/ROOM-TEMPLATE.md).
  */
 import Photo from '../Photo.astro';
 import type { RoomPhoto } from '../../content/rooms';
@@ -11,85 +13,144 @@ interface Props {
   photos: RoomPhoto[];
 }
 const { roomName, photos } = Astro.props;
-// Phones: one column. Tablets: two columns (with an odd count the first runs the full width so the rest pair up).
-// Wide screens: one row, up to four across.
-const wideFirst = photos.length % 2 === 1;
-const columns = Math.min(Math.max(photos.length, 1), 4);
+const [main, ...rest] = photos;
+const side = rest.slice(0, 3);
 ---
 
 {
-  photos.length > 0 && (
-    <section class="room-gallery section" aria-labelledby="room-gallery-title">
-      <div class="container">
-        <h2 id="room-gallery-title" data-reveal>
-          Photographs of the {roomName}
-        </h2>
-        <ul class:list={['room-gallery__grid', { 'room-gallery__grid--wide-first': wideFirst }]} style={`--cols:${columns}`}>
-          {photos.map((p) => (
-            <li data-reveal>
-              <Photo
-                name={p.key}
-                alt={p.alt}
-                position={p.position}
-                ratio="3 / 2"
-                sizes="(min-width: 40rem) 50vw, 100vw"
-                widths={[480, 800, 1200, 1600]}
-                label={`${roomName}, photograph`}
-              />
-            </li>
-          ))}
-        </ul>
+  main && (
+    <section class="gallery" aria-label={`Photographs of the ${roomName}`}>
+      <div class="container gallery__frame">
+        <div class:list={['gallery__grid', { 'gallery__grid--single': side.length === 0 }]}>
+          {/* The large photograph is the first thing seen, so it loads at once and is not faded in. */}
+          <div class="gallery__main">
+            <Photo
+              name={main.key}
+              alt={main.alt}
+              position={main.position}
+              ratio="16 / 9"
+              sizes="(min-width: 90rem) 1030px, (min-width: 40rem) 77vw, 135vw"
+              widths={[640, 960, 1280, 1600, 2048]}
+              loading="eager"
+              fetchpriority="high"
+              tone="dark"
+              label={`${roomName}, main photograph`}
+            />
+          </div>
+
+          {side.length > 0 && (
+            <ul class="gallery__side">
+              {side.map((p) => (
+                <li data-reveal>
+                  <Photo
+                    name={p.key}
+                    alt={p.alt}
+                    position={p.position}
+                    sizes="(min-width: 40rem) 23vw, 34vw"
+                    widths={[320, 480, 640, 800]}
+                    label={`${roomName}, photograph`}
+                  />
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </div>
     </section>
   )
 }
 
 <style>
-  .room-gallery {
-    padding-top: clamp(1rem, 3vw, 2rem);
+  /* One gap size, used both across and down. Phones: the photographs run edge to edge. */
+  .gallery {
+    --gap: clamp(0.4rem, 1.4vw, 1.2rem);
+    padding-bottom: clamp(1.5rem, 4vw, 3rem);
   }
 
-  .room-gallery h2 {
-    margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
-    padding-top: clamp(2.5rem, 6vw, 4.5rem);
-    border-top: 1px solid var(--line);
-    color: var(--teak);
+  .gallery__frame {
+    padding-inline: 0;
   }
 
-  .room-gallery__grid {
+  .gallery__grid {
     display: grid;
-    gap: 0.75rem;
+    gap: var(--gap);
+  }
+
+  /* Phones: the large photograph is a little taller than 16:9 (the crop is set per photograph in rooms.ts). */
+  .gallery__main :global(.photo) {
+    aspect-ratio: 4 / 3 !important;
+  }
+
+  .gallery__side {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--gap);
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  @media (min-width: 40rem) {
-    .room-gallery__grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
+  .gallery__side :global(.photo) {
+    aspect-ratio: 4 / 3;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* The same quiet settle as the homepage photograph. */
+    .gallery__main :global(.photo > img),
+    .gallery__main :global(.photo__placeholder) {
+      animation: gallery-settle 2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
     }
 
-    .room-gallery__grid--wide-first > li:first-child {
-      grid-column: 1 / -1;
-    }
-
-    .room-gallery__grid--wide-first > li:first-child :global(.photo) {
-      aspect-ratio: 16 / 9 !important;
+    @keyframes gallery-settle {
+      from {
+        transform: scale(1.04);
+      }
+      to {
+        transform: scale(1);
+      }
     }
   }
 
-  @media (min-width: 72rem) {
-    .room-gallery__grid {
-      grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  /* From 40rem the gallery sits within the page margins, which also keeps the photographs from being enlarged
+     past their own width on wide screens. */
+  @media (min-width: 40rem) {
+    .gallery {
+      padding-top: clamp(0.75rem, 1.4vw, 1.25rem);
     }
 
-    .room-gallery__grid--wide-first > li:first-child {
-      grid-column: auto;
+    .gallery__frame {
+      padding-inline: var(--gutter);
+    }
+  }
+
+  /* Tablet and up: the large photograph on the left (about 77%), the others stacked on the right (about 23%).
+     The stack takes the large photograph's height exactly, so the top and bottom edges align. */
+  @media (min-width: 48rem) {
+    .gallery__grid:not(.gallery__grid--single) {
+      grid-template-columns: minmax(0, 3.35fr) minmax(0, 1fr);
     }
 
-    .room-gallery__grid--wide-first > li:first-child :global(.photo) {
-      aspect-ratio: 3 / 2 !important;
+    .gallery__main :global(.photo) {
+      aspect-ratio: 16 / 9 !important;
+    }
+
+    .gallery__side {
+      grid-template-columns: none;
+      grid-template-rows: repeat(3, minmax(0, 1fr));
+      min-height: 0;
+    }
+
+    .gallery__side > li {
+      position: relative;
+      min-height: 0;
+    }
+
+    /* Filled into the row by the grid, not sized by the photograph, so the stack cannot change the height. */
+    .gallery__side :global(.photo) {
+      position: absolute;
+      inset: 0;
+      aspect-ratio: auto;
+      height: 100%;
     }
   }
 </style>

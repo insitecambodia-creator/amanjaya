@@ -24,20 +24,20 @@ const { intro, items } = Astro.props;
 
 <style>
   .amenities {
-    padding-top: clamp(1rem, 3vw, 2rem);
+    padding-block: 0 clamp(3rem, 7vw, 5rem);
   }
 
   .amenities__grid {
     display: grid;
-    gap: clamp(1.5rem, 4vw, 2.5rem);
-    padding-top: clamp(2.5rem, 6vw, 4.5rem);
+    gap: clamp(1.25rem, 3vw, 2rem);
+    padding-top: clamp(2.5rem, 6vw, 4rem);
     border-top: 1px solid var(--line);
   }
 
   .amenities__intro {
     display: grid;
     gap: 1rem;
-    align-content: start;
+    max-width: 52ch;
   }
 
   .amenities__intro h2 {
@@ -45,10 +45,10 @@ const { intro, items } = Astro.props;
   }
 
   .amenities__intro p {
-    max-width: 38ch;
     color: var(--grey-text);
   }
 
+  /* Hairlines between the rows only: no boxes, no vertical rules. */
   .amenities__list {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -71,10 +71,9 @@ const { intro, items } = Astro.props;
     }
   }
 
-  @media (min-width: 56rem) {
-    .amenities__grid {
-      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-      column-gap: clamp(3rem, 7vw, 6rem);
+  @media (min-width: 72rem) {
+    .amenities__list {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
 </style>
