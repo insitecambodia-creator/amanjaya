@@ -150,20 +150,38 @@ export const rooms: Room[] = [
       'Hair dryer',
       'Room service',
     ],
-    // The existing page's carousel runs deluxe3, deluxe5, deluxe4, deluxe1, deluxe2 (deluxe3 is its lead). Only
-    // deluxe1 is in the repository so far (and only 674px wide), so it leads here; the other three are placeholders
-    // until the hotel supplies them (file names in docs/ROOM-TEMPLATE.md). Reorder this list to change which is large.
+    // Hotel photographs, all supplied by the hotel team. The existing page's carousel runs deluxe3, 5, 4, 1, 2; this
+    // uses 3, 5, 2 and 4 and leaves out deluxe-1, which is only 674px wide and shows the same bed as deluxe-5.
+    // The large photograph is the first; reorder the list to change it.
     photos: [
       {
-        key: 'suite-deluxe',
-        label: 'Bed and headboard',
-        alt: 'The bed in the Deluxe Room against a headboard wall of warm wood with a framed textile panel and brass reading lights, with white pillows, sheer curtains, and an armchair and small round table in the background',
-        position: '60% 50%',
-        source: '2020/09/Amanjaya-deluxe1.jpg',
+        key: 'deluxe-3',
+        label: 'Corner with cabinet',
+        alt: 'A corner of the Deluxe Room: a dark wood cabinet with a carved lattice front, an armchair with patterned cushions beside a round marble table with a brass base, framed botanical prints on the wall, and part of the bed at the right',
+        position: '50% 60%',
+        source: '2020/09/Amanjaya-deluxe3.jpg',
       },
-      { key: 'deluxe-3', label: 'Photograph 2', alt: 'The Deluxe Room', source: '2020/09/Amanjaya-deluxe3.jpg' },
-      { key: 'deluxe-5', label: 'Photograph 3', alt: 'The Deluxe Room', source: '2020/09/Amanjaya-deluxe5.jpg' },
-      { key: 'deluxe-4', label: 'Photograph 4', alt: 'The Deluxe Room', source: '2020/09/Amanjaya-deluxe4.jpg' },
+      {
+        key: 'deluxe-5',
+        label: 'Bed and windows',
+        alt: 'The king-size bed in the Deluxe Room against a wood headboard wall with a framed textile panel and lattice, with white linens, brass reading lights and sheer curtains over tall windows',
+        position: '50% 65%',
+        source: '2020/09/Amanjaya-deluxe5.jpg',
+      },
+      {
+        key: 'deluxe-2',
+        label: 'Living area',
+        alt: 'The Deluxe Room seen from the living area: armchairs and a round marble table on a woven rug, the bed beyond, a desk and chair by tall sheer-curtained windows, and a ceiling fan',
+        position: '60% 55%',
+        source: '2020/09/Amanjaya-deluxe2.jpg',
+      },
+      {
+        key: 'deluxe-4',
+        label: 'Armchair and bed',
+        alt: 'An armchair and a large plant in a basket beside the bed in the Deluxe Room, with framed prints on the white wall and a wood headboard with lattice panels',
+        position: '70% 50%',
+        source: '2020/09/Amanjaya-deluxe4.jpg',
+      },
     ],
   },
   {
@@ -198,19 +216,39 @@ export const rooms: Room[] = [
       'Hair dryer',
       'Room service',
     ],
-    // Carousel on the existing page: executive3 (lead), executive2, executive4, executive5, executive12. Only
-    // executive12 is in the repository so far (it leads here); the other three are placeholders.
+    // Hotel photographs, supplied by the hotel team. The existing page's carousel runs executive3, 2, 4, 5, 12; this
+    // leads with executive7 (the living area, which the description is about; the hotel also uses it as this
+    // room's picture on its offers pages), then 3, 9 and 4. Also in the repository and available: executive-2 (sofa),
+    // executive-10 (bathroom vanity), executive-11 (wide view of bed and lounge), executive-12 (bed detail).
     photos: [
       {
-        key: 'suite-executive',
-        label: 'Bed and headboard',
-        alt: 'The bed in the Executive Suite against a headboard wall of warm wood with a framed textile panel and a lattice panel lit by a bright reading light, with white pillows, a woven cushion and sheer curtains',
-        position: '55% 50%',
-        source: '2020/09/Amanjaya-executive12.jpg',
+        key: 'executive-7',
+        label: 'Living area',
+        alt: 'The living area of the Executive Suite: a sofa and armchairs around a round table on a woven rug, a plant and floor lamp, and a wooden desk and chair at the right, on a polished dark wood floor under warm lighting',
+        position: '40% 50%',
+        source: '2020/09/Amanjaya-executive7.jpg',
       },
-      { key: 'executive-3', label: 'Photograph 2', alt: 'The Executive Suite', source: '2020/09/Amanjaya-executive3.jpg' },
-      { key: 'executive-2', label: 'Photograph 3', alt: 'The Executive Suite', source: '2020/09/Amanjaya-executive2.jpg' },
-      { key: 'executive-4', label: 'Photograph 4', alt: 'The Executive Suite', source: '2020/09/Amanjaya-executive4.jpg' },
+      {
+        key: 'executive-3',
+        label: 'Bed and headboard',
+        alt: 'The bed in the Executive Suite against a wood headboard wall with a framed textile panel and carved lattice panels, with sheer curtains either side and a ceiling fan above',
+        position: '50% 55%',
+        source: '2020/09/Amanjaya-executive3.jpg',
+      },
+      {
+        key: 'executive-9',
+        label: 'Balcony view',
+        alt: 'The bed in the Executive Suite beside open balcony doors, with a table and chairs on the balcony and a view over rooftops to ornate pagoda spires',
+        position: '60% 50%',
+        source: '2020/09/Amanjaya-executive9.jpg',
+      },
+      {
+        key: 'executive-4',
+        label: 'Bed and lounge',
+        alt: 'The Executive Suite bed with a bench at its foot, seen through the leaves of a large plant, with the lounge area and windows beyond',
+        position: '40% 55%',
+        source: '2020/09/Amanjaya-executive4.jpg',
+      },
     ],
   },
   {
@@ -245,19 +283,38 @@ export const rooms: Room[] = [
       'Hair dryer',
       'Room service',
     ],
-    // Carousel on the existing page: panoramic3 (lead), panoramic2, panoramic6, panoramic4, panoramic7. Only
-    // panoramic2 is in the repository so far (it leads here); the other three are placeholders.
+    // Hotel photographs, supplied by the hotel team. The existing page's carousel runs panoramic3, 2, 6, 4, 7. This
+    // leads with panoramic2 (the whole room) rather than panoramic3 (a close view of louvred shutters). Also in the
+    // repository and available: panoramic-3, panoramic-8 (the bed and a sofa with flowers).
     photos: [
       {
-        key: 'suite-panoramic',
+        key: 'panoramic-2',
         label: 'Bed and lounge',
         alt: 'The Panoramic Suite: a king bed with a bench at its foot and sheer curtains, a writing desk with a lamp and chair and a large plant in front of tall windows full of light, a ceiling fan, and a round marble table with fruit in the foreground',
         position: '60% 50%',
         source: '2020/09/Amanjaya-panoramic2.jpg',
       },
-      { key: 'panoramic-3', label: 'Photograph 2', alt: 'The Panoramic Suite', source: '2020/09/Amanjaya-panoramic3.jpg' },
-      { key: 'panoramic-6', label: 'Photograph 3', alt: 'The Panoramic Suite', source: '2020/09/Amanjaya-panoramic6.jpg' },
-      { key: 'panoramic-4', label: 'Photograph 4', alt: 'The Panoramic Suite', source: '2020/09/Amanjaya-panoramic4.jpg' },
+      {
+        key: 'panoramic-6',
+        label: 'Bed and desk',
+        alt: 'The Panoramic Suite: the bed with a cushioned bench at its foot, a desk and chair by a balcony door, and wide windows with sheer curtains opening onto sky and rooftops',
+        position: '50% 60%',
+        source: '2020/09/Amanjaya-panoramic6.jpg',
+      },
+      {
+        key: 'panoramic-4',
+        label: 'Balcony doors',
+        alt: 'The Panoramic Suite: the bed and a wooden desk with a large plant beside tall glass doors that open onto a balcony, with grey curtains and a view of trees and sky',
+        position: '55% 50%',
+        source: '2020/09/Amanjaya-panoramic4.jpg',
+      },
+      {
+        key: 'panoramic-7',
+        label: 'Window view',
+        alt: 'The Panoramic Suite in the evening: a bed with a bench at its foot, a desk and chair by a window, and tall windows and a balcony door looking out over the city',
+        position: '45% 50%',
+        source: '2020/09/Amanjaya-panoramic7.jpg',
+      },
     ],
   },
 ];

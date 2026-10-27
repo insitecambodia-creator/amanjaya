@@ -93,49 +93,99 @@
       "usedFor": "Gallery: a working breakfast in a suite"
     },
     {
-      "key": "deluxe-3",
-      "path": "2020/09/Amanjaya-deluxe3.jpg",
-      "usedFor": "Deluxe page lead slide (3:2). NOT in the repository yet: the room page shows a labelled placeholder until the hotel team supplies the file (any of .jpg/.webp, named deluxe-3)."
+      "key": "deluxe-1",
+      "path": "2020/09/Amanjaya-deluxe1.jpg",
+      "usedFor": "In the repository, not used on the room page. Supplied by the hotel team (uploaded to the repository). Same photograph as suite-deluxe (homepage card)."
     },
     {
-      "key": "deluxe-5",
-      "path": "2020/09/Amanjaya-deluxe5.jpg",
-      "usedFor": "Deluxe page, 2nd slide. NOT in the repository yet: the room page shows a labelled placeholder until the hotel team supplies the file (any of .jpg/.webp, named deluxe-5)."
+      "key": "deluxe-2",
+      "path": "2020/09/Amanjaya-deluxe2.jpg",
+      "usedFor": "Deluxe page gallery. Supplied by the hotel team (uploaded to the repository)."
+    },
+    {
+      "key": "deluxe-3",
+      "path": "2020/09/Amanjaya-deluxe3.jpg",
+      "usedFor": "Deluxe page gallery. Supplied by the hotel team (uploaded to the repository)."
     },
     {
       "key": "deluxe-4",
       "path": "2020/09/Amanjaya-deluxe4.jpg",
-      "usedFor": "Deluxe page, 3rd slide. NOT in the repository yet: the room page shows a labelled placeholder until the hotel team supplies the file (any of .jpg/.webp, named deluxe-4)."
+      "usedFor": "Deluxe page gallery. Supplied by the hotel team (uploaded to the repository)."
     },
     {
-      "key": "executive-3",
-      "path": "2020/09/Amanjaya-executive3.jpg",
-      "usedFor": "Executive page lead slide. NOT in the repository yet: the room page shows a labelled placeholder until the hotel team supplies the file (any of .jpg/.webp, named executive-3)."
+      "key": "deluxe-5",
+      "path": "2020/09/Amanjaya-deluxe5.jpg",
+      "usedFor": "Deluxe page gallery. Supplied by the hotel team (uploaded to the repository)."
     },
     {
       "key": "executive-2",
       "path": "2020/09/Amanjaya-executive2.jpg",
-      "usedFor": "Executive page, 2nd slide. NOT in the repository yet: the room page shows a labelled placeholder until the hotel team supplies the file (any of .jpg/.webp, named executive-2)."
+      "usedFor": "In the repository, not used on the room page. Supplied by the hotel team (uploaded to the repository)."
+    },
+    {
+      "key": "executive-3",
+      "path": "2020/09/Amanjaya-executive3.jpg",
+      "usedFor": "Executive page gallery. Supplied by the hotel team (uploaded to the repository)."
     },
     {
       "key": "executive-4",
       "path": "2020/09/Amanjaya-executive4.jpg",
-      "usedFor": "Executive page, 3rd slide. NOT in the repository yet: the room page shows a labelled placeholder until the hotel team supplies the file (any of .jpg/.webp, named executive-4)."
+      "usedFor": "Executive page gallery. Supplied by the hotel team (uploaded to the repository)."
+    },
+    {
+      "key": "executive-7",
+      "path": "2020/09/Amanjaya-executive7.jpg",
+      "usedFor": "Executive page gallery. Supplied by the hotel team (uploaded to the repository)."
+    },
+    {
+      "key": "executive-9",
+      "path": "2020/09/Amanjaya-executive9.jpg",
+      "usedFor": "Executive page gallery. Supplied by the hotel team (uploaded to the repository)."
+    },
+    {
+      "key": "executive-10",
+      "path": "2020/09/Amanjaya-executive10.jpg",
+      "usedFor": "In the repository, not used on the room page. Supplied by the hotel team (uploaded to the repository)."
+    },
+    {
+      "key": "executive-11",
+      "path": "2020/09/Amanjaya-executive11.jpg",
+      "usedFor": "In the repository, not used on the room page. Supplied by the hotel team (uploaded to the repository)."
+    },
+    {
+      "key": "executive-12",
+      "path": "2020/09/Amanjaya-executive12.jpg",
+      "usedFor": "In the repository, not used on the room page. Supplied by the hotel team (uploaded to the repository). Same photograph as suite-executive (homepage card)."
+    },
+    {
+      "key": "panoramic-2",
+      "path": "2020/09/Amanjaya-panoramic2.jpg",
+      "usedFor": "Panoramic page gallery. Supplied by the hotel team (uploaded to the repository). Same photograph as suite-panoramic (homepage card)."
     },
     {
       "key": "panoramic-3",
       "path": "2020/09/Amanjaya-panoramic3.jpg",
-      "usedFor": "Panoramic page lead slide. NOT in the repository yet: the room page shows a labelled placeholder until the hotel team supplies the file (any of .jpg/.webp, named panoramic-3)."
-    },
-    {
-      "key": "panoramic-6",
-      "path": "2020/09/Amanjaya-panoramic6.jpg",
-      "usedFor": "Panoramic page, 3rd slide. NOT in the repository yet: the room page shows a labelled placeholder until the hotel team supplies the file (any of .jpg/.webp, named panoramic-6)."
+      "usedFor": "In the repository, not used on the room page. Supplied by the hotel team (uploaded to the repository)."
     },
     {
       "key": "panoramic-4",
       "path": "2020/09/Amanjaya-panoramic4.jpg",
-      "usedFor": "Panoramic page, 4th slide. NOT in the repository yet: the room page shows a labelled placeholder until the hotel team supplies the file (any of .jpg/.webp, named panoramic-4)."
+      "usedFor": "Panoramic page gallery. Supplied by the hotel team (uploaded to the repository)."
+    },
+    {
+      "key": "panoramic-6",
+      "path": "2020/09/Amanjaya-panoramic6.jpg",
+      "usedFor": "Panoramic page gallery. Supplied by the hotel team (uploaded to the repository)."
+    },
+    {
+      "key": "panoramic-7",
+      "path": "2020/09/Amanjaya-panoramic7.jpg",
+      "usedFor": "Panoramic page gallery. Supplied by the hotel team (uploaded to the repository)."
+    },
+    {
+      "key": "panoramic-8",
+      "path": "2020/09/Amanjaya-panoramic8.jpg",
+      "usedFor": "In the repository, not used on the room page. Supplied by the hotel team (uploaded to the repository)."
     }
   ],
   "unused": [

@@ -116,14 +116,15 @@ Points for the hotel to confirm:
 - **Executive.** The balcony and espresso machine come only from the shared amenities block; the description does not mention a balcony or a bed, so none is claimed in the text.
 - Copy is lightly edited for grammar and the sales adjectives ("stunning", "luxurious", "ultimate") are dropped, as on the Junior page.
 
-### Photographs: one real photograph per room so far
+### Photographs
 
-Each existing page has a five-slide carousel. Only one photograph of each is in the repository, so each gallery shows it large with three labelled **placeholders**. To finish, add the files below to `src/assets/photos/` (`.webp` or `.jpg`, named exactly), and the placeholders are replaced with no code change.
+The hotel team has uploaded the room photographs (`deluxe-1` to `-5`, `executive-2, -3, -4, -7, -9, -10, -11, -12`, `panoramic-2, -3, -4, -6, -7, -8`, and extra Junior ones `junior-1, -2, -5, -12, -13`). There are no placeholders left on any room page. Each gallery uses four (the first four in `photos` in `rooms.ts`):
 
-| Room | In the repository | Needed (existing page order) |
-|---|---|---|
-| Deluxe | `suite-deluxe` (= deluxe1, only 674px wide, so it looks soft when large: a bigger original is needed) | `deluxe-3` (the page's lead), `deluxe-5`, `deluxe-4` (and `deluxe2` if wanted) |
-| Executive | `suite-executive` (= executive12) | `executive-3` (the page's lead), `executive-2`, `executive-4` (and `executive5`) |
-| Panoramic | `suite-panoramic` (= panoramic2) | `panoramic-3` (the page's lead), `panoramic-6`, `panoramic-4` (and `panoramic7`) |
+| Room | Large photograph | The three beside it | Not used (in the repository) |
+|---|---|---|---|
+| Deluxe | `deluxe-3`: corner with the lattice cabinet, armchair, marble table and the bed | `deluxe-5` (bed and windows), `deluxe-2` (living area), `deluxe-4` (armchair and bed) | `deluxe-1`: only 674px wide and the same bed as `deluxe-5` |
+| Executive | `executive-7`: the living area with sofa, armchairs and desk | `executive-3` (bed and headboard), `executive-9` (balcony view), `executive-4` (bed and lounge) | `executive-2`, `-10` (bathroom vanity), `-11`, `-12` |
+| Panoramic | `panoramic-2`: the whole room | `panoramic-6` (bed and desk), `panoramic-4` (balcony doors), `panoramic-7` (window view) | `panoramic-3` (louvred shutters, close up), `panoramic-8` |
+| Junior | `junior-8` (unchanged, approved) | `junior-6`, `junior-12`, `junior-14` | `junior-1`, `-2`, `-5`, `-13` |
 
-The gallery uses the first four entries of each room's `photos` list in `rooms.ts`; once the files arrive, reorder that list (the hotel's own order starts with the `-3` photograph) and write the alt text for each. Placeholder alt text is deliberately generic until someone has looked at the photograph.
+On the hotel's own pages the lead slide is `deluxe3`, `executive3` and `panoramic3`; the choices above lead instead with the strongest wide view of each room, which is a design decision you can reverse by reordering `photos`. The alt text for each describes only what is visible. The `junior-14`, `-6` and `-8` files were uploaded twice (as `.webp` and `.jpg`, the same photographs); the `.webp` copies were removed.
