@@ -17,7 +17,7 @@ const { home = '' } = Astro.props;
 
     <nav id="site-nav" class="nav" aria-label="Main">
       <ul>
-        {nav.map((item) => <li><a href={`${home}${item.href}`}>{item.label}</a></li>)}
+        {nav.map((item) => <li><a href={item.href.startsWith('/') ? item.href : `${home}${item.href}`} aria-current={Astro.url.pathname === item.href ? 'page' : undefined}>{item.label}</a></li>)}
         <li class="nav__book"><a href={booking.url}>{booking.label}</a></li>
       </ul>
     </nav>

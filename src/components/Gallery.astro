@@ -33,6 +33,7 @@ const grow = (name: string) => {
         ))
       }
     </div>
+    <a class="gallery__all" href="/image-gallery-amanjaya/" data-reveal>View all photographs</a>
   </div>
 </section>
 
@@ -67,5 +68,24 @@ const grow = (name: string) => {
       flex: var(--grow) 1 0%;
       min-width: 0;
     }
+  }
+
+  .gallery__all {
+    display: inline-block;
+    margin-top: clamp(1.5rem, 3vw, 2.25rem);
+    padding-bottom: 0.2rem;
+    border-bottom: 1px solid var(--bronze);
+    color: var(--bronze-deep);
+    font-size: var(--text-size);
+    line-height: 1.6;
+    text-decoration: none;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .gallery__all:hover {
+    color: var(--teak);
+    border-color: var(--teak);
   }
 </style>

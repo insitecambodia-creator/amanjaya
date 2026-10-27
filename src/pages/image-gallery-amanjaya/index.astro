@@ -1,0 +1,257 @@
+---
+/**
+ * The gallery page, at the path the existing WordPress site uses (/image-gallery-amanjaya/).
+ * Photographs sit in justified rows at their own proportions (nothing is cropped), grouped by section.
+ * Each one is a plain link to the larger image, so it works without JavaScript; with JavaScript, choosing one
+ * opens the viewer (src/scripts/lightbox.ts). Content: src/content/gallery.ts.
+ */
+import Base from '../../layouts/Base.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import Photo from '../../components/Photo.astro';
+import Lightbox from '../../components/gallery/Lightbox.astro';
+import { getImage } from 'astro:assets';
+import { findPhoto } from '../../lib/photos';
+import { galleryPage, gallerySections } from '../../content/gallery';
+
+const fullSize = 2048;
+
+// Resolve each photograph once: its proportions for the row layout and the URL of its larger version.
+let index = 0;
+const sections = await Promise.all(
+  gallerySections.map(async (section) => ({
+    ...section,
+    groups: await Promise.all(
+      section.groups.map(async (group) => ({
+        ...group,
+        items: await Promise.all(
+          group.items.map(async (item) => {
+            const photo = findPhoto(item.key);
+            if (!photo) throw new Error(`gallery: no file for "${item.key}" in src/assets/photos/`);
+            const large = await getImage({
+              src: photo,
+              width: Math.min(photo.width, fullSize),
+              format: 'webp',
+              quality: 80,
+            });
+            return { ...item, ratio: photo.width / photo.height, href: large.src, n: index++ };
+          }),
+        ),
+      })),
+    ),
+  })),
+);
+const total = index;
+---
+
+<Base title={galleryPage.seoTitle} description={galleryPage.seoDescription}>
+  <SiteHeader home="/" />
+  <main id="main">
+    <section class="intro">
+      <div class="container">
+        <h1 data-reveal>{galleryPage.title}</h1>
+        <p class="copy" data-reveal>{galleryPage.intro}</p>
+        <nav class="jump" aria-label="Gallery sections" data-reveal>
+          <ul>
+            {sections.map((s) => <li><a href={`#${s.id}`}>{s.title}</a></li>)}
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    {
+      sections.map((section) => (
+        <section class="block" id={section.id} aria-labelledby={`${section.id}-title`}>
+          <div class="container">
+            <h2 id={`${section.id}-title`} data-reveal>{section.title}</h2>
+            {section.groups.map((group) => (
+              <div class="group">
+                {group.title && (
+                  <div class="group__head" data-reveal>
+                    <h3>{group.title}</h3>
+                    {group.link && <a href={group.link.href}>{group.link.label}</a>}
+                  </div>
+                )}
+                <ul class="rows">
+                  {group.items.map((item) => (
+                    <li style={`--r:${item.ratio.toFixed(3)}`}>
+                      <a
+                        class="tile"
+                        href={item.href}
+                        data-lightbox
+                        data-alt={item.alt}
+                        data-label={item.label}
+                        aria-label={`View larger: ${item.label}`}
+                      >
+                        <Photo
+                          name={item.key}
+                          alt={item.alt}
+                          natural
+                          sizes="(min-width: 64rem) 22vw, (min-width: 40rem) 34vw, 46vw"
+                          widths={[320, 480, 640, 960]}
+                          loading={item.n < 4 ? 'eager' : 'lazy'}
+                          label={item.label}
+                        />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+      ))
+    }
+  </main>
+  <Lightbox total={total} />
+  <SiteFooter />
+</Base>
+
+<script>
+  import '../../scripts/lightbox';
+</script>
+
+<style>
+  .intro {
+    padding-block: clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  h1 {
+    color: var(--teak);
+    font-size: var(--heading-1);
+    font-weight: 300;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+  }
+
+  .intro .copy {
+    margin-top: 1rem;
+  }
+
+  .jump ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.1rem clamp(1.4rem, 3vw, 2.5rem);
+    margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .jump a {
+    display: inline-block;
+    padding-block: 0.4rem 0.3rem;
+    border-bottom: 2px solid transparent;
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: var(--step--1);
+    font-weight: 500;
+    line-height: 1.65;
+    text-decoration: none;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .jump a:hover {
+    color: var(--teak);
+    border-bottom-color: var(--bronze);
+  }
+
+  .block {
+    padding-block: clamp(2rem, 5vw, 4rem) 0;
+    scroll-margin-top: calc(var(--header-h) + 0.5rem);
+  }
+
+  .block:last-of-type {
+    padding-bottom: var(--section);
+  }
+
+  .block h2 {
+    margin-bottom: clamp(1.25rem, 3vw, 2rem);
+    padding-top: clamp(1.25rem, 3vw, 2rem);
+    border-top: 1px solid var(--line);
+    color: var(--teak);
+  }
+
+  .group + .group {
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+
+  .group__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.25rem 1.5rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .group__head h3 {
+    color: var(--teak);
+  }
+
+  .group__head a {
+    font-size: var(--text-small);
+    line-height: 1.6;
+  }
+
+  /* Justified rows: every photograph in a row has the same height and keeps its own proportions. Width and
+     growth follow the photograph's ratio; the empty flex item at the end stops a short last row stretching. */
+  .rows {
+    --gap: clamp(0.4rem, 1vw, 0.75rem);
+    --h: 6rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap);
+  }
+
+  .rows::after {
+    content: '';
+    flex-grow: 1000000;
+  }
+
+  .rows li {
+    flex: calc(var(--r) * 100) 1 calc(var(--r) * var(--h));
+    min-width: 0;
+  }
+
+  @media (min-width: 40rem) {
+    .rows {
+      --h: 11rem;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .rows {
+      --h: 13.5rem;
+    }
+  }
+
+  .tile {
+    display: block;
+    position: relative;
+    cursor: zoom-in;
+    line-height: 0;
+  }
+
+  .tile :global(.photo) {
+    height: auto;
+  }
+
+  .tile :global(img) {
+    transition: opacity 0.25s ease;
+  }
+
+  .tile:hover :global(img) {
+    opacity: 0.86;
+  }
+
+  .tile:focus-visible {
+    outline: 2px solid var(--teak);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tile :global(img) {
+      transition: none;
+    }
+  }
+</style>

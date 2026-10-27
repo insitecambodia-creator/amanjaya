@@ -1,0 +1,165 @@
+---
+/**
+ * The full-size viewer: a native <dialog> opened by src/scripts/lightbox.ts. The page lists the photographs as
+ * ordinary links, so without JavaScript this is simply never shown. Solid dark background, plain controls.
+ */
+interface Props {
+  total: number;
+}
+const { total } = Astro.props;
+---
+
+<dialog class="lightbox" aria-label="Photograph viewer" data-lightbox-dialog data-total={total}>
+  <div class="lightbox__bar">
+    <p class="lightbox__count" data-lightbox-count aria-hidden="true"></p>
+    <button type="button" class="lightbox__btn lightbox__close" data-lightbox-close>
+      <span>Close</span>
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+    </button>
+  </div>
+
+  <figure class="lightbox__figure">
+    <img class="lightbox__img" alt="" data-lightbox-img />
+    <figcaption class="lightbox__caption" data-lightbox-caption aria-live="polite"></figcaption>
+  </figure>
+
+  <button type="button" class="lightbox__btn lightbox__nav lightbox__prev" data-lightbox-prev aria-label="Previous photograph">
+    <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"></path></svg>
+  </button>
+  <button type="button" class="lightbox__btn lightbox__nav lightbox__next" data-lightbox-next aria-label="Next photograph">
+    <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"></path></svg>
+  </button>
+</dialog>
+
+<style>
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: #1c1c1c;
+    color: #ffffff;
+  }
+
+  .lightbox:not([open]) {
+    display: none;
+  }
+
+  .lightbox[open] {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .lightbox::backdrop {
+    background: #1c1c1c;
+  }
+
+  .lightbox__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem clamp(0.75rem, 2.5vw, 1.75rem);
+  }
+
+  .lightbox__count {
+    max-width: none;
+    margin: 0;
+    color: rgb(255 255 255 / 0.8);
+    font-size: var(--text-small);
+    line-height: 1.6;
+  }
+
+  .lightbox__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0.4rem 0.75rem;
+    border: 0;
+    background: transparent;
+    color: #ffffff;
+    font-family: var(--font-heading);
+    font-size: var(--step--1);
+    font-weight: 500;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .lightbox__btn:hover {
+    background: rgb(255 255 255 / 0.12);
+  }
+
+  .lightbox__btn:focus-visible {
+    outline: 2px solid var(--bronze-light);
+    outline-offset: -2px;
+  }
+
+  .lightbox__figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    min-height: 0;
+    margin: 0;
+    padding: 0 clamp(3.25rem, 8vw, 6rem) clamp(0.75rem, 2vw, 1.25rem);
+  }
+
+  .lightbox__img {
+    max-width: 100%;
+    max-height: calc(100dvh - 9.5rem);
+    min-height: 0;
+    object-fit: contain;
+    background: #2a2a2a;
+  }
+
+  .lightbox__caption {
+    max-width: 70ch;
+    color: rgb(255 255 255 / 0.88);
+    font-size: var(--text-small);
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .lightbox__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    min-width: 3rem;
+    min-height: 4rem;
+    padding: 0;
+  }
+
+  .lightbox__prev {
+    left: clamp(0rem, 1vw, 0.75rem);
+  }
+
+  .lightbox__next {
+    right: clamp(0rem, 1vw, 0.75rem);
+  }
+
+  @media (max-width: 39.99rem) {
+    .lightbox__figure {
+      padding-inline: 0;
+    }
+
+    .lightbox__caption {
+      padding-inline: 1rem;
+    }
+
+    /* Phones: the arrows sit below the photograph's corners so they never cover it. */
+    .lightbox__nav {
+      top: auto;
+      bottom: 0.5rem;
+      transform: none;
+    }
+  }
+</style>

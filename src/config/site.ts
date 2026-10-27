@@ -41,11 +41,11 @@ export const social = [
   { label: 'TikTok', url: 'https://www.tiktok.com/@amanjayapancamhotel' },
 ] as const;
 
-/** Sections the header links to. Phase 1 is a single page, so these are in-page anchors. */
+/** What the header links to: homepage sections (anchors) and, for a path starting with "/", a page of its own. */
 export const nav = [
   { label: 'Suites', href: '#suites' },
   { label: 'Dining', href: '#dining' },
   { label: 'Riverside', href: '#riverside' },
-  { label: 'Gallery', href: '#gallery' },
+  { label: 'Gallery', href: '/image-gallery-amanjaya/' }, // its own page, at the path the existing site uses
   { label: 'Contact', href: '#contact' },
 ] as const;
