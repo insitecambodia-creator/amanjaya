@@ -37,8 +37,9 @@ const keepTogether = (t: string) => t.replace(/Phnom Penh/g, 'Phnom\u00a0Penh').
 </section>
 
 <style>
-  /* Full-width, immersive photograph with the text centred in its upper third, above the couple's faces. The
-     headline and the quieter line beneath it are one block, centre-aligned. */
+  /* Full-width, immersive photograph with the text set directly on it as one left-aligned block (headline, then a
+     quieter line beneath it). From 72rem it sits on the right, vertically centred, clear of the couple; below that,
+     including phones, it sits at the foot of the photograph, under both faces. */
   .hero__stage {
     position: relative;
     isolation: isolate;
@@ -73,19 +74,17 @@ const keepTogether = (t: string) => t.replace(/Phnom Penh/g, 'Phnom\u00a0Penh').
     }
   }
 
-  /* A discreet neutral gradient over the top of the photograph, behind the text. Black only, no colour grade. */
+  /* A discreet neutral gradient behind the text. Black only, no colour grade. Under 72rem it rises from the bottom. */
   .hero__shade {
     position: absolute;
     inset: 0;
     z-index: 1;
     pointer-events: none;
     background: linear-gradient(
-      to bottom,
-      rgb(0 0 0 / 0.66) 0%,
-      rgb(0 0 0 / 0.58) 20%,
-      rgb(0 0 0 / 0.5) 34%,
-      rgb(0 0 0 / 0.28) 48%,
-      rgb(0 0 0 / 0.08) 60%,
+      to top,
+      rgb(0 0 0 / 0.68) 0%,
+      rgb(0 0 0 / 0.5) 26%,
+      rgb(0 0 0 / 0.16) 52%,
       rgb(0 0 0 / 0) 70%
     );
   }
@@ -95,19 +94,16 @@ const keepTogether = (t: string) => t.replace(/Phnom Penh/g, 'Phnom\u00a0Penh').
     inset: 0;
     z-index: 2;
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
+    align-items: flex-end;
     pointer-events: none;
   }
 
   .hero__overlay .container {
-    padding-top: clamp(1.75rem, 7svh, 4.5rem);
+    padding-bottom: clamp(1.75rem, 6svh, 2.75rem);
   }
 
   .hero__text {
     max-width: 26rem;
-    margin-inline: auto;
-    text-align: center;
   }
 
   .hero__text h1 {
@@ -122,7 +118,7 @@ const keepTogether = (t: string) => t.replace(/Phnom Penh/g, 'Phnom\u00a0Penh').
   }
 
   .hero__text p {
-    margin: 0.85rem auto 0;
+    margin: 0.85rem 0 0;
     max-width: none;
     color: rgb(255 255 255 / 0.94);
     font-family: var(--font-heading);
@@ -130,7 +126,7 @@ const keepTogether = (t: string) => t.replace(/Phnom Penh/g, 'Phnom\u00a0Penh').
     font-weight: 400;
     line-height: 1.6;
     letter-spacing: 0.005em;
-    text-align: center;
+    text-align: left;
     text-wrap: balance;
     text-shadow: 0 0 1.25rem rgb(0 0 0 / 0.25);
   }
@@ -140,12 +136,43 @@ const keepTogether = (t: string) => t.replace(/Phnom Penh/g, 'Phnom\u00a0Penh').
       height: clamp(34rem, calc(100svh - var(--header-h)), 54rem);
     }
 
-    /* The photograph is enlarged about 14% and anchored to the right edge, which moves the man's raised phone left,
-       out from behind the centred headline, and brings the couple nearer the middle. Both faces stay well inside. */
     .hero__media :global(.photo) {
       --focus: var(--focus-d) !important;
-      width: 114%;
-      margin-left: -14%;
+    }
+  }
+
+  /* Wide screens: the block sits on the right, vertically centred. The shade is a soft vignette centred on the text
+     block, plus a light gradient from the right-hand edge; both are gone before the couple (about 50% across). */
+  @media (min-width: 72rem) {
+    .hero__shade {
+      background:
+        radial-gradient(
+          ellipse 46% 52% at 80% 50%,
+          rgb(0 0 0 / 0.62) 0%,
+          rgb(0 0 0 / 0.58) 18%,
+          rgb(0 0 0 / 0.49) 36%,
+          rgb(0 0 0 / 0.36) 54%,
+          rgb(0 0 0 / 0.22) 70%,
+          rgb(0 0 0 / 0.1) 84%,
+          rgb(0 0 0 / 0.03) 94%,
+          rgb(0 0 0 / 0) 100%
+        ),
+        linear-gradient(270deg, rgb(0 0 0 / 0.26) 0%, rgb(0 0 0 / 0.1) 30%, rgb(0 0 0 / 0) 50%);
+    }
+
+    .hero__overlay {
+      align-items: center;
+    }
+
+    .hero__overlay .container {
+      display: flex;
+      justify-content: flex-end;
+      padding-bottom: 0;
+    }
+
+    .hero__text {
+      width: 26rem;
+      max-width: 100%;
     }
   }
 </style>
