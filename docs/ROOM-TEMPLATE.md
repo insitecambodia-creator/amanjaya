@@ -8,7 +8,7 @@ The Junior Suite is the master template. The other three suites reuse it by addi
 |---|---|
 | Route (one page per published room) | `src/pages/4-types-of-rooms/[slug]/index.astro` |
 | Structured content (facts, copy, amenities, photographs) | `src/content/rooms.ts` |
-| Components | `src/components/rooms/`: `RoomGallery`, `RoomOverview` (with `RoomBookingPanel`), `RoomAmenities` |
+| Components | `src/components/rooms/`: `RoomGallery`, `RoomOverview` (with `RoomBookingPanel`), `RoomAmenities` (icons chosen in `amenity-icons.ts`) |
 | Price (one place to edit) | `src/data/pricing.ts`, keyed by the room's `id` |
 | Booking link (the external boundary) | `booking` in `src/config/site.ts` |
 | Photographs | `src/assets/photos/<key>.*`, registered in `src/data/image-manifest.json` |
@@ -54,7 +54,7 @@ Photograph quality: the photographs are 1325 to 1368px wide, and the gallery sta
 - **Gallery (reproduces the approved mockup).** The large photograph on the left takes about 76% of the gallery width and is 16:9; three photographs stack on the right (about 23%). The stack takes the large photograph's height exactly, so top and bottom edges align, and one gap size (about 19px at 1440px, scaling down) is used across and down. Plain rectangles: no borders, rounded corners or shadows. Phones: the large photograph (4:3) edge to edge, then a flush row of three small ones. The photographs are interactive; see "Gallery interaction" below.
 - **Information below the gallery.** On desktop, about 65% for the title, the spec line (45 sqm, king size bed, private balcony) and the description, and 35% for the starting price and the single teak Book Your Stay button with the "indicative rates" note. No cards, boxes or vertical dividers. On phones they stack in that order.
 - A discreet "All accommodation" text link above the title returns to the room categories on the homepage (`/#suites`). The header's section links also lead back to the homepage.
-- **Amenities.** Heading and a one-line introduction, then the list in hairline-separated rows: four columns on wide screens, three on tablets, two on phones.
+- **Amenities.** Heading and a one-line introduction, then small line icons (28px, the text grey) with a 14px centred label beneath each: six across on desktop (11 amenities make 6 + 5), four on tablets, two on phones, with a short last row centred. No cards, shadows, circles or boxes; the page stays white. The icons are decorative (hidden from screen readers; each item reads out as its label). There is no booking button in this section: the room page has one above, and the footer has another.
 - Fade-in-up (`data-reveal`) on the same terms as the homepage: once only, off for reduced motion, content visible without JavaScript. The large photograph is not faded in; it settles once on load, as on the homepage.
 
 ## Gallery interaction
@@ -68,6 +68,26 @@ Built into the shared `RoomGallery` component (`src/components/rooms/RoomGallery
 - **Keyboard and screen readers.** Each thumbnail is a real button, labelled "Show larger: Bathroom" (the names come from each photograph's `label` in `rooms.ts`), reachable with Tab in visual order and activated with Enter or Space. Focus shows as a white band inside a teak line and stays in the same slot after a swap. A hidden live region announces "Showing: ...". The large photograph carries the full description; thumbnails are named by their buttons, so their images are decorative.
 - **Without JavaScript** the gallery is the static layout; no buttons are shown.
 - **Adding a room** needs nothing for this: give each photograph a `label` in `rooms.ts`. The component uses up to four photographs; with fewer it adapts (the thumbnails share the height; a single photograph fills the width).
+
+## Amenity icons
+
+The icons are Lucide line artwork (ISC licence), copied as plain SVG paths into `src/components/rooms/amenity-icons.ts`: only the dozen used, no icon library, no JavaScript. The shared `RoomAmenities` component draws each amenity's icon by matching its name, so every room page uses the same system.
+
+| Amenity | Icon (Lucide) |
+|---|---|
+| Private balcony | `door-open` |
+| High-speed Wi-Fi | `wifi` |
+| Malongo espresso | `coffee` |
+| Air conditioning | `air-vent` |
+| Electronic safe | `vault` |
+| Working desk | `lamp-desk` |
+| Mini bar | `wine` |
+| Slippers & robe | `shirt` (the closest Lucide has to a robe) |
+| Flat-screen TV | `tv` |
+| Hair dryer | `wind` (Lucide has no hair dryer) |
+| Room service | `concierge-bell` |
+
+To add an amenity that another room lists: copy its icon's shapes from lucide.dev/icons into `icons`, and add the amenity's name (lower case) to `byAmenity`. An amenity with no mapping shows a quiet tick, so a page never breaks. Check each room's own export before listing an amenity: do not add any the hotel's page does not show.
 
 ## Not done yet (for the migration)
 

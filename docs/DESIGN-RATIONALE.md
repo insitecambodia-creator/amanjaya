@@ -44,7 +44,7 @@ Contrast (WCAG AA): charcoal on white 12.6, teak on white 9.6, grey on white 6.7
 
 ## Accommodation pages
 
-The Junior Suite page (`/4-types-of-rooms/junior-suite-phnom-penh/`) is the master template for the four room pages; see `docs/ROOM-TEMPLATE.md`. It keeps the homepage identity: white, Montserrat headings, Helvetica copy, one teak button, hairlines instead of cards. The photographs lead, as a large image with three stacked beside it (reproducing the approved mockup), then the facts and description (65%) beside the price and one booking button (35%), then the amenities. The gallery is interactive (choose a thumbnail to swap it with the large photograph, 200ms crossfade, keyboard accessible). Everything shown comes from the hotel's own page.
+The Junior Suite page (`/4-types-of-rooms/junior-suite-phnom-penh/`) is the master template for the four room pages; see `docs/ROOM-TEMPLATE.md`. It keeps the homepage identity: white, Montserrat headings, Helvetica copy, one teak button, hairlines instead of cards. The photographs lead, as a large image with three stacked beside it (reproducing the approved mockup), then the facts and description (65%) beside the price and one booking button (35%), then the amenities as quiet grey line icons with centred labels. The gallery is interactive (choose a thumbnail to swap it with the large photograph, 200ms crossfade, keyboard accessible). Everything shown comes from the hotel's own page.
 
 ## Performance and access
 
