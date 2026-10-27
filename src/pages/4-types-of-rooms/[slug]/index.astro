@@ -2,11 +2,12 @@
 /**
  * The shared accommodation page. One entry in src/content/rooms.ts gives one page, at the same path the existing
  * WordPress site uses (/4-types-of-rooms/<slug>/), so the URLs carry over.
- * Order: photographs, then the room information (about 65% description, 35% price and booking), then amenities.
+ * Order: the links between rooms, photographs, then the room information (about 65% description, 35% price and booking), then amenities.
  */
 import Base from '../../../layouts/Base.astro';
 import SiteHeader from '../../../components/SiteHeader.astro';
 import SiteFooter from '../../../components/SiteFooter.astro';
+import RoomNav from '../../../components/rooms/RoomNav.astro';
 import RoomGallery from '../../../components/rooms/RoomGallery.astro';
 import RoomOverview from '../../../components/rooms/RoomOverview.astro';
 import RoomAmenities from '../../../components/rooms/RoomAmenities.astro';
@@ -22,6 +23,7 @@ const { room } = Astro.props as { room: Room };
 <Base title={room.seoTitle} description={room.seoDescription}>
   <SiteHeader home="/" />
   <main id="main">
+    <RoomNav current={room.id} />
     <RoomGallery roomName={room.name} photos={room.photos} />
     <RoomOverview room={room} allRoomsHref="/#suites" />
     <RoomAmenities intro={room.amenitiesIntro} items={room.amenities} />

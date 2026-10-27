@@ -1,0 +1,76 @@
+---
+/**
+ * Moves between the accommodation pages without going back to the homepage: one text link per published room,
+ * the current one marked. It reads the room list in src/content/rooms.ts, so a new published room appears here by itself.
+ */
+import { publishedRooms, roomPath, type Room } from '../../content/rooms';
+
+interface Props {
+  current: Room['id'];
+}
+const { current } = Astro.props;
+---
+
+<nav class="roomnav" aria-label="Rooms and suites">
+  <div class="container">
+    <ul>
+      {
+        publishedRooms.map((r) => (
+          <li>
+            <a href={roomPath(r)} aria-current={r.id === current ? 'page' : undefined}>
+              {r.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</nav>
+
+<style>
+  .roomnav {
+    padding-block: clamp(0.5rem, 1.5vw, 0.9rem) clamp(0.5rem, 1.5vw, 0.75rem);
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.1rem clamp(1.4rem, 3vw, 2.5rem);
+  }
+
+  /* Phones: a tidy two-by-two rather than three links and one left over. */
+  @media (max-width: 35.99rem) {
+    ul {
+      display: grid;
+      grid-template-columns: repeat(2, max-content);
+      justify-content: start;
+      gap: 0.1rem 2.25rem;
+    }
+  }
+
+  a {
+    display: inline-block;
+    padding-block: 0.4rem 0.3rem;
+    border-bottom: 2px solid transparent;
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: var(--step--1);
+    font-weight: 500;
+    line-height: 1.65;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  a:hover {
+    color: var(--teak);
+  }
+
+  /* The room you are on: teak with a bronze line under it. */
+  a[aria-current='page'] {
+    color: var(--teak);
+    border-bottom-color: var(--bronze);
+  }
+</style>
