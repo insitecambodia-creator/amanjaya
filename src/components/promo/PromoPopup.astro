@@ -1,0 +1,235 @@
+---
+/**
+ * The promotion popup (content: src/content/promotions.ts, how-to: docs/PROMOTIONS.md).
+ *
+ * At build time: checks every promotion, resolves its image, and drops the ones that have already ended. The rest
+ * are written into the page as data. In the browser (src/scripts/promo.ts) the date decides which one, if any, shows,
+ * so a promotion switches itself on and off without a new deploy. With no promotions the component outputs nothing
+ * and no script is loaded.
+ */
+import { getImage } from 'astro:assets';
+import { promotions, defaultButton, type Promotion } from '../../content/promotions';
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/promotions/*.{jpg,jpeg,png,webp,avif}', {
+  eager: true,
+});
+
+// Cambodia is UTC+7 all year. Dates are written as YYYY-MM-DD and mean the whole day there.
+const startOf = (d: string) => new Date(`${d}T00:00:00+07:00`).getTime();
+const endOf = (d: string) => new Date(`${d}T23:59:59.999+07:00`).getTime();
+const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+
+function fail(p: Promotion, why: string): never {
+  throw new Error(`Promotion "${p.id}" (src/content/promotions.ts): ${why}`);
+}
+
+const seen = new Set<string>();
+const pathname = Astro.url.pathname;
+const prepared = await Promise.all(
+  promotions.map(async (p) => {
+    if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(p.id)) fail(p, 'the id must be lowercase letters, numbers and hyphens, e.g. "pchum-ben-2026"');
+    if (seen.has(p.id)) fail(p, 'this id is used twice: every promotion needs its own');
+    seen.add(p.id);
+    if (!datePattern.test(p.start) || Number.isNaN(startOf(p.start))) fail(p, `start "${p.start}" is not a date like 2026-11-01`);
+    if (!datePattern.test(p.end) || Number.isNaN(endOf(p.end))) fail(p, `end "${p.end}" is not a date like 2026-11-30`);
+    if (endOf(p.end) < startOf(p.start)) fail(p, 'the end date is before the start date');
+    if (!p.title.trim()) fail(p, 'the title is empty');
+    if (!p.text.trim()) fail(p, 'the text is empty');
+    if (p.text.length > 240) fail(p, `the text is ${p.text.length} characters; keep it to about 160 (240 at most)`);
+    if (p.button?.url && !/^(https:\/\/|\/)/.test(p.button.url)) fail(p, 'the button link must start with https:// (or / for a page on this site)');
+
+    let image: { src: string; srcset: string; width: number; height: number; alt: string } | undefined;
+    if (p.image) {
+      if (!p.image.alt.trim()) fail(p, 'the image needs a description (alt): say what the photograph shows');
+      const file = Object.entries(images).find(([path]) => path.endsWith(`/${p.image!.file}`));
+      if (!file) fail(p, `the image "${p.image.file}" is not in src/assets/promotions/`);
+      const meta = file![1].default;
+      const widths = [480, 720, 960].filter((w) => w <= meta.width);
+      if (widths.length === 0) widths.push(meta.width);
+      const made = await Promise.all(widths.map((w) => getImage({ src: meta, width: w, format: 'webp', quality: 80 })));
+      image = {
+        src: made[made.length - 1].src,
+        srcset: made.map((m, i) => `${m.src} ${widths[i]}w`).join(', '),
+        width: made[made.length - 1].attributes.width as number,
+        height: made[made.length - 1].attributes.height as number,
+        alt: p.image.alt,
+      };
+    }
+
+    return {
+      id: p.id,
+      start: startOf(p.start),
+      end: endOf(p.end),
+      showOn: p.showOn ?? 'home',
+      title: p.title.trim(),
+      text: p.text.trim(),
+      terms: p.terms?.trim() || '',
+      buttonLabel: p.button?.label?.trim() || defaultButton.label,
+      buttonUrl: p.button?.url?.trim() || defaultButton.url,
+      image,
+    };
+  }),
+);
+
+// Only what could still show: promotions that have already ended are not sent to visitors.
+const live = prepared.filter((p) => p.end >= Date.now() - 24 * 3600 * 1000);
+const isHome = pathname === '/';
+---
+
+{
+  live.length > 0 && (
+    <>
+      <script type="application/json" id="promo-data" set:html={JSON.stringify({ promotions: live, home: isHome })} />
+      <dialog class="promo" aria-labelledby="promo-title" aria-describedby="promo-text" data-promo-dialog>
+        <button type="button" class="promo__close" data-promo-close aria-label="Close">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" focusable="false">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+        <img class="promo__img" data-promo-img alt="" hidden sizes="(min-width: 40rem) 30rem, 100vw" />
+        <div class="promo__body">
+          <h2 id="promo-title" data-promo-title />
+          <p id="promo-text" class="promo__text" data-promo-text />
+          <a class="btn btn--book promo__btn" data-promo-button href="#" />
+          <p class="promo__terms" data-promo-terms hidden />
+        </div>
+      </dialog>
+    </>
+  )
+}
+
+{live.length > 0 && <script>import '../../scripts/promo';</script>}
+
+<style>
+  .promo {
+    --card: 30rem;
+    width: min(var(--card), calc(100% - 2rem));
+    max-width: none;
+    max-height: calc(100dvh - 2rem);
+    margin: auto;
+    padding: 0;
+    overflow: auto;
+    border: 0;
+    background: var(--white);
+    color: var(--ink);
+    box-shadow: 0 1.25rem 3rem rgb(0 0 0 / 0.28);
+  }
+
+  .promo:not([open]) {
+    display: none;
+  }
+
+  .promo::backdrop {
+    background: rgb(20 20 20 / 0.55);
+  }
+
+  .promo__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 0;
+    background: var(--charcoal);
+    color: var(--white);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .promo__close:hover {
+    background: var(--teak);
+  }
+
+  .promo__close:focus-visible {
+    outline: 2px solid var(--white);
+    outline-offset: -5px;
+  }
+
+  .promo__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    background: var(--grey-fill);
+  }
+
+  .promo__body {
+    display: grid;
+    gap: 0.9rem;
+    justify-items: start;
+    padding: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .promo__body h2 {
+    max-width: 22ch;
+    margin: 0;
+    padding-right: 2.5rem;
+    color: var(--teak);
+    font-size: var(--step-3);
+    line-height: 1.2;
+  }
+
+  .promo__img:not([hidden]) + .promo__body h2 {
+    padding-right: 0;
+  }
+
+  .promo__text {
+    max-width: 46ch;
+    margin: 0;
+  }
+
+  .promo__btn {
+    margin-top: 0.4rem;
+  }
+
+  .promo__terms {
+    max-width: 46ch;
+    margin: 0;
+    color: var(--grey-text);
+    font-size: var(--text-small);
+    line-height: 1.6;
+  }
+
+  /* Phones: a compact card along the foot of the screen that leaves the page behind it usable. */
+  @media (max-width: 39.99rem) {
+    .promo {
+      position: fixed;
+      inset: auto 0 0 0;
+      z-index: 50;
+      width: 100%;
+      max-height: 78dvh;
+      margin: 0;
+    }
+
+    .promo__img {
+      aspect-ratio: 2 / 1;
+    }
+
+    .promo__btn {
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .promo[open] {
+      animation: promo-in 0.28s ease-out;
+    }
+
+    @keyframes promo-in {
+      from {
+        opacity: 0;
+        transform: translateY(0.75rem);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  }
+</style>

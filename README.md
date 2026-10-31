@@ -43,6 +43,7 @@ The hotel's own photographs are committed in `src/assets/photos/` (never hotlink
 | Scroll-reveal motion (how it works, how to use `data-reveal`) | `docs/MOTION.md`, `src/scripts/reveal.ts` |
 | Photo review, hero options, QA notes | `docs/PHOTO-REVIEW.md` |
 | Accommodation page template and the Junior Suite page (content, sources, pending photos) | `docs/ROOM-TEMPLATE.md`, `src/content/rooms.ts`, `src/components/rooms/` |
+| Promotion popups: add, schedule or remove one; what to ask the hotel for | `docs/PROMOTIONS.md`, `docs/PROMOTION-BRIEF.md`, `src/content/promotions.ts` |
 | Gallery page: photographs, groups, viewer, what is still missing | `docs/GALLERY.md`, `src/content/gallery.ts`, `src/components/gallery/` |
 | Room photo shortlist | `docs/ROOM-PHOTO-CANDIDATES.md` |
 | Rooftop & Dining photos: what we have and need | `docs/DINING-PHOTOS.md` |
