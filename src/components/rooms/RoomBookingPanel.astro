@@ -14,7 +14,7 @@ const { room } = Astro.props;
 const price = startingPrice(room.id);
 ---
 
-<aside class="booking" aria-label={`Price and booking for the ${room.name}`}>
+<div class="booking" role="group" aria-label={`Price and booking for the ${room.name}`}>
   {
     price && (
       <p class="booking__price">
@@ -25,7 +25,7 @@ const price = startingPrice(room.id);
   }
   <a class="btn btn--book" href={booking.url}>{booking.label}</a>
   <p class="booking__note">{pricing.disclaimer}</p>
-</aside>
+</div>
 
 <style>
   .booking {
