@@ -1,6 +1,7 @@
 ---
 import Photo from './Photo.astro';
 import { welcome } from '../content/home';
+import { booking } from '../config/site';
 
 const [large, small] = welcome.photos;
 ---
@@ -10,6 +11,7 @@ const [large, small] = welcome.photos;
     <div class="welcome__text" data-reveal>
       <h2 id="welcome-title">{welcome.title}</h2>
       {welcome.paragraphs.map((p) => <p class="copy">{p}</p>)}
+      <a class="welcome__book" href={booking.url}>{booking.label}</a>
     </div>
 
     <div class="welcome__images">
@@ -54,6 +56,14 @@ const [large, small] = welcome.photos;
     margin-bottom: 0.5rem;
     color: var(--teak);
     max-width: 16ch;
+  }
+
+  /* A text link, like "Discover Le Moon" further down: an invitation after the story, not another button. */
+  .welcome__book {
+    justify-self: start;
+    font-family: var(--font-heading);
+    font-size: var(--step--1);
+    font-weight: 500;
   }
 
   .welcome__images {

@@ -8,9 +8,29 @@ import Dining from '../components/Dining.astro';
 import Riverside from '../components/Riverside.astro';
 import Gallery from '../components/Gallery.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import { site, contact, social } from '../config/site';
+
+// Structured data for search engines: only facts already shown on the page (name, address, phone, social profiles).
+const origin = Astro.site?.origin;
+const hotel = {
+  '@context': 'https://schema.org',
+  '@type': 'Hotel',
+  name: site.name,
+  description: site.description,
+  url: `${origin}/`,
+  telephone: contact.phoneHref,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '1, Street 154, corner of Sisowath Quay',
+    addressLocality: 'Phnom Penh',
+    addressCountry: 'KH',
+  },
+  hasMap: contact.mapUrl,
+  sameAs: social.map((s) => s.url),
+};
 ---
 
-<Base>
+<Base jsonLd={hotel}>
   <SiteHeader />
   <main id="main">
     <Hero />

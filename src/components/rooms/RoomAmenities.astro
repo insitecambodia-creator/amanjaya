@@ -78,10 +78,9 @@ const { intro, items } = Astro.props;
   /* A centred, wrapping row of equal cells, so a short last row stays centred under the rows above it: six across
      on desktop (11 amenities make 6 + 5), four on tablets, two on phones. */
   .amenities__list {
-    /* One very light grey for the icons and their labels, as requested. It is 1.8:1 on white, below the AA minimum
-       (4.5:1 for text, 3:1 for graphics): to make it compliant, darken this one value (#767676 is the lightest
-       grey that passes for text). */
-    --amenity-tone: #c3c3c3;
+    /* One light grey for the icons and their labels. #767676 is the lightest grey that meets WCAG 2.2 AA on white:
+       4.5:1 for the labels (text) and well over the 3:1 asked of the icons. The earlier #c3c3c3 was 1.8:1. */
+    --amenity-tone: #767676;
     --cols: 2;
     --gap-x: 1rem;
     display: flex;
