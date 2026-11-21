@@ -34,7 +34,7 @@ const [supportBefore, supportAfter = ''] = hero.support.split('Amanjaya Pancam')
         <div class="hero__text">
           <h1 id="hero-title">{keepTogether(hero.title)}</h1>
           <p>{keepTogether(supportBefore)}<span class="hero__brand">Amanjaya&nbsp;Pancam</span>{keepTogether(supportAfter)}</p>
-          <a class="btn btn--ghost hero__book" href={booking.url}>{booking.label}</a>
+          <a class="btn btn--light hero__book" href={booking.url}>{booking.label}</a>
         </div>
       </div>
     </div>
@@ -110,6 +110,12 @@ const [supportBefore, supportAfter = ''] = hero.support.split('Amanjaya Pancam')
 
   .hero__text {
     max-width: 26rem;
+  }
+
+  @media (min-width: 72rem) {
+    .hero__text {
+      max-width: 31rem;
+    }
   }
 
   .hero__text h1 {

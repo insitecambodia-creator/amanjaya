@@ -173,6 +173,13 @@ a:hover {
   outline-color: var(--bronze-light);
 }
 
+/* Buttons that sit on photographs (the room tiles, the hero, the closing band): a white ring, which a teak one on a
+   dark photograph would not show. */
+.btn--ghost:focus-visible,
+.btn--light:focus-visible {
+  outline-color: var(--white);
+}
+
 .container {
   width: 100%;
   max-width: var(--max);

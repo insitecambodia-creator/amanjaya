@@ -60,7 +60,7 @@ const rows = [suites.items.slice(0, 2), suites.items.slice(2, 4)];
   <div class="container">
     <div class="suites__footer">
       <p class="suites__note">{pricing.disclaimer}</p>
-      <a class="btn btn--outline" href={booking.url}>{booking.label}</a>
+      <a class="btn" href={booking.url}>{booking.label}</a>
     </div>
   </div>
 </section>
@@ -115,6 +115,18 @@ const rows = [suites.items.slice(0, 2), suites.items.slice(2, 4)];
 
   .room__photo :global(.photo) {
     height: 100%;
+  }
+
+  /* The tile answers the pointer: the photograph eases in slightly inside its frame. */
+  @media (prefers-reduced-motion: no-preference) {
+    .room__photo :global(img) {
+      transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .room:hover .room__photo :global(img),
+    .room:focus-within .room__photo :global(img) {
+      transform: scale(1.03);
+    }
   }
 
   /* A black gradient rising from the bottom keeps the white text readable. Its stops follow the height of the

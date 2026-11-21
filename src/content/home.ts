@@ -61,8 +61,8 @@ export const hero = {
   position: chosenHero.position,
   positionMobile: 'positionMobile' in chosenHero ? chosenHero.positionMobile : chosenHero.position,
   alt: chosenHero.alt,
-  title: 'Your Phnom Penh story begins here.',
-  support: 'Discover Phnom Penh from Amanjaya Pancam, your riverside retreat.',
+  title: 'A boutique hotel on the Phnom Penh riverside.',
+  support: 'Amanjaya Pancam, on Sisowath Quay, looking over the Tonle Sap and the Mekong.',
 };
 
 export const welcome = {
@@ -155,7 +155,7 @@ export const suites = {
 } as const;
 
 export const dining = {
-  title: 'Rooftop & Dining',
+  title: 'A rooftop bar and a Khmer restaurant',
   /**
    * Two editorial rows: Le Moon (photo left) then Sombok (photo right). Each description is about 20 to 30 words.
    * Sombok is listed as a restaurant in Phnom Penh. The existing homepage does not say it is inside the hotel,
@@ -196,7 +196,7 @@ export const riverside = {
 } as const;
 
 export const gallery = {
-  title: 'Inside and out',
+  title: 'The hotel in photographs',
   /** Photographs are laid out in justified rows at their own proportions, so nothing is cropped. */
   rows: [
     [

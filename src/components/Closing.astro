@@ -1,0 +1,89 @@
+---
+import Photo from './Photo.astro';
+import { booking } from '../config/site';
+
+// The page's closing invitation: one wide photograph of the hotel and one booking line, just before the footer.
+---
+
+<section class="closing" aria-labelledby="closing-title">
+  <div class="closing__media">
+    <Photo
+      name="hero"
+      alt="A couple walks hand in hand at sunset in front of the Amanjaya Pancam hotel"
+      position="60% 30%"
+      sizes="100vw"
+      widths={[640, 960, 1280, 1600, 1920, 2560]}
+      tone="dark"
+      label="The hotel at sunset"
+    />
+  </div>
+  <div class="closing__shade" aria-hidden="true"></div>
+  <div class="container closing__text">
+    <h2 id="closing-title">Your room on Sisowath Quay.</h2>
+    <p>Every room has a private balcony.</p>
+    <a class="btn btn--light" href={booking.url}>{booking.label}</a>
+  </div>
+</section>
+
+<style>
+  .closing {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: flex-end;
+    min-height: clamp(26rem, 70svh, 38rem);
+    overflow: clip;
+    color: var(--white);
+  }
+
+  .closing__media {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+  }
+
+  .closing__media :global(.photo) {
+    height: 100%;
+  }
+
+  /* Neutral black only, rising from the bottom, as in the hero. */
+  .closing__shade {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.8) 0%, rgb(0 0 0 / 0.6) 32%, rgb(0 0 0 / 0.15) 65%, rgb(0 0 0 / 0) 80%);
+  }
+
+  /* On wide screens the text sits over the bright left side of the photograph, so the shade also comes in from the left. */
+  @media (min-width: 56rem) {
+    .closing__shade {
+      background:
+        linear-gradient(to right, rgb(0 0 0 / 0.62) 0%, rgb(0 0 0 / 0.45) 28%, rgb(0 0 0 / 0) 55%),
+        linear-gradient(to top, rgb(0 0 0 / 0.55) 0%, rgb(0 0 0 / 0) 60%);
+    }
+  }
+
+  .closing__text {
+    display: grid;
+    justify-items: start;
+    gap: 1rem;
+    width: 100%;
+    padding-bottom: clamp(2.5rem, 7svh, 4rem);
+  }
+
+  .closing__text h2 {
+    color: var(--white);
+    max-width: 18ch;
+  }
+
+  .closing__text p {
+    margin: 0;
+    color: rgb(255 255 255 / 0.92);
+    font-family: var(--font-heading);
+    font-size: var(--step-1);
+  }
+
+  .closing__text .btn {
+    margin-top: 0.5rem;
+  }
+</style>

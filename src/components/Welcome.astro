@@ -11,7 +11,7 @@ const [large, small] = welcome.photos;
     <div class="welcome__text" data-reveal>
       <h2 id="welcome-title">{welcome.title}</h2>
       {welcome.paragraphs.map((p) => <p class="copy">{p}</p>)}
-      <a class="welcome__book" href={booking.url}>{booking.label}</a>
+      <a class="btn welcome__book" href={booking.url}>{booking.label}</a>
     </div>
 
     <div class="welcome__images">
@@ -61,9 +61,7 @@ const [large, small] = welcome.photos;
   /* A text link, like "Discover Le Moon" further down: an invitation after the story, not another button. */
   .welcome__book {
     justify-self: start;
-    font-family: var(--font-heading);
-    font-size: var(--step--1);
-    font-weight: 500;
+    margin-top: 0.5rem;
   }
 
   .welcome__images {
