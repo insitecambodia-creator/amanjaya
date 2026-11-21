@@ -1,6 +1,7 @@
 ---
 import Photo from './Photo.astro';
 import { hero } from '../content/home';
+import { booking } from '../config/site';
 
 // Keep place names and the hotel name together when the text wraps (display only; the content is unchanged).
 const keepTogether = (t: string) => t.replace(/Phnom Penh/g, 'Phnom\u00a0Penh').replace(/Amanjaya Pancam/g, 'Amanjaya\u00a0Pancam');
@@ -33,6 +34,7 @@ const [supportBefore, supportAfter = ''] = hero.support.split('Amanjaya Pancam')
         <div class="hero__text">
           <h1 id="hero-title">{keepTogether(hero.title)}</h1>
           <p>{keepTogether(supportBefore)}<span class="hero__brand">Amanjaya&nbsp;Pancam</span>{keepTogether(supportAfter)}</p>
+          <a class="btn btn--ghost hero__book" href={booking.url}>{booking.label}</a>
         </div>
       </div>
     </div>
@@ -133,6 +135,21 @@ const [supportBefore, supportAfter = ''] = hero.support.split('Amanjaya Pancam')
     text-align: left;
     text-wrap: balance;
     text-shadow: 0 0 1.25rem rgb(0 0 0 / 0.25);
+  }
+
+  /* A quiet booking prompt beneath the words: the white outline button the room panels use, not a second solid one.
+     Shown on large screens, where the panel has room for it, and under 360px, where the header has no button.
+     On phones and tablets the header's Book Your Stay sits just above, so a second one here would only repeat it. */
+  .hero__book {
+    display: none;
+    margin-top: 1.35rem;
+    pointer-events: auto;
+  }
+
+  @media (min-width: 72rem), (max-width: 22.49rem) {
+    .hero__book {
+      display: inline-flex;
+    }
   }
 
   /* The hotel's name in a light bronze, a little brighter than the site's usual accent on dark so it keeps 4.5:1 or

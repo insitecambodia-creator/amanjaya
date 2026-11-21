@@ -16,7 +16,7 @@ export const site = {
  * Booking engine boundary.
  * The existing site links to this property page on book-directonline.com. The undated base URL is used here;
  * the date-specific links found in the export (2020, 2021, 2023, 2026) are deliberately NOT reused.
- * `verified: false` until the hotel confirms the engine and URL. The label is the single call to action on the page.
+ * `verified: false` until the hotel confirms the engine and URL. Every booking prompt on the site uses this one label and URL.
  */
 export const booking = {
   label: 'Book Your Stay',

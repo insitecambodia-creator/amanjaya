@@ -2,6 +2,7 @@
 import Photo from './Photo.astro';
 import { suites } from '../content/home';
 import { pricing, startingPrice } from '../data/pricing';
+import { booking } from '../config/site';
 
 // Two rows of two panels. Each row's columns follow the panels' `width` values (58/42, then 40/60).
 const rows = [suites.items.slice(0, 2), suites.items.slice(2, 4)];
@@ -57,7 +58,10 @@ const rows = [suites.items.slice(0, 2), suites.items.slice(2, 4)];
   </div>
 
   <div class="container">
-    <p class="suites__note">{pricing.disclaimer}</p>
+    <div class="suites__footer">
+      <p class="suites__note">{pricing.disclaimer}</p>
+      <a class="btn btn--outline" href={booking.url}>{booking.label}</a>
+    </div>
   </div>
 </section>
 
@@ -179,9 +183,19 @@ const rows = [suites.items.slice(0, 2), suites.items.slice(2, 4)];
     font-size: var(--step-1);
   }
 
+  /* The rate note with the booking prompt beside it: right after the prices, where a guest decides. */
+  .suites__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    margin-top: 1rem;
+  }
+
   .suites__note {
     line-height: 1.6;
-    margin-top: 1rem;
+    margin: 0;
     color: var(--grey-text);
     font-size: 0.8125rem;
   }

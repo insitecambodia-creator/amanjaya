@@ -18,6 +18,7 @@ A full-width, immersive photograph with the text set directly on it in white Mon
 - **Readability, measured** against the brightest pixels behind the text, 360 to 1920px: headline 3.9:1 or better at the worst point (typically 4.7 to 11:1); supporting line 4.3:1 or better at the worst point. AA asks 3:1 for large text and 4.5:1 for small.
 - The photograph settles once on load (off under reduced motion). Responsive WebP sizes are generated up to the original 2048px (not enlarged); loaded eagerly with high priority.
 - Under 360px wide the header has no room for the Book Your Stay button, so the link moves into the menu panel.
+- **Booking prompt in the hero.** From 72rem a white outline Book Your Stay button sits in the text panel, under the supporting line. On phones and tablets the header's button is just above, so the hero leaves it out (except under 360px, where the header has none).
 - Layout history: a centred, upper-third version existed briefly and was replaced by this one. `docs/screenshots/hero-text-left-comparison.jpg` is an earlier experiment with a left-hand block on the previous photograph.
 
 ## Type

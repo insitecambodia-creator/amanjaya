@@ -28,7 +28,7 @@ The 17 original photographs are committed in `src/assets/photos/` (they could no
 
 | Key | Original file | Shows | Used for |
 |---|---|---|---|
-| hero | `2024/08/022_A74240503_1929-scaled` | A couple in front of the hotel at golden hour (2560x1707) | Hero. The site's own 16:9 cover is a crop of this scene, kept as `unused/social-cover.png` for the future og:image. |
+| hero | `2024/08/022_A74240503_1929-scaled` | A couple in front of the hotel at golden hour (2560x1707) | Hero. The site's own 16:9 cover is a crop of this scene, kept as `unused/social-cover.png` and used, resized to 1200x630, as the og:image. |
 | welcome-lobby | `Amanjaya-lobby1` | Hallway with a Khmer mural and a polished wood floor | Welcome |
 | welcome-balcony | `001_A74240503_037-scaled` | A couple having coffee on a private balcony | Welcome inset |
 | suite-junior | `Amanjaya-junior12` | Lattice cabinet, armchair, flowers | Junior Suite |
@@ -53,7 +53,7 @@ See `docs/PHOTO-REVIEW.md` for the composition review and the hero recommendatio
 
 ## Booking
 
-One button, "Book Your Stay", set in `src/config/site.ts`. It points at the undated base URL, which appears unchanged on eight exported pages. The date-specific links (2020, 2021, 2023, 2026) and the older `thebookingbutton.com` link were not reused. `verified: false` stays until the hotel confirms the engine and URL.
+One label and one link, "Book Your Stay", set in `src/config/site.ts`. On the homepage it appears in the sticky header, in the hero panel on large screens (and under 360px, where the header has no room for it), as a text link after the welcome, as an outline button beside the starting rates, and in the footer. It points at the undated base URL, which appears unchanged on eight exported pages. The date-specific links (2020, 2021, 2023, 2026) and the older `thebookingbutton.com` link were not reused. `verified: false` stays until the hotel confirms the engine and URL.
 
 ## Please confirm before launch
 
@@ -87,3 +87,14 @@ The four starting rates are shown on the room cards: Junior Suite from $81, Delu
 ## For the later migration (not started)
 
 The export also includes five XML sitemaps and the pages above. These will be needed for the URL inventory and 301 redirect map, but no data extraction was done in this phase.
+
+## Search metadata (homepage SEO check)
+
+Set in `src/layouts/Base.astro` and `src/pages/index.astro`. `site` in `astro.config.mjs` is the hotel's existing domain, because the new site keeps the existing paths; the preview itself stays `noindex` (meta robots, `robots.txt` and the `X-Robots-Tag` header) until launch.
+
+- Title (60 characters) and meta description (128 characters): unchanged, both within search-result limits.
+- Canonical URL and `og:url` on every page.
+- Social preview: `og:image` (the hotel's own cover photograph, 1200x630), `og:locale`, `twitter:card`.
+- Homepage structured data: a schema.org `Hotel` with only facts shown on the page (name, address, phone, map link, social profiles). No ratings, prices or amenities. The phone number uses the international form `+85581559748`, which still needs the hotel's confirmation (see below).
+- Checked and already fine: one `h1`, a logical `h2`/`h3` outline, descriptive alt text on every photograph, `lang="en"`, responsive images with lazy loading below the fold.
+- For the SEO phase: the `h1` ("Your Phnom Penh story begins here.") carries no hotel name or "boutique hotel" wording; hreflang for the French pages; a sitemap once the site is indexable.
